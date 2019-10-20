@@ -3,20 +3,22 @@
 2. Right click and open git bash
 3. Enter the following line: `git clone https://github.com/ernchenghoo/CSharp.git`
 
-## Update to github
+## GitHub general commands
 
-1. git add .
-2. git commit -m "commit message"
-3. git push origin "your branch name"
+### Pushing changes to remote branch
 
-## Create new branch
+1. Stage changes: `git add .`
+2. Commit staged changes `git commit -m "commit message"`
+3. Push commits to remote branch `git push origin "your branch name"`
 
-1. git checkout -b <branchName>
+### Create a new branch
 
-## Delete branch 
+`git checkout -b <branchName>`
 
-1. git branch -d <branchName>
+### Delete a branch 
 
-## Check local changes unstaged
+`git branch -d <branchName>`
 
-1, git status
+## Check for unstaged local changes
+
+`git status`
