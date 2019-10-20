@@ -1,7 +1,7 @@
 # Setup project (FIRST THING TO DO)
 1. Go to whichever directory that you want to clone this project
 2. Right click and open git bash
-3. Enter the following line: "git clone https://github.com/ernchenghoo/CSharp.git"
+3. Enter the following line: `git clone https://github.com/ernchenghoo/CSharp.git`
 
 ## Update to github
 
