@@ -3,7 +3,7 @@
 2. Right click and open git bash
 3. Enter the following line: `git clone https://github.com/ernchenghoo/CSharp.git`
 
-## GitHub general commands
+# GitHub general commands
 
 ### Pushing changes to remote branch
 
