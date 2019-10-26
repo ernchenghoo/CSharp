@@ -16,6 +16,7 @@ namespace AssignmentCSharp.View
         public Form1()
         {
             InitializeComponent();
+            passwordBox.PasswordChar = '*';
         }       
 
         private void LoginButton_click(object sender, EventArgs e)

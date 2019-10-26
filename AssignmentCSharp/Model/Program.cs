@@ -18,7 +18,7 @@ namespace AssignmentCSharp.Model
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form2());
+            Application.Run(new Form1());
 
      
         }
