@@ -31,12 +31,14 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(POSpageForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.endBusinessButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.label14 = new System.Windows.Forms.Label();
+            this.orderType = new System.Windows.Forms.ComboBox();
             this.creditCardPay = new System.Windows.Forms.Button();
             this.cashPayButton = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -49,9 +51,9 @@
             this.label11 = new System.Windows.Forms.Label();
             this.totalPrice = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
+            this.serviceTax = new System.Windows.Forms.Label();
+            this.tax = new System.Windows.Forms.Label();
+            this.subTotal = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -86,7 +88,7 @@
             this.panel1.Controls.Add(this.label1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1055, 38);
             this.panel1.TabIndex = 0;
@@ -99,7 +101,7 @@
             this.endBusinessButton.FlatAppearance.BorderSize = 0;
             this.endBusinessButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.endBusinessButton.Location = new System.Drawing.Point(912, 4);
-            this.endBusinessButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.endBusinessButton.Margin = new System.Windows.Forms.Padding(2);
             this.endBusinessButton.Name = "endBusinessButton";
             this.endBusinessButton.Size = new System.Drawing.Size(141, 32);
             this.endBusinessButton.TabIndex = 1;
@@ -128,6 +130,8 @@
             // splitContainer1.Panel1
             // 
             this.splitContainer1.Panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.splitContainer1.Panel1.Controls.Add(this.label14);
+            this.splitContainer1.Panel1.Controls.Add(this.orderType);
             this.splitContainer1.Panel1.Controls.Add(this.creditCardPay);
             this.splitContainer1.Panel1.Controls.Add(this.cashPayButton);
             this.splitContainer1.Panel1.Controls.Add(this.pictureBox1);
@@ -140,9 +144,9 @@
             this.splitContainer1.Panel1.Controls.Add(this.label11);
             this.splitContainer1.Panel1.Controls.Add(this.totalPrice);
             this.splitContainer1.Panel1.Controls.Add(this.label10);
-            this.splitContainer1.Panel1.Controls.Add(this.label9);
-            this.splitContainer1.Panel1.Controls.Add(this.label8);
-            this.splitContainer1.Panel1.Controls.Add(this.label7);
+            this.splitContainer1.Panel1.Controls.Add(this.serviceTax);
+            this.splitContainer1.Panel1.Controls.Add(this.tax);
+            this.splitContainer1.Panel1.Controls.Add(this.subTotal);
             this.splitContainer1.Panel1.Controls.Add(this.label6);
             this.splitContainer1.Panel1.Controls.Add(this.label5);
             this.splitContainer1.Panel1.Controls.Add(this.label4);
@@ -165,6 +169,26 @@
             this.splitContainer1.SplitterWidth = 3;
             this.splitContainer1.TabIndex = 1;
             // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label14.Location = new System.Drawing.Point(329, 11);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(102, 18);
+            this.label14.TabIndex = 23;
+            this.label14.Text = "Order Type :";
+            // 
+            // orderType
+            // 
+            this.orderType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.orderType.FormattingEnabled = true;
+            this.orderType.Location = new System.Drawing.Point(431, 10);
+            this.orderType.Name = "orderType";
+            this.orderType.Size = new System.Drawing.Size(98, 21);
+            this.orderType.TabIndex = 22;
+            this.orderType.SelectedIndexChanged += new System.EventHandler(this.orderType_SelectedIndexChanged);
+            // 
             // creditCardPay
             // 
             this.creditCardPay.BackgroundImage = global::AssignmentCSharp.Properties.Resources.creditccardpay;
@@ -173,7 +197,7 @@
             this.creditCardPay.FlatAppearance.BorderSize = 0;
             this.creditCardPay.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.creditCardPay.Location = new System.Drawing.Point(387, 490);
-            this.creditCardPay.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.creditCardPay.Margin = new System.Windows.Forms.Padding(2);
             this.creditCardPay.Name = "creditCardPay";
             this.creditCardPay.Size = new System.Drawing.Size(122, 37);
             this.creditCardPay.TabIndex = 21;
@@ -187,7 +211,7 @@
             this.cashPayButton.FlatAppearance.BorderSize = 0;
             this.cashPayButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cashPayButton.Location = new System.Drawing.Point(387, 444);
-            this.cashPayButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cashPayButton.Margin = new System.Windows.Forms.Padding(2);
             this.cashPayButton.Name = "cashPayButton";
             this.cashPayButton.Size = new System.Drawing.Size(120, 33);
             this.cashPayButton.TabIndex = 20;
@@ -198,7 +222,7 @@
             this.pictureBox1.BackgroundImage = global::AssignmentCSharp.Properties.Resources.usericon;
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pictureBox1.Location = new System.Drawing.Point(86, 4);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(20, 28);
             this.pictureBox1.TabIndex = 19;
@@ -212,11 +236,12 @@
             this.clearAllButton.FlatAppearance.BorderSize = 0;
             this.clearAllButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.clearAllButton.Location = new System.Drawing.Point(440, 287);
-            this.clearAllButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.clearAllButton.Margin = new System.Windows.Forms.Padding(2);
             this.clearAllButton.Name = "clearAllButton";
             this.clearAllButton.Size = new System.Drawing.Size(50, 55);
             this.clearAllButton.TabIndex = 18;
             this.clearAllButton.UseVisualStyleBackColor = true;
+            this.clearAllButton.Click += new System.EventHandler(this.clearAllButton_Click);
             // 
             // deleteButton
             // 
@@ -226,11 +251,12 @@
             this.deleteButton.FlatAppearance.BorderSize = 0;
             this.deleteButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.deleteButton.Location = new System.Drawing.Point(442, 229);
-            this.deleteButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.deleteButton.Margin = new System.Windows.Forms.Padding(2);
             this.deleteButton.Name = "deleteButton";
             this.deleteButton.Size = new System.Drawing.Size(48, 52);
             this.deleteButton.TabIndex = 17;
             this.deleteButton.UseVisualStyleBackColor = true;
+            this.deleteButton.Click += new System.EventHandler(this.deleteButton_Click);
             // 
             // minusQtyButton
             // 
@@ -240,11 +266,12 @@
             this.minusQtyButton.FlatAppearance.BorderSize = 0;
             this.minusQtyButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.minusQtyButton.Location = new System.Drawing.Point(440, 165);
-            this.minusQtyButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.minusQtyButton.Margin = new System.Windows.Forms.Padding(2);
             this.minusQtyButton.Name = "minusQtyButton";
             this.minusQtyButton.Size = new System.Drawing.Size(53, 56);
             this.minusQtyButton.TabIndex = 16;
             this.minusQtyButton.UseVisualStyleBackColor = true;
+            this.minusQtyButton.Click += new System.EventHandler(this.minusQtyButton_Click);
             // 
             // plusQtyButton
             // 
@@ -254,11 +281,12 @@
             this.plusQtyButton.FlatAppearance.BorderSize = 0;
             this.plusQtyButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.plusQtyButton.Location = new System.Drawing.Point(441, 103);
-            this.plusQtyButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.plusQtyButton.Margin = new System.Windows.Forms.Padding(2);
             this.plusQtyButton.Name = "plusQtyButton";
             this.plusQtyButton.Size = new System.Drawing.Size(52, 57);
             this.plusQtyButton.TabIndex = 15;
             this.plusQtyButton.UseVisualStyleBackColor = true;
+            this.plusQtyButton.Click += new System.EventHandler(this.plusQtyButton_Click);
             // 
             // xQtyButton
             // 
@@ -268,7 +296,7 @@
             this.xQtyButton.FlatAppearance.BorderSize = 0;
             this.xQtyButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.xQtyButton.Location = new System.Drawing.Point(440, 43);
-            this.xQtyButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.xQtyButton.Margin = new System.Windows.Forms.Padding(2);
             this.xQtyButton.Name = "xQtyButton";
             this.xQtyButton.Size = new System.Drawing.Size(52, 55);
             this.xQtyButton.TabIndex = 14;
@@ -278,7 +306,7 @@
             // cashAmount
             // 
             this.cashAmount.Location = new System.Drawing.Point(448, 410);
-            this.cashAmount.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cashAmount.Margin = new System.Windows.Forms.Padding(2);
             this.cashAmount.Name = "cashAmount";
             this.cashAmount.Size = new System.Drawing.Size(56, 20);
             this.cashAmount.TabIndex = 13;
@@ -298,13 +326,13 @@
             // 
             this.totalPrice.Font = new System.Drawing.Font("Impact", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.totalPrice.Location = new System.Drawing.Point(241, 459);
-            this.totalPrice.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.totalPrice.Margin = new System.Windows.Forms.Padding(2);
             this.totalPrice.Multiline = true;
             this.totalPrice.Name = "totalPrice";
             this.totalPrice.ReadOnly = true;
             this.totalPrice.Size = new System.Drawing.Size(126, 51);
             this.totalPrice.TabIndex = 11;
-            this.totalPrice.Text = "RM 200";
+            this.totalPrice.Text = "RM 0";
             this.totalPrice.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label10
@@ -318,66 +346,66 @@
             this.label10.TabIndex = 10;
             this.label10.Text = "Total :";
             // 
-            // label9
+            // serviceTax
             // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Impact", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(132, 496);
-            this.label9.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(48, 23);
-            this.label9.TabIndex = 9;
-            this.label9.Text = "2.00";
+            this.serviceTax.AutoSize = true;
+            this.serviceTax.Font = new System.Drawing.Font("Impact", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.serviceTax.Location = new System.Drawing.Point(143, 496);
+            this.serviceTax.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.serviceTax.Name = "serviceTax";
+            this.serviceTax.Size = new System.Drawing.Size(21, 23);
+            this.serviceTax.TabIndex = 9;
+            this.serviceTax.Text = "0";
             // 
-            // label8
+            // tax
             // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Impact", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(131, 457);
-            this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(48, 23);
-            this.label8.TabIndex = 8;
-            this.label8.Text = "0.80";
+            this.tax.AutoSize = true;
+            this.tax.Font = new System.Drawing.Font("Impact", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tax.Location = new System.Drawing.Point(142, 457);
+            this.tax.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.tax.Name = "tax";
+            this.tax.Size = new System.Drawing.Size(21, 23);
+            this.tax.TabIndex = 8;
+            this.tax.Text = "0";
             // 
-            // label7
+            // subTotal
             // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Impact", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(134, 412);
-            this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(70, 23);
-            this.label7.TabIndex = 7;
-            this.label7.Text = "200.00";
+            this.subTotal.AutoSize = true;
+            this.subTotal.Font = new System.Drawing.Font("Impact", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.subTotal.Location = new System.Drawing.Point(145, 412);
+            this.subTotal.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.subTotal.Name = "subTotal";
+            this.subTotal.Size = new System.Drawing.Size(21, 23);
+            this.subTotal.TabIndex = 7;
+            this.subTotal.Text = "0";
             // 
             // label6
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Impact", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(22, 496);
+            this.label6.Location = new System.Drawing.Point(2, 496);
             this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(114, 23);
+            this.label6.Size = new System.Drawing.Size(147, 23);
             this.label6.TabIndex = 6;
-            this.label6.Text = "Tax (10%) : RM";
+            this.label6.Text = "Service (10%) : RM";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Impact", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(26, 457);
+            this.label5.Location = new System.Drawing.Point(40, 457);
             this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(111, 23);
+            this.label5.Size = new System.Drawing.Size(107, 23);
             this.label5.TabIndex = 5;
-            this.label5.Text = "SST (6%) : RM";
+            this.label5.Text = "Tax (6%) : RM";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Impact", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(26, 412);
+            this.label4.Location = new System.Drawing.Point(33, 412);
             this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(114, 23);
@@ -393,14 +421,14 @@
             this.itemListInCart.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
             this.itemListInCart.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.itemListInCart.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(247)))), ((int)(((byte)(247)))));
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Elephant", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(247)))), ((int)(((byte)(247)))));
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.itemListInCart.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(247)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Elephant", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle9.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(247)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.itemListInCart.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle9;
             this.itemListInCart.ColumnHeadersHeight = 40;
             this.itemListInCart.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.itemListInCart.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -416,15 +444,15 @@
             this.itemListInCart.Margin = new System.Windows.Forms.Padding(0);
             this.itemListInCart.Name = "itemListInCart";
             this.itemListInCart.ReadOnly = true;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.Padding = new System.Windows.Forms.Padding(0, 10, 0, 10);
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.itemListInCart.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle10.Padding = new System.Windows.Forms.Padding(0, 10, 0, 10);
+            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.itemListInCart.RowHeadersDefaultCellStyle = dataGridViewCellStyle10;
             this.itemListInCart.RowHeadersVisible = false;
             this.itemListInCart.RowHeadersWidth = 51;
             this.itemListInCart.RowTemplate.Height = 24;
@@ -513,7 +541,7 @@
             // 
             this.foodListContainer.AutoScroll = true;
             this.foodListContainer.Location = new System.Drawing.Point(14, 115);
-            this.foodListContainer.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.foodListContainer.Margin = new System.Windows.Forms.Padding(2);
             this.foodListContainer.Name = "foodListContainer";
             this.foodListContainer.Size = new System.Drawing.Size(476, 405);
             this.foodListContainer.TabIndex = 8;
@@ -526,7 +554,7 @@
             this.clearSearchButton.FlatAppearance.BorderSize = 0;
             this.clearSearchButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.clearSearchButton.Location = new System.Drawing.Point(384, 70);
-            this.clearSearchButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.clearSearchButton.Margin = new System.Windows.Forms.Padding(2);
             this.clearSearchButton.Name = "clearSearchButton";
             this.clearSearchButton.Size = new System.Drawing.Size(98, 28);
             this.clearSearchButton.TabIndex = 6;
@@ -541,7 +569,7 @@
             this.searchButton.FlatAppearance.BorderSize = 0;
             this.searchButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.searchButton.Location = new System.Drawing.Point(344, 72);
-            this.searchButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.searchButton.Margin = new System.Windows.Forms.Padding(2);
             this.searchButton.Name = "searchButton";
             this.searchButton.Size = new System.Drawing.Size(28, 26);
             this.searchButton.TabIndex = 5;
@@ -552,7 +580,7 @@
             // 
             this.searchBar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.searchBar.Location = new System.Drawing.Point(14, 78);
-            this.searchBar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.searchBar.Margin = new System.Windows.Forms.Padding(2);
             this.searchBar.Name = "searchBar";
             this.searchBar.Size = new System.Drawing.Size(324, 20);
             this.searchBar.TabIndex = 4;
@@ -580,15 +608,15 @@
             this.label12.TabIndex = 0;
             this.label12.Text = "Menu";
             // 
-            // Form2
+            // POSpageForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1055, 593);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.panel1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.Name = "Form2";
+            this.Margin = new System.Windows.Forms.Padding(2);
+            this.Name = "POSpageForm";
             this.Text = "Form2";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -615,9 +643,9 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label serviceTax;
+        private System.Windows.Forms.Label tax;
+        private System.Windows.Forms.Label subTotal;
         private System.Windows.Forms.TextBox totalPrice;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label11;
@@ -643,5 +671,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn quantity;
         private System.Windows.Forms.DataGridViewTextBoxColumn price;
         private System.Windows.Forms.DataGridViewTextBoxColumn total;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.ComboBox orderType;
     }
 }
