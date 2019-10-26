@@ -32,7 +32,7 @@ namespace AssignmentCSharp
             this.foodListContainer.Controls.Clear();
             foreach (FoodStock food in FoodStock.getFoodStocks())
             {
-                if (food.name.ToLower().Contains(search.ToLower()))
+                if (food.Name.ToLower().Contains(search.ToLower()))
                 {
                     System.Windows.Forms.Button newButton = new System.Windows.Forms.Button();
 
@@ -44,12 +44,12 @@ namespace AssignmentCSharp
                     newButton.Name = "button1";
                     newButton.Size = new System.Drawing.Size(199, 191);
                     newButton.TabIndex = 7;
-                    newButton.Text = food.name;
+                    newButton.Text = food.Name;
                     newButton.Tag = food;
                     newButton.UseVisualStyleBackColor = false;
 
                     //if the item is no stock the color will be red
-                    if (food.quantity > 0)
+                    if (food.Quantity > 0)
                     {
                         newButton.BackColor = System.Drawing.Color.White;
                         newButton.Click += new System.EventHandler(this.addItem);
@@ -78,7 +78,7 @@ namespace AssignmentCSharp
             foreach (DataGridViewRow row in this.itemListInCart.Rows)
             {
                 int currentRowID = (int)row.Cells[1].Value;
-                if (currentRowID == chosenFood.id)
+                if (currentRowID == chosenFood.Id)
                 {
                     foundItemInCart = row;
                 }
@@ -87,7 +87,7 @@ namespace AssignmentCSharp
             if (foundItemInCart == null)
             {
                 int newNo = this.itemListInCart.Rows.Count + 1;
-                this.itemListInCart.Rows.Add(newNo, chosenFood.id, chosenFood.name, 1, chosenFood.price, chosenFood.price * 1);
+                this.itemListInCart.Rows.Add(newNo, chosenFood.Id, chosenFood.Name, 1, chosenFood.Price, chosenFood.Price * 1);
             }
             else
             {
@@ -106,17 +106,17 @@ namespace AssignmentCSharp
             FoodStock itemObject = FoodStock.findById(itemId);
 
             int newQuantity = currentNumberOfItem + 1;
-            if(itemObject.quantity >= newQuantity)
+            if(itemObject.Quantity >= newQuantity)
             {
                 //add quantity, update price, update total price
                 row.Cells[3].Value = newQuantity;
-                row.Cells[4].Value = itemObject.price;
-                row.Cells[5].Value = newQuantity * itemObject.price;
+                row.Cells[4].Value = itemObject.Price;
+                row.Cells[5].Value = newQuantity * itemObject.Price;
                 updateTotalCalculation();
             }
             else
             {
-                MessageBox.Show(String.Format("You have only {0} stock for {1}!",itemObject.quantity,itemObject.name));
+                MessageBox.Show(String.Format("You have only {0} stock for {1}!",itemObject.Quantity,itemObject.Name));
             }
             
         }
@@ -140,8 +140,8 @@ namespace AssignmentCSharp
             {
                 //minus quantity
                 row.Cells[3].Value = newQuantity;
-                row.Cells[4].Value = itemObject.price;
-                row.Cells[5].Value = newQuantity * itemObject.price;
+                row.Cells[4].Value = itemObject.Price;
+                row.Cells[5].Value = newQuantity * itemObject.Price;
             }
             updateTotalCalculation();
         }
@@ -201,16 +201,16 @@ namespace AssignmentCSharp
 
                         FoodStock itemObject = FoodStock.findById(itemId);
 
-                        if(itemObject.quantity >= newQuantity)
+                        if(itemObject.Quantity >= newQuantity)
                         {
                             //modify quantity
                             row.Cells[3].Value = newQuantity;
-                            row.Cells[4].Value = itemObject.price;
-                            row.Cells[5].Value = newQuantity * itemObject.price;
+                            row.Cells[4].Value = itemObject.Price;
+                            row.Cells[5].Value = newQuantity * itemObject.Price;
                         }
                         else
                         {
-                            MessageBox.Show(String.Format("Cannot modify item {0} because you have only {1} stock",itemObject.name,itemObject.quantity));
+                            MessageBox.Show(String.Format("Cannot modify item {0} because you have only {1} stock",itemObject.Name,itemObject.Quantity));
                         }
                         
                     }
