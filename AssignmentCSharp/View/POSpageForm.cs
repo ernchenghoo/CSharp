@@ -8,22 +8,24 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
+using AssignmentCSharp.Model;
 
 namespace AssignmentCSharp
 {
     
-    public partial class Form2 : Form
+    public partial class POSpageForm : Form
     {
-        public Form2()
+        public POSpageForm()
         {
             InitializeComponent();
             searchAndUpdateList("");
         }
 
+        //function to search and update the food menu
         public void searchAndUpdateList(String search)
         {
             this.foodListContainer.Controls.Clear();
-            foreach (var food in foodstock.getFoodStocks())
+            foreach (var food in FoodStock.getFoodStocks())
             {
                 if (food.name.ToLower().Contains(search.ToLower()))
                 {
@@ -47,38 +49,41 @@ namespace AssignmentCSharp
             }
         }
 
-        private void SearchButton_Click(object sender, EventArgs e)
-        {
-            this.foodListContainer.Controls.Clear();
-            searchAndUpdateList(searchBar.Text);
-        }
-
+        //function to add the item to the cart
         private void addItem(object sender, EventArgs e)
         {
-            System.Windows.Forms.Button buttonObject = (System.Windows.Forms.Button) sender;
-            foodstock chosenFood = (foodstock)buttonObject.Tag;
+            System.Windows.Forms.Button buttonObject = (System.Windows.Forms.Button)sender;
+            FoodStock chosenFood = (FoodStock)buttonObject.Tag;
 
-            DataGridViewRow foundItemInCart = null; 
+            DataGridViewRow foundItemInCart = null;
             foreach (DataGridViewRow row in this.itemListInCart.Rows)
             {
                 int currentRowID = (int)row.Cells[1].Value;
-                if(currentRowID == chosenFood.id)
+                if (currentRowID == chosenFood.id)
                 {
                     foundItemInCart = row;
-                }                
+                }
             }
 
-            if(foundItemInCart == null)
+            if (foundItemInCart == null)
             {
                 int newNo = this.itemListInCart.Rows.Count + 1;
                 this.itemListInCart.Rows.Add(newNo, chosenFood.id, chosenFood.name, 1, chosenFood.price, chosenFood.price * 1);
             }
             else
             {
-                addQuantityToRow(foundItemInCart);          
+                addQuantityToRow(foundItemInCart);
             }
 
         }
+
+        private void SearchButton_Click(object sender, EventArgs e)
+        {
+            this.foodListContainer.Controls.Clear();
+            searchAndUpdateList(searchBar.Text);
+        }
+
+        
 
         public void addQuantityToRow(DataGridViewRow row)
         {
@@ -86,8 +91,8 @@ namespace AssignmentCSharp
             int itemId = (int)row.Cells[1].Value;
             int currentNumberOfItem = (int)row.Cells[3].Value;
 
-            foodstock itemObject = null;
-            foreach (var food in foodstock.getFoodStocks())
+            FoodStock itemObject = null;
+            foreach (var food in FoodStock.getFoodStocks())
             {
                 if(food.id == itemId)
                 {
@@ -110,50 +115,6 @@ namespace AssignmentCSharp
         private void ClearSearchButton_Click(object sender, EventArgs e)
         {
             searchAndUpdateList("");
-        } 
-    }
-    class foodstock
-    {
-        public int id;
-        public String name;
-        public int quantity;
-        public decimal price;
-
-        public foodstock(int id, String name, int quantity, decimal price)
-        {
-            this.id = id;
-            this.name = name;
-            this.price = price;
-            this.quantity = quantity;
         }
-
-        public static List<foodstock> getFoodStocks()
-        {
-            MySqlConnection cnn;
-            string connectionString = "server=localhost;database=pos;uid=root;pwd=;";
-            cnn = new MySqlConnection(connectionString);
-            List<foodstock> foodlist = new List<foodstock>();
-
-            try
-            {
-                cnn.Open();
-                
-                MySqlCommand command = new MySqlCommand("select foodId,foodName,quantity,price from foodstock", cnn);
-                MySqlDataReader dataReader = command.ExecuteReader();
-
-                while (dataReader.Read())
-                {
-                    foodlist.Add(new foodstock(dataReader.GetInt32(0), dataReader.GetString(1), dataReader.GetInt32(2), dataReader.GetDecimal(3)));
-                }
-                cnn.Close();
-
-                
-            }catch
-            {
-                MessageBox.Show("Connection failed");
-            }
-            return foodlist;
-        }
-   
     }
 }
