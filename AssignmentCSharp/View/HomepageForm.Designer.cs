@@ -1,4 +1,4 @@
-﻿namespace AssignmentCSharp
+﻿namespace AssignmentCSharp.View
 {
     partial class Form1
     {
