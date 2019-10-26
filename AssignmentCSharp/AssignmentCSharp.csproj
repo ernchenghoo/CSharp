@@ -35,7 +35,7 @@
   <ItemGroup>
     <Reference Include="MySql.Data, Version=8.0.18.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\..\..\..\Program Files\MySQL\MYSQL C# connector\v4.5.2\MySql.Data.dll</HintPath>
+      <HintPath>..\mysql-connector\v4.5.2\MySql.Data.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -58,11 +58,20 @@
     <Compile Include="View\HomepageForm.Designer.cs">
       <DependentUpon>HomepageForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Form2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form2.Designer.cs">
+      <DependentUpon>Form2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Model\Login.cs" />
     <Compile Include="Model\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="View\HomepageForm.resx">
       <DependentUpon>HomepageForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form2.resx">
+      <DependentUpon>Form2.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -72,6 +81,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -86,6 +96,22 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\usericon.png" />
+    <None Include="Resources\search.png" />
+    <None Include="Resources\remove.png" />
+    <None Include="Resources\foodbutton.png" />
+    <None Include="Resources\endbusiness.png" />
+    <None Include="Resources\clearsearch.png" />
+    <None Include="Resources\drinkbutton.png" />
+    <None Include="Resources\creditccardpay.png" />
+    <None Include="Resources\cashpay.png" />
+    <None Include="Resources\clearall.png" />
+    <None Include="Resources\quantityminus.png" />
+    <None Include="Resources\quantityadd.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\quantityx.png" />
+  </ItemGroup>  
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
