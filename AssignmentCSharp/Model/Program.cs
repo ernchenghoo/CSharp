@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using AssignmentCSharp;
+using AssignmentCSharp.View;
 
-namespace AssignmentCSharp
+namespace AssignmentCSharp.Model
 {
     static class Program
     {
