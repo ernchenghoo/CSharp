@@ -86,6 +86,26 @@ namespace AssignmentCSharp.Model
                 }
                 else
                 {
+                    //****************** Saving new receipt***********************
+                    cnn = new MySqlConnection(connectionString);
+                    cnn.Open();
+                    MySqlCommand command = new MySqlCommand();
+                    command.Connection = cnn;
+                    command.CommandText = "UPDATE Receipt SET datePrinted=@dateprinted,tax=@tax,servicetax=@servicetax,total=@total where id=@id";
+                    command.Parameters.AddWithValue("@id", this.Id);
+                    command.Parameters.AddWithValue("@dateprinted", this.DatePrinted.ToString("yyyy-MM-dd HH:mm:ss"));
+                    command.Parameters.AddWithValue("@tax", this.Tax);
+                    command.Parameters.AddWithValue("@servicetax", this.ServiceTax);
+                    command.Parameters.AddWithValue("@total", this.Total);
+                    command.ExecuteNonQuery();
+                    cnn.Close();
+
+                    //***************save food order list*******************
+                    foreach (Receipt_Food food in FoodOrdered)
+                    {
+                        //pass receipt id to indicate this food record belongs to this receipt
+                        food.save();
+                    }
 
                 }
                 
