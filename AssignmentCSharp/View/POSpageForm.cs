@@ -10,7 +10,8 @@ using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 using AssignmentCSharp.Model;
 
-namespace AssignmentCSharp
+
+namespace AssignmentCSharp.View
 {
     
     public partial class POSpageForm : Form
@@ -339,6 +340,126 @@ namespace AssignmentCSharp
         private void orderType_SelectedIndexChanged(object sender, EventArgs e)
         {
             updateTotalCalculation();
+        }
+
+        private void cashPayButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                decimal cashPayed =Convert.ToDecimal(this.cashAmount.Text);
+
+                if(this.itemListInCart.Rows.Count > 0)
+                {
+                    //add all food object
+                    List<Receipt_Food> foodlist = new List<Receipt_Food>();
+                    foreach (DataGridViewRow row in this.itemListInCart.Rows)
+                    {
+                        int foodid = (int)row.Cells[1].Value;
+                        int quantity = (int)row.Cells[3].Value;
+                        foodlist.Add(new Receipt_Food(foodid, quantity));
+                    }
+
+                    //make the receipt
+                    decimal totalPrice = 0;
+
+                    foreach (DataGridViewRow row in this.itemListInCart.Rows)
+                    {
+                        totalPrice += (decimal)row.Cells[5].Value;
+                    }
+
+                    
+                    decimal tax = (totalPrice * 6 / 100);
+                    decimal servTax = this.orderType.SelectedIndex == 0 ? totalPrice * 10 / 100 : 0;
+                    decimal finaltotal = totalPrice + tax + servTax;
+
+                    if (cashPayed >= finaltotal)
+                    {
+                        Receipt newReceipt = new Receipt(tax, servTax, finaltotal, foodlist);
+                        newReceipt.save();
+
+                        this.Hide();
+                        ReceiptPage showReceipt = new ReceiptPage(newReceipt, cashPayed);
+                        showReceipt.Show();
+                        this.Close();
+                    }
+                    else
+                    {
+                        MessageBox.Show("The cash amount cannot be lower than Total Price!");
+                    }
+
+                    
+                }
+                else
+                {
+                    MessageBox.Show("You must have at least one item to checkout!");
+
+                }
+
+
+            }
+            catch(Exception ex)
+            {
+                if(ex is FormatException)
+                {
+                    MessageBox.Show("Cash Amount must be decimal number!");
+                }
+                else
+                {
+                    MessageBox.Show("Error saving receipt!");
+                    
+                }
+                
+            }
+        }
+
+        private void creditCardPay_Click(object sender, EventArgs e)
+        {
+            if (this.itemListInCart.Rows.Count > 0)
+            {
+                //add all food object
+                List<Receipt_Food> foodlist = new List<Receipt_Food>();
+                foreach (DataGridViewRow row in this.itemListInCart.Rows)
+                {
+                    int foodid = (int)row.Cells[1].Value;
+                    int quantity = (int)row.Cells[3].Value;
+                    foodlist.Add(new Receipt_Food(foodid, quantity));
+                }
+
+                //make the receipt
+                decimal totalPrice = 0;
+
+                foreach (DataGridViewRow row in this.itemListInCart.Rows)
+                {
+                    totalPrice += (decimal)row.Cells[5].Value;
+                }
+
+
+                decimal tax = (totalPrice * 6 / 100);
+                decimal servTax = this.orderType.SelectedIndex == 0 ? totalPrice * 10 / 100 : 0;
+                decimal finaltotal = totalPrice + tax + servTax;
+
+               
+                Receipt newReceipt = new Receipt(tax, servTax, finaltotal, foodlist);
+                newReceipt.save();
+
+                this.Hide();
+                ReceiptPage showReceipt = new ReceiptPage(newReceipt, finaltotal);
+                showReceipt.Show();
+                this.Close();
+
+
+            }
+            else
+            {
+                MessageBox.Show("You must have at least one item to checkout!");
+
+            }
+        }
+
+        private void endBusinessButton_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Thank you for using our POS system! Have a nice day =D");
+            this.Close();
         }
     }
 }

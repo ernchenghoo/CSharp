@@ -8,7 +8,7 @@ using MySql.Data.MySqlClient;
 
 namespace AssignmentCSharp.Model
 {
-    class FoodStock
+    public class FoodStock
     {
         public int Id { get; set; }
         public String Name { get; set; }
@@ -66,6 +66,7 @@ namespace AssignmentCSharp.Model
                     command.Parameters.AddWithValue("@quantity", Quantity);
                     command.Parameters.AddWithValue("@price", Price);
                     command.ExecuteNonQuery();
+                    cnn.Close();
 
                     this.Id = newId;
                 }
@@ -82,6 +83,7 @@ namespace AssignmentCSharp.Model
                     command.Parameters.AddWithValue("@quantity", Quantity);
                     command.Parameters.AddWithValue("@price", Price);
                     command.ExecuteNonQuery();
+                    cnn.Close();
 
                 }
             }

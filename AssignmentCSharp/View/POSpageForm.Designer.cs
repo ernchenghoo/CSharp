@@ -1,4 +1,4 @@
-﻿namespace AssignmentCSharp
+﻿namespace AssignmentCSharp.View
 {
 
 
@@ -31,8 +31,8 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(POSpageForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.endBusinessButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -107,6 +107,7 @@
             this.endBusinessButton.Size = new System.Drawing.Size(141, 32);
             this.endBusinessButton.TabIndex = 1;
             this.endBusinessButton.UseVisualStyleBackColor = true;
+            this.endBusinessButton.Click += new System.EventHandler(this.endBusinessButton_Click);
             // 
             // label1
             // 
@@ -203,6 +204,7 @@
             this.creditCardPay.Size = new System.Drawing.Size(122, 37);
             this.creditCardPay.TabIndex = 21;
             this.creditCardPay.UseVisualStyleBackColor = true;
+            this.creditCardPay.Click += new System.EventHandler(this.creditCardPay_Click);
             // 
             // cashPayButton
             // 
@@ -217,6 +219,7 @@
             this.cashPayButton.Size = new System.Drawing.Size(120, 33);
             this.cashPayButton.TabIndex = 20;
             this.cashPayButton.UseVisualStyleBackColor = true;
+            this.cashPayButton.Click += new System.EventHandler(this.cashPayButton_Click);
             // 
             // pictureBox1
             // 
@@ -422,14 +425,14 @@
             this.itemListInCart.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
             this.itemListInCart.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.itemListInCart.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(247)))), ((int)(((byte)(247)))));
-            dataGridViewCellStyle11.Font = new System.Drawing.Font("Elephant", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle11.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(247)))), ((int)(((byte)(247)))));
-            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.itemListInCart.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(247)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Elephant", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(247)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.itemListInCart.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.itemListInCart.ColumnHeadersHeight = 40;
             this.itemListInCart.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.itemListInCart.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -445,15 +448,15 @@
             this.itemListInCart.Margin = new System.Windows.Forms.Padding(0);
             this.itemListInCart.Name = "itemListInCart";
             this.itemListInCart.ReadOnly = true;
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle12.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle12.Padding = new System.Windows.Forms.Padding(0, 10, 0, 10);
-            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.itemListInCart.RowHeadersDefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.Padding = new System.Windows.Forms.Padding(0, 10, 0, 10);
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.itemListInCart.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.itemListInCart.RowHeadersVisible = false;
             this.itemListInCart.RowHeadersWidth = 51;
             this.itemListInCart.RowTemplate.Height = 24;

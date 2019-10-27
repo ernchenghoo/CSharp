@@ -18,9 +18,17 @@ namespace AssignmentCSharp.Model
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new POSpageForm());
+            Application.Run(new mainForm());
 
      
+        }
+    }
+
+    public class mainForm : Form
+    {
+        public mainForm()
+        {
+            new POSpageForm().Show();
         }
     }
 }
