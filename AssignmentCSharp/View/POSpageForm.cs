@@ -377,6 +377,14 @@ namespace AssignmentCSharp.View
                         Receipt newReceipt = new Receipt(tax, servTax, finaltotal, foodlist);
                         newReceipt.save();
 
+                        /*Minus the stock from database*/
+                        foreach(Receipt_Food currFood in newReceipt.FoodOrdered)
+                        {
+                            //food stock quantity minus ordered quantity
+                            currFood.Food.Quantity -= currFood.Quantity;
+                            currFood.Food.save();
+                        }
+
                         this.Hide();
                         ReceiptPage showReceipt = new ReceiptPage(newReceipt, cashPayed);
                         showReceipt.Show();
@@ -441,6 +449,14 @@ namespace AssignmentCSharp.View
                
                 Receipt newReceipt = new Receipt(tax, servTax, finaltotal, foodlist);
                 newReceipt.save();
+
+                /*Minus the stock from database*/
+                foreach (Receipt_Food currFood in newReceipt.FoodOrdered)
+                {
+                    //food stock quantity minus ordered quantity
+                    currFood.Food.Quantity -= currFood.Quantity;
+                    currFood.Food.save();
+                }
 
                 this.Hide();
                 ReceiptPage showReceipt = new ReceiptPage(newReceipt, finaltotal);

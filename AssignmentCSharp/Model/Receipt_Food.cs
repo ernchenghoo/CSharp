@@ -44,7 +44,7 @@ namespace AssignmentCSharp.Model
                 command.Connection = cnn;
                 command.CommandText = "UPDATE Receipt_Food SET quantity=@quantity,isDone=@isDone where receiptid=@receiptid and foodid=@foodid";
                 command.Parameters.AddWithValue("@receiptid", this.ReceiptId);
-                command.Parameters.AddWithValue("@foodid", this.ReceiptId);
+                command.Parameters.AddWithValue("@foodid", this.Food.Id);
                 command.Parameters.AddWithValue("@quantity", this.Quantity);
                 command.Parameters.AddWithValue("@isDone", this.IsDone);
                 command.ExecuteNonQuery();

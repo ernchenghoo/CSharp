@@ -133,13 +133,15 @@ namespace AssignmentCSharp.Model
                 {
                     //get receipt food
                     List<Receipt_Food> foodList = new List<Receipt_Food>();
-                    MySqlCommand getFoodOrder = new MySqlCommand("select receiptid,foodid,quantity,isDone from receipt_food", cnn);
-                    MySqlDataReader foodOrderDataReader = command.ExecuteReader();
+                    MySqlConnection foodcon = new MySqlConnection(connectionString);
+                    foodcon.Open();
+                    MySqlCommand getFoodOrder = new MySqlCommand("select receiptid,foodid,quantity,isDone from receipt_food WHERE receiptid="+id, foodcon);
+                    MySqlDataReader foodOrderDataReader = getFoodOrder.ExecuteReader();
                     while (foodOrderDataReader.Read())
                     {
                         foodList.Add(new Receipt_Food(foodOrderDataReader.GetInt32(0), foodOrderDataReader.GetInt32(1), foodOrderDataReader.GetInt32(2),foodOrderDataReader.GetBoolean(3)));
                     }
-
+                    foodcon.Close();
                     foundReceiptObject = new Receipt(dataReader.GetInt32(0), dataReader.GetDateTime(1),dataReader.GetDecimal(2),dataReader.GetDecimal(3),dataReader.GetDecimal(4),foodList);
                 }
                 cnn.Close();
@@ -163,19 +165,22 @@ namespace AssignmentCSharp.Model
                 cnn.Open();
 
 
-                MySqlCommand command = new MySqlCommand("select id,datePrinted,tax,servicetax,total from receipt", cnn);
+                MySqlCommand command = new MySqlCommand("select id,datePrinted,tax,servicetax,total from receipt ORDER BY datePrinted Asc", cnn);
                 MySqlDataReader dataReader = command.ExecuteReader();
 
                 while (dataReader.Read())
                 {
                     //get receipt food
                     List<Receipt_Food> foodList = new List<Receipt_Food>();
-                    MySqlCommand getFoodOrder = new MySqlCommand("select receiptid,foodid,quantity,isDone from receipt_food", cnn);
-                    MySqlDataReader foodOrderDataReader = command.ExecuteReader();
+                    MySqlConnection foodCon = new MySqlConnection(connectionString);
+                    foodCon.Open();
+                    MySqlCommand getFoodOrder = new MySqlCommand("select receiptid,foodid,quantity,isDone from receipt_food where receiptid="+dataReader.GetInt32(0), foodCon);
+                    MySqlDataReader foodOrderDataReader = getFoodOrder.ExecuteReader();
                     while (foodOrderDataReader.Read())
                     {
                         foodList.Add(new Receipt_Food(foodOrderDataReader.GetInt32(0), foodOrderDataReader.GetInt32(1), foodOrderDataReader.GetInt32(2),foodOrderDataReader.GetBoolean(3)));
                     }
+                    foodCon.Close();
 
                     receiptList.Add(new Receipt(dataReader.GetInt32(0), dataReader.GetDateTime(1), dataReader.GetDecimal(2), dataReader.GetDecimal(3), dataReader.GetDecimal(4), foodList));
                 }
@@ -183,9 +188,10 @@ namespace AssignmentCSharp.Model
 
 
             }
-            catch
+            catch(Exception ex)
             {
                 MessageBox.Show("Connection failed");
+                Console.WriteLine(ex.ToString());
             }
             return receiptList;
         }
