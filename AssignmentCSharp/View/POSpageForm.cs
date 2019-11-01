@@ -31,7 +31,7 @@ namespace AssignmentCSharp.View
         public void searchAndUpdateList(String search)
         {
             this.foodListContainer.Controls.Clear();
-            foreach (FoodStock food in FoodStock.getFoodStocks())
+            foreach (Model.FoodStock food in Model.FoodStock.getFoodStocks())
             {
                 if (food.Name.ToLower().Contains(search.ToLower()))
                 {
@@ -73,7 +73,7 @@ namespace AssignmentCSharp.View
         private void addItem(object sender, EventArgs e)
         {
             System.Windows.Forms.Button buttonObject = (System.Windows.Forms.Button)sender;
-            FoodStock chosenFood = (FoodStock)buttonObject.Tag;
+            Model.FoodStock chosenFood = (Model.FoodStock)buttonObject.Tag;
 
             DataGridViewRow foundItemInCart = null;
             foreach (DataGridViewRow row in this.itemListInCart.Rows)
@@ -104,7 +104,7 @@ namespace AssignmentCSharp.View
             int itemId = (int)row.Cells[1].Value;
             int currentNumberOfItem = (int)row.Cells[3].Value;
 
-            FoodStock itemObject = FoodStock.findById(itemId);
+            Model.FoodStock itemObject = Model.FoodStock.findById(itemId);
 
             int newQuantity = currentNumberOfItem + 1;
             if(itemObject.Quantity >= newQuantity)
@@ -128,7 +128,7 @@ namespace AssignmentCSharp.View
             int itemId = (int)row.Cells[1].Value;
             int currentNumberOfItem = (int)row.Cells[3].Value;
 
-            FoodStock itemObject = FoodStock.findById(itemId);
+            Model.FoodStock itemObject = Model.FoodStock.findById(itemId);
 
             int newQuantity = currentNumberOfItem - 1;
 
@@ -200,7 +200,7 @@ namespace AssignmentCSharp.View
                         int itemId = (int)row.Cells[1].Value;
                         int currentNumberOfItem = (int)row.Cells[3].Value;
 
-                        FoodStock itemObject = FoodStock.findById(itemId);
+                        Model.FoodStock itemObject = Model.FoodStock.findById(itemId);
 
                         if(itemObject.Quantity >= newQuantity)
                         {

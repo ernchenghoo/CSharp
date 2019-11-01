@@ -51,7 +51,7 @@ namespace AssignmentCSharp.Model
                     cnn = new MySqlConnection(connectionString);
                     cnn.Open();
 
-                    MySqlCommand command = new MySqlCommand("select COUNT(receipt.id) from receipt", cnn);
+                    MySqlCommand command = new MySqlCommand("select MAX(receipt.id) from receipt", cnn);
                     MySqlDataReader dataReader = command.ExecuteReader();
 
                     int currentBiggestId = -1;

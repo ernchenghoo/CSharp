@@ -30,14 +30,23 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(POSpageForm));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(POSpageForm));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.endBusinessButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.label14 = new System.Windows.Forms.Label();
             this.orderType = new System.Windows.Forms.ComboBox();
+            this.creditCardPay = new System.Windows.Forms.Button();
+            this.cashPayButton = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.clearAllButton = new System.Windows.Forms.Button();
+            this.deleteButton = new System.Windows.Forms.Button();
+            this.minusQtyButton = new System.Windows.Forms.Button();
+            this.plusQtyButton = new System.Windows.Forms.Button();
+            this.xQtyButton = new System.Windows.Forms.Button();
             this.cashAmount = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
             this.totalPrice = new System.Windows.Forms.TextBox();
@@ -58,27 +67,18 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.foodListContainer = new System.Windows.Forms.FlowLayoutPanel();
+            this.clearSearchButton = new System.Windows.Forms.Button();
+            this.searchButton = new System.Windows.Forms.Button();
             this.searchBar = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
-            this.creditCardPay = new System.Windows.Forms.Button();
-            this.cashPayButton = new System.Windows.Forms.Button();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.clearAllButton = new System.Windows.Forms.Button();
-            this.deleteButton = new System.Windows.Forms.Button();
-            this.minusQtyButton = new System.Windows.Forms.Button();
-            this.plusQtyButton = new System.Windows.Forms.Button();
-            this.xQtyButton = new System.Windows.Forms.Button();
-            this.clearSearchButton = new System.Windows.Forms.Button();
-            this.searchButton = new System.Windows.Forms.Button();
-            this.endBusinessButton = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.itemListInCart)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.itemListInCart)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -92,6 +92,22 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1055, 38);
             this.panel1.TabIndex = 0;
+            // 
+            // endBusinessButton
+            // 
+            this.endBusinessButton.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.endBusinessButton.BackgroundImage = global::AssignmentCSharp.Properties.Resources.endbusiness;
+            this.endBusinessButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.endBusinessButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.endBusinessButton.FlatAppearance.BorderSize = 0;
+            this.endBusinessButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.endBusinessButton.Location = new System.Drawing.Point(912, 4);
+            this.endBusinessButton.Margin = new System.Windows.Forms.Padding(2);
+            this.endBusinessButton.Name = "endBusinessButton";
+            this.endBusinessButton.Size = new System.Drawing.Size(141, 32);
+            this.endBusinessButton.TabIndex = 1;
+            this.endBusinessButton.UseVisualStyleBackColor = true;
+            this.endBusinessButton.Click += new System.EventHandler(this.endBusinessButton_Click);
             // 
             // label1
             // 
@@ -174,6 +190,122 @@
             this.orderType.Size = new System.Drawing.Size(98, 21);
             this.orderType.TabIndex = 22;
             this.orderType.SelectedIndexChanged += new System.EventHandler(this.orderType_SelectedIndexChanged);
+            // 
+            // creditCardPay
+            // 
+            this.creditCardPay.BackgroundImage = global::AssignmentCSharp.Properties.Resources.creditccardpay;
+            this.creditCardPay.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.creditCardPay.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.creditCardPay.FlatAppearance.BorderSize = 0;
+            this.creditCardPay.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.creditCardPay.Location = new System.Drawing.Point(387, 490);
+            this.creditCardPay.Margin = new System.Windows.Forms.Padding(2);
+            this.creditCardPay.Name = "creditCardPay";
+            this.creditCardPay.Size = new System.Drawing.Size(122, 37);
+            this.creditCardPay.TabIndex = 21;
+            this.creditCardPay.UseVisualStyleBackColor = true;
+            this.creditCardPay.Click += new System.EventHandler(this.creditCardPay_Click);
+            // 
+            // cashPayButton
+            // 
+            this.cashPayButton.BackgroundImage = global::AssignmentCSharp.Properties.Resources.cashpay;
+            this.cashPayButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.cashPayButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.cashPayButton.FlatAppearance.BorderSize = 0;
+            this.cashPayButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cashPayButton.Location = new System.Drawing.Point(387, 444);
+            this.cashPayButton.Margin = new System.Windows.Forms.Padding(2);
+            this.cashPayButton.Name = "cashPayButton";
+            this.cashPayButton.Size = new System.Drawing.Size(120, 33);
+            this.cashPayButton.TabIndex = 20;
+            this.cashPayButton.UseVisualStyleBackColor = true;
+            this.cashPayButton.Click += new System.EventHandler(this.cashPayButton_Click);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackgroundImage = global::AssignmentCSharp.Properties.Resources.usericon;
+            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBox1.Location = new System.Drawing.Point(86, 4);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(20, 28);
+            this.pictureBox1.TabIndex = 19;
+            this.pictureBox1.TabStop = false;
+            // 
+            // clearAllButton
+            // 
+            this.clearAllButton.BackgroundImage = global::AssignmentCSharp.Properties.Resources.clearall;
+            this.clearAllButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.clearAllButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.clearAllButton.FlatAppearance.BorderSize = 0;
+            this.clearAllButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.clearAllButton.Location = new System.Drawing.Point(440, 287);
+            this.clearAllButton.Margin = new System.Windows.Forms.Padding(2);
+            this.clearAllButton.Name = "clearAllButton";
+            this.clearAllButton.Size = new System.Drawing.Size(50, 55);
+            this.clearAllButton.TabIndex = 18;
+            this.clearAllButton.UseVisualStyleBackColor = true;
+            this.clearAllButton.Click += new System.EventHandler(this.clearAllButton_Click);
+            // 
+            // deleteButton
+            // 
+            this.deleteButton.BackgroundImage = global::AssignmentCSharp.Properties.Resources.remove;
+            this.deleteButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.deleteButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.deleteButton.FlatAppearance.BorderSize = 0;
+            this.deleteButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.deleteButton.Location = new System.Drawing.Point(442, 229);
+            this.deleteButton.Margin = new System.Windows.Forms.Padding(2);
+            this.deleteButton.Name = "deleteButton";
+            this.deleteButton.Size = new System.Drawing.Size(48, 52);
+            this.deleteButton.TabIndex = 17;
+            this.deleteButton.UseVisualStyleBackColor = true;
+            this.deleteButton.Click += new System.EventHandler(this.deleteButton_Click);
+            // 
+            // minusQtyButton
+            // 
+            this.minusQtyButton.BackgroundImage = global::AssignmentCSharp.Properties.Resources.quantityminus;
+            this.minusQtyButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.minusQtyButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.minusQtyButton.FlatAppearance.BorderSize = 0;
+            this.minusQtyButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.minusQtyButton.Location = new System.Drawing.Point(440, 165);
+            this.minusQtyButton.Margin = new System.Windows.Forms.Padding(2);
+            this.minusQtyButton.Name = "minusQtyButton";
+            this.minusQtyButton.Size = new System.Drawing.Size(53, 56);
+            this.minusQtyButton.TabIndex = 16;
+            this.minusQtyButton.UseVisualStyleBackColor = true;
+            this.minusQtyButton.Click += new System.EventHandler(this.minusQtyButton_Click);
+            // 
+            // plusQtyButton
+            // 
+            this.plusQtyButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("plusQtyButton.BackgroundImage")));
+            this.plusQtyButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.plusQtyButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.plusQtyButton.FlatAppearance.BorderSize = 0;
+            this.plusQtyButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.plusQtyButton.Location = new System.Drawing.Point(441, 103);
+            this.plusQtyButton.Margin = new System.Windows.Forms.Padding(2);
+            this.plusQtyButton.Name = "plusQtyButton";
+            this.plusQtyButton.Size = new System.Drawing.Size(52, 57);
+            this.plusQtyButton.TabIndex = 15;
+            this.plusQtyButton.UseVisualStyleBackColor = true;
+            this.plusQtyButton.Click += new System.EventHandler(this.plusQtyButton_Click);
+            // 
+            // xQtyButton
+            // 
+            this.xQtyButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("xQtyButton.BackgroundImage")));
+            this.xQtyButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.xQtyButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.xQtyButton.FlatAppearance.BorderSize = 0;
+            this.xQtyButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.xQtyButton.Location = new System.Drawing.Point(440, 43);
+            this.xQtyButton.Margin = new System.Windows.Forms.Padding(2);
+            this.xQtyButton.Name = "xQtyButton";
+            this.xQtyButton.Size = new System.Drawing.Size(52, 55);
+            this.xQtyButton.TabIndex = 14;
+            this.xQtyButton.UseVisualStyleBackColor = true;
+            this.xQtyButton.Click += new System.EventHandler(this.XQtyButton_Click);
             // 
             // cashAmount
             // 
@@ -418,6 +550,36 @@
             this.foodListContainer.Size = new System.Drawing.Size(476, 405);
             this.foodListContainer.TabIndex = 8;
             // 
+            // clearSearchButton
+            // 
+            this.clearSearchButton.BackgroundImage = global::AssignmentCSharp.Properties.Resources.clearsearch;
+            this.clearSearchButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.clearSearchButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.clearSearchButton.FlatAppearance.BorderSize = 0;
+            this.clearSearchButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.clearSearchButton.Location = new System.Drawing.Point(384, 70);
+            this.clearSearchButton.Margin = new System.Windows.Forms.Padding(2);
+            this.clearSearchButton.Name = "clearSearchButton";
+            this.clearSearchButton.Size = new System.Drawing.Size(98, 28);
+            this.clearSearchButton.TabIndex = 6;
+            this.clearSearchButton.UseVisualStyleBackColor = true;
+            this.clearSearchButton.Click += new System.EventHandler(this.ClearSearchButton_Click);
+            // 
+            // searchButton
+            // 
+            this.searchButton.BackgroundImage = global::AssignmentCSharp.Properties.Resources.search;
+            this.searchButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.searchButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.searchButton.FlatAppearance.BorderSize = 0;
+            this.searchButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.searchButton.Location = new System.Drawing.Point(344, 72);
+            this.searchButton.Margin = new System.Windows.Forms.Padding(2);
+            this.searchButton.Name = "searchButton";
+            this.searchButton.Size = new System.Drawing.Size(28, 26);
+            this.searchButton.TabIndex = 5;
+            this.searchButton.UseVisualStyleBackColor = true;
+            this.searchButton.Click += new System.EventHandler(this.SearchButton_Click);
+            // 
             // searchBar
             // 
             this.searchBar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -450,168 +612,6 @@
             this.label12.TabIndex = 0;
             this.label12.Text = "Menu";
             // 
-            // creditCardPay
-            // 
-            this.creditCardPay.BackgroundImage = global::AssignmentCSharp.Properties.Resources.creditccardpay;
-            this.creditCardPay.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.creditCardPay.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.creditCardPay.FlatAppearance.BorderSize = 0;
-            this.creditCardPay.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.creditCardPay.Location = new System.Drawing.Point(387, 490);
-            this.creditCardPay.Margin = new System.Windows.Forms.Padding(2);
-            this.creditCardPay.Name = "creditCardPay";
-            this.creditCardPay.Size = new System.Drawing.Size(122, 37);
-            this.creditCardPay.TabIndex = 21;
-            this.creditCardPay.UseVisualStyleBackColor = true;
-            this.creditCardPay.Click += new System.EventHandler(this.creditCardPay_Click);
-            // 
-            // cashPayButton
-            // 
-            this.cashPayButton.BackgroundImage = global::AssignmentCSharp.Properties.Resources.cashpay;
-            this.cashPayButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.cashPayButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.cashPayButton.FlatAppearance.BorderSize = 0;
-            this.cashPayButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cashPayButton.Location = new System.Drawing.Point(387, 444);
-            this.cashPayButton.Margin = new System.Windows.Forms.Padding(2);
-            this.cashPayButton.Name = "cashPayButton";
-            this.cashPayButton.Size = new System.Drawing.Size(120, 33);
-            this.cashPayButton.TabIndex = 20;
-            this.cashPayButton.UseVisualStyleBackColor = true;
-            this.cashPayButton.Click += new System.EventHandler(this.cashPayButton_Click);
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackgroundImage = global::AssignmentCSharp.Properties.Resources.usericon;
-            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox1.Location = new System.Drawing.Point(86, 4);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(20, 28);
-            this.pictureBox1.TabIndex = 19;
-            this.pictureBox1.TabStop = false;
-            // 
-            // clearAllButton
-            // 
-            this.clearAllButton.BackgroundImage = global::AssignmentCSharp.Properties.Resources.clearall;
-            this.clearAllButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.clearAllButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.clearAllButton.FlatAppearance.BorderSize = 0;
-            this.clearAllButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.clearAllButton.Location = new System.Drawing.Point(440, 287);
-            this.clearAllButton.Margin = new System.Windows.Forms.Padding(2);
-            this.clearAllButton.Name = "clearAllButton";
-            this.clearAllButton.Size = new System.Drawing.Size(50, 55);
-            this.clearAllButton.TabIndex = 18;
-            this.clearAllButton.UseVisualStyleBackColor = true;
-            this.clearAllButton.Click += new System.EventHandler(this.clearAllButton_Click);
-            // 
-            // deleteButton
-            // 
-            this.deleteButton.BackgroundImage = global::AssignmentCSharp.Properties.Resources.remove;
-            this.deleteButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.deleteButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.deleteButton.FlatAppearance.BorderSize = 0;
-            this.deleteButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.deleteButton.Location = new System.Drawing.Point(442, 229);
-            this.deleteButton.Margin = new System.Windows.Forms.Padding(2);
-            this.deleteButton.Name = "deleteButton";
-            this.deleteButton.Size = new System.Drawing.Size(48, 52);
-            this.deleteButton.TabIndex = 17;
-            this.deleteButton.UseVisualStyleBackColor = true;
-            this.deleteButton.Click += new System.EventHandler(this.deleteButton_Click);
-            // 
-            // minusQtyButton
-            // 
-            this.minusQtyButton.BackgroundImage = global::AssignmentCSharp.Properties.Resources.quantityminus;
-            this.minusQtyButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.minusQtyButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.minusQtyButton.FlatAppearance.BorderSize = 0;
-            this.minusQtyButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.minusQtyButton.Location = new System.Drawing.Point(440, 165);
-            this.minusQtyButton.Margin = new System.Windows.Forms.Padding(2);
-            this.minusQtyButton.Name = "minusQtyButton";
-            this.minusQtyButton.Size = new System.Drawing.Size(53, 56);
-            this.minusQtyButton.TabIndex = 16;
-            this.minusQtyButton.UseVisualStyleBackColor = true;
-            this.minusQtyButton.Click += new System.EventHandler(this.minusQtyButton_Click);
-            // 
-            // plusQtyButton
-            // 
-            this.plusQtyButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("plusQtyButton.BackgroundImage")));
-            this.plusQtyButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.plusQtyButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.plusQtyButton.FlatAppearance.BorderSize = 0;
-            this.plusQtyButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.plusQtyButton.Location = new System.Drawing.Point(441, 103);
-            this.plusQtyButton.Margin = new System.Windows.Forms.Padding(2);
-            this.plusQtyButton.Name = "plusQtyButton";
-            this.plusQtyButton.Size = new System.Drawing.Size(52, 57);
-            this.plusQtyButton.TabIndex = 15;
-            this.plusQtyButton.UseVisualStyleBackColor = true;
-            this.plusQtyButton.Click += new System.EventHandler(this.plusQtyButton_Click);
-            // 
-            // xQtyButton
-            // 
-            this.xQtyButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("xQtyButton.BackgroundImage")));
-            this.xQtyButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.xQtyButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.xQtyButton.FlatAppearance.BorderSize = 0;
-            this.xQtyButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.xQtyButton.Location = new System.Drawing.Point(440, 43);
-            this.xQtyButton.Margin = new System.Windows.Forms.Padding(2);
-            this.xQtyButton.Name = "xQtyButton";
-            this.xQtyButton.Size = new System.Drawing.Size(52, 55);
-            this.xQtyButton.TabIndex = 14;
-            this.xQtyButton.UseVisualStyleBackColor = true;
-            this.xQtyButton.Click += new System.EventHandler(this.XQtyButton_Click);
-            // 
-            // clearSearchButton
-            // 
-            this.clearSearchButton.BackgroundImage = global::AssignmentCSharp.Properties.Resources.clearsearch;
-            this.clearSearchButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.clearSearchButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.clearSearchButton.FlatAppearance.BorderSize = 0;
-            this.clearSearchButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.clearSearchButton.Location = new System.Drawing.Point(384, 70);
-            this.clearSearchButton.Margin = new System.Windows.Forms.Padding(2);
-            this.clearSearchButton.Name = "clearSearchButton";
-            this.clearSearchButton.Size = new System.Drawing.Size(98, 28);
-            this.clearSearchButton.TabIndex = 6;
-            this.clearSearchButton.UseVisualStyleBackColor = true;
-            this.clearSearchButton.Click += new System.EventHandler(this.ClearSearchButton_Click);
-            // 
-            // searchButton
-            // 
-            this.searchButton.BackgroundImage = global::AssignmentCSharp.Properties.Resources.search;
-            this.searchButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.searchButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.searchButton.FlatAppearance.BorderSize = 0;
-            this.searchButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.searchButton.Location = new System.Drawing.Point(344, 72);
-            this.searchButton.Margin = new System.Windows.Forms.Padding(2);
-            this.searchButton.Name = "searchButton";
-            this.searchButton.Size = new System.Drawing.Size(28, 26);
-            this.searchButton.TabIndex = 5;
-            this.searchButton.UseVisualStyleBackColor = true;
-            this.searchButton.Click += new System.EventHandler(this.SearchButton_Click);
-            // 
-            // endBusinessButton
-            // 
-            this.endBusinessButton.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.endBusinessButton.BackgroundImage = global::AssignmentCSharp.Properties.Resources.endbusiness;
-            this.endBusinessButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.endBusinessButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.endBusinessButton.FlatAppearance.BorderSize = 0;
-            this.endBusinessButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.endBusinessButton.Location = new System.Drawing.Point(912, 4);
-            this.endBusinessButton.Margin = new System.Windows.Forms.Padding(2);
-            this.endBusinessButton.Name = "endBusinessButton";
-            this.endBusinessButton.Size = new System.Drawing.Size(141, 32);
-            this.endBusinessButton.TabIndex = 1;
-            this.endBusinessButton.UseVisualStyleBackColor = true;
-            this.endBusinessButton.Click += new System.EventHandler(this.endBusinessButton_Click);
-            // 
             // POSpageForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -630,8 +630,8 @@
             this.splitContainer1.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.itemListInCart)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.itemListInCart)).EndInit();
             this.ResumeLayout(false);
 
         }
