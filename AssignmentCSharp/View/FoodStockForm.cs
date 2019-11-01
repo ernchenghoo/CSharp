@@ -17,7 +17,7 @@ namespace AssignmentCSharp.View
         public FoodStockForm()
         {
             InitializeComponent();
-            getAllRecord();
+            getAllRecord("");
         }
 
         private void FoodStock_Load(object sender, EventArgs e)
@@ -25,12 +25,15 @@ namespace AssignmentCSharp.View
 
         }
 
-        private void getAllRecord()
+        private void getAllRecord(string search)
         {
             this.dataFoodStock.Rows.Clear();
             foreach (Model.FoodStock food in Model.FoodStock.getFoodStocks())
             {
-                this.dataFoodStock.Rows.Add(food.Id, food.Name, food.Quantity, food.Price);
+                if (food.Name.ToLower().Contains(search.ToLower()))
+                {
+                    this.dataFoodStock.Rows.Add(food.Id, food.Name, food.Quantity, food.Price);
+                }
             }
         }
 
@@ -97,7 +100,7 @@ namespace AssignmentCSharp.View
                         {
                             FoodStock newItem = new FoodStock(inputItemName, inputQuantity, inputPrice);
                             newItem.save();
-                            getAllRecord();
+                            getAllRecord("");
                         }
                         else
                         {
@@ -106,7 +109,7 @@ namespace AssignmentCSharp.View
                             foodId.Quantity = inputQuantity;
                             foodId.Price = inputPrice;                        
                             foodId.save();
-                            getAllRecord();
+                            getAllRecord("");
                         }
                         
                     }
@@ -155,7 +158,7 @@ namespace AssignmentCSharp.View
                 int itemId = (int)dataFoodStock.SelectedRows[0].Cells[0].Value;
                 FoodStock foodId = FoodStock.findById(itemId);
                 foodId.delete();
-                getAllRecord();
+                getAllRecord("");
 
             }
             else
@@ -165,9 +168,16 @@ namespace AssignmentCSharp.View
             }
         }
 
-        private void ClearSearchButton_Click(object sender, EventArgs e)
+        private void SearchButton_Click(object sender, EventArgs e)
         {
+            this.dataFoodStock.Controls.Clear();
+            getAllRecord(searchBar.Text);
+        }
 
+        private void ClearSearchButton_Click_1(object sender, EventArgs e)
+        {
+            getAllRecord("");
+            searchBar.Text = "";
         }
     }
 }
