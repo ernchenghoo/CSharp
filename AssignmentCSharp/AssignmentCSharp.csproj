@@ -56,6 +56,12 @@
     <Compile Include="Model\Receipt_Food.cs" />
     <Compile Include="Model\Receipt.cs" />
     <Compile Include="Model\FoodStock.cs" />
+    <Compile Include="View\FoodStockForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\FoodStockForm.Designer.cs">
+      <DependentUpon>FoodStockForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\KitchenForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -83,6 +89,9 @@
     <Compile Include="Model\Login.cs" />
     <Compile Include="Model\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="View\FoodStockForm.resx">
+      <DependentUpon>FoodStockForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\KitchenForm.resx">
       <DependentUpon>KitchenForm.cs</DependentUpon>
     </EmbeddedResource>

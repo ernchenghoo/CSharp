@@ -48,7 +48,7 @@ namespace AssignmentCSharp.Model
                 {
                     cnn = new MySqlConnection(connectionString);
                     cnn.Open();
-                    MySqlCommand command = new MySqlCommand("select COUNT(foodstock.id) from foodstock", cnn);
+                    MySqlCommand command = new MySqlCommand("select Max(foodstock.foodId) from foodstock", cnn);
                     MySqlDataReader dataReader = command.ExecuteReader();
 
                     int currentBiggestId = -1;
@@ -56,7 +56,10 @@ namespace AssignmentCSharp.Model
                     {
                         currentBiggestId = dataReader.GetInt32(0);
                     }
+                    cnn.Close();
 
+                    cnn = new MySqlConnection(connectionString);
+                    cnn.Open();
                     int newId = currentBiggestId + 1;
                     command = new MySqlCommand();
                     command.Connection = cnn;
@@ -87,9 +90,10 @@ namespace AssignmentCSharp.Model
 
                 }
             }
-            catch
+            catch(Exception e)
             {
                 MessageBox.Show("Connection failed");
+                MessageBox.Show(e.ToString());
             }
         }
 
@@ -120,6 +124,29 @@ namespace AssignmentCSharp.Model
             }
             return foundFoodStockObject; ;
         }
+
+        public void delete()
+        {
+            try
+            {
+                //dalete the record
+                cnn = new MySqlConnection(connectionString);
+                cnn.Open();
+                MySqlCommand command = new MySqlCommand();
+                command.Connection = cnn;
+                command.CommandText = "delete from FoodStock where foodId =@id";
+                command.Parameters.AddWithValue("@id", Id);
+                command.ExecuteNonQuery();
+                cnn.Close();
+             
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Connection failed");
+                MessageBox.Show(e.ToString());
+            }
+        }
+
 
         public static List<FoodStock> getFoodStocks()
         {
