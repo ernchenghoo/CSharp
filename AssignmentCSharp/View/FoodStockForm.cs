@@ -39,35 +39,44 @@ namespace AssignmentCSharp.View
 
         private void AddItem_Click(object sender, EventArgs e)
         {
-            string userinput = ShowInputDialog("Enter item name :","Enter quantity : (enter more than 15)","Enter price :", "Add new item Box",-1);
+            string userinput = ShowInputDialog("Enter item name :","Enter quantity : (enter more than 15)","Enter price :","Select Category:", "Add new item Box",-1);
         }
 
-        public string ShowInputDialog(string itemname,string quantity,string price, string caption,int getId)
+        public string ShowInputDialog(string itemname,string quantity,string price,string category, string caption,int getId)
         {
             Form prompt = new Form()
             {
                 Width = 300,
-                Height = 300,
+                Height = 470,
                 FormBorderStyle = FormBorderStyle.FixedDialog,
                 Text = caption,
                 StartPosition = FormStartPosition.CenterScreen
             };
             Label itemNameLabel = new Label() { Left = 20, Top = 10, Text = itemname };
-            TextBox itemNameTextBox = new TextBox() { Left = 20, Top = 40, Width = 200 };
+            TextBox itemNameTextBox = new TextBox() { Left = 20, Top = 30, Width = 200 };
             Label quantityLabel = new Label() { Left = 20, Top = 80, Text = quantity, Width = 300 };
-            TextBox quantityTextBox = new TextBox() { Left = 20, Top = 110, Width = 200 };
+            TextBox quantityTextBox = new TextBox() { Left = 20, Top = 100, Width = 200 };
             Label priceLabel = new Label() { Left = 20, Top = 150, Text = price };
-            TextBox priceTextBox = new TextBox() { Left = 20, Top = 180, Width = 200 };
-            Button confirmation = new Button() { Text = "Ok", Left = 20, Width = 70, Top = 220 };
-            Button cancel = new Button() { Text = "Cancel", Left = 120, Width = 70, Top = 220 };
+            TextBox priceTextBox = new TextBox() { Left = 20, Top = 170, Width = 200 };
+            Label categoryLabel = new Label() { Left = 20, Top = 220, Text = category };
+            ListBox categoryListBox = new ListBox() { Left = 20, Top = 245, Width = 200 };
+            Button confirmation = new Button() { Text = "Ok", Left = 20, Width = 70, Top = 360 };
+            Button cancel = new Button() { Text = "Cancel", Left = 120, Width = 70, Top = 360 };
 
-            if(getId != -1)
+            foreach (Model.FoodCategory food in Model.FoodCategory.getFoodCategory())
+            {
+
+                categoryListBox.Items.Add(food.Category);
+                
+            }
+
+            if (getId != -1)
             {
                 FoodStock foodId = FoodStock.findById(getId);
                 itemNameTextBox.Text = foodId.Name;
+                categoryListBox.SelectedItem = foodId.Category;
                 quantityTextBox.Text = foodId.Quantity.ToString();
                 priceTextBox.Text = foodId.Price.ToString();
-
 
             }
             //button click event handler
@@ -75,6 +84,7 @@ namespace AssignmentCSharp.View
                 try
                 {
                     string inputItemName = itemNameTextBox.Text;
+                    string selectedItem = categoryListBox.Items[categoryListBox.SelectedIndex].ToString();
                     int inputQuantity = Convert.ToInt32(quantityTextBox.Text);
                     decimal inputPrice = Convert.ToDecimal(priceTextBox.Text);
                     string errorMessages = "";
@@ -98,7 +108,7 @@ namespace AssignmentCSharp.View
                         prompt.DialogResult = DialogResult.OK;
                         if (getId == -1)
                         {
-                            FoodStock newItem = new FoodStock(inputItemName, inputQuantity, inputPrice);
+                            FoodStock newItem = new FoodStock(inputItemName, selectedItem, inputQuantity, inputPrice);
                             newItem.save();
                             getAllRecord("");
                         }
@@ -106,6 +116,7 @@ namespace AssignmentCSharp.View
                         {
                             FoodStock foodId = FoodStock.findById(getId);
                             foodId.Name = inputItemName;
+                            foodId.Category = selectedItem;
                             foodId.Quantity = inputQuantity;
                             foodId.Price = inputPrice;                        
                             foodId.save();
@@ -127,6 +138,8 @@ namespace AssignmentCSharp.View
             prompt.Controls.Add(itemNameLabel);
             prompt.Controls.Add(quantityLabel);
             prompt.Controls.Add(priceLabel);
+            prompt.Controls.Add(categoryLabel);
+            prompt.Controls.Add(categoryListBox);
             prompt.Controls.Add(confirmation);
             prompt.Controls.Add(cancel);            
             prompt.AcceptButton = confirmation;
@@ -140,7 +153,7 @@ namespace AssignmentCSharp.View
             {
                 // have row selected
                 int itemId = (int)dataFoodStock.SelectedRows[0].Cells[0].Value;
-                string userinput = ShowInputDialog("Enter item name :", "Enter quantity :", "Enter price :", "Add new item Box", itemId);
+                string userinput = ShowInputDialog("Enter item name :", "Enter quantity :", "Enter price :","Select Category:", "Add new item Box", itemId);
 
             }
             else
