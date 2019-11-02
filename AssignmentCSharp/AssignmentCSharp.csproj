@@ -53,6 +53,7 @@
     <Compile Include="Controller\POSpageController.cs" />
     <Compile Include="Controller\HomepageController.cs" />
     <Compile Include="Model\Account.cs" />
+    <Compile Include="Model\FoodCategory.cs" />
     <Compile Include="Model\Receipt_Food.cs" />
     <Compile Include="Model\Receipt.cs" />
     <Compile Include="Model\FoodStock.cs" />
