@@ -8,23 +8,36 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using AssignmentCSharp.Model;
+using System.Threading;
 
 namespace AssignmentCSharp.View
 {
     public partial class KitchenForm : Form
     {
+        public int currentReceiptCount = 0;
         public KitchenForm()
         {
             InitializeComponent();
-            this.detail_id.Text = "2";
-            updateOrderList();
-        }
+            this.detail_id.Text = "";
 
+            Thread t2 = new Thread(delegate ()
+            {
+                while (true)
+                {
+                    updateOrderList();
+                    Thread.Sleep(1000);
+                }
+                
+            });
+            t2.Start();
+
+        }
+        int test = 0;
         public void updateOrderList()
         {
-            this.orderList.Rows.Clear();
+            List<Receipt> orderNotDone = new List<Receipt>();
 
-            foreach(Receipt currReceipt in Receipt.getReceipts())
+            foreach (Receipt currReceipt in Receipt.getReceipts())
             {
                 bool gotUnfinishFood = false;
                 foreach(Receipt_Food food in currReceipt.FoodOrdered)
@@ -37,10 +50,46 @@ namespace AssignmentCSharp.View
 
                 if(gotUnfinishFood == true)
                 {
-                    this.orderList.Rows.Add(currReceipt.DatePrinted.ToString("yyyy/MM/dd hh:mm:ss tt"), currReceipt.Id);
+                    orderNotDone.Add( currReceipt);                 
                 }
             }
+            var orderDescList = from receipt in orderNotDone
+                                orderby receipt.DatePrinted ascending
+                                select receipt;
 
+
+            int count = orderDescList.Count();
+            if (this.currentReceiptCount != count)
+            {
+                this.currentReceiptCount = count;
+                MessageBox.Show("There are a new Order!");
+
+                if (this.InvokeRequired)
+                {
+                    Invoke(new MethodInvoker(delegate () {
+                        orderList.Rows.Clear();
+                    }));
+                }
+                else
+                {
+                    orderList.Rows.Clear();
+                }
+
+                foreach (Receipt currReceipt in orderDescList)
+                {
+                    if (this.InvokeRequired)
+                    {
+                        Invoke(new MethodInvoker(delegate () {
+                            this.orderList.Rows.Add(currReceipt.DatePrinted.ToString("yyyy/MM/dd hh:mm:ss tt"), currReceipt.Id);
+                        }));
+                    }
+                    else
+                    {
+                        this.orderList.Rows.Add(currReceipt.DatePrinted.ToString("yyyy/MM/dd hh:mm:ss tt"), currReceipt.Id);
+                    }
+                }
+
+            }
         }
 
         public void updateOrderDetail(int receiptId)
@@ -54,8 +103,8 @@ namespace AssignmentCSharp.View
             int totalFoodOrdered = 0;
             foreach(Receipt_Food food in receiptObject.FoodOrdered)
             {
-                this.foodList.Rows.Add(this.foodList.Rows.Count + 1, food.Food.Name, food.Quantity);
-                totalFoodOrdered += food.Quantity;
+                this.foodList.Rows.Add(this.foodList.Rows.Count + 1, food.FoodName, food.QuantityOrdered);
+                totalFoodOrdered += food.QuantityOrdered;
             }
 
             this.detail_numoffood.Text = totalFoodOrdered.ToString();
@@ -70,6 +119,13 @@ namespace AssignmentCSharp.View
 
                 int orderid = (int)row.Cells[1].Value;
                 updateOrderDetail(orderid);
+            }
+            else
+            {
+                this.foodList.Rows.Clear();
+                this.detail_id.Text = "";
+                this.detail_time.Text = "";
+                this.detail_numoffood.Text = "";
             }
         }
 
@@ -86,9 +142,45 @@ namespace AssignmentCSharp.View
                     food.IsDone = true;
                     food.save();
                 }
+                currentReceiptCount -= 1;
 
-                MessageBox.Show("Recorded Successful!");
-                updateOrderList();
+                //update the orderlist
+                List<Receipt> orderNotDone = new List<Receipt>();
+
+                foreach (Receipt currReceipt in Receipt.getReceipts())
+                {
+                    bool gotUnfinishFood = false;
+                    foreach (Receipt_Food food in currReceipt.FoodOrdered)
+                    {
+                        if (food.IsDone == false)
+                        {
+                            gotUnfinishFood = true;
+                        }
+                    }
+
+                    if (gotUnfinishFood == true)
+                    {
+                        orderNotDone.Add(currReceipt);
+                    }
+                }
+                var orderDescList = from receipt in orderNotDone
+                                    orderby receipt.DatePrinted descending
+                                    select receipt;
+                orderList.Rows.Clear();
+
+                foreach (Receipt currReceipt in orderDescList)
+                {
+                    if (this.InvokeRequired)
+                    {
+                        Invoke(new MethodInvoker(delegate () {
+                            this.orderList.Rows.Add(currReceipt.DatePrinted.ToString("yyyy/MM/dd hh:mm:ss tt"), currReceipt.Id);
+                        }));
+                    }
+                    else
+                    {
+                        this.orderList.Rows.Add(currReceipt.DatePrinted.ToString("yyyy/MM/dd hh:mm:ss tt"), currReceipt.Id);
+                    }
+                }
 
                 this.foodList.Rows.Clear();
                 this.detail_id.Text = "";
