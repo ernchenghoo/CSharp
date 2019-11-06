@@ -28,7 +28,7 @@ namespace AssignmentCSharp.Model
     {
         public mainForm()
         {
-            new FoodStockForm().Show();
+            new EmailSupplierForm().Show();
         }
     }
 }
