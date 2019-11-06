@@ -16,6 +16,7 @@ namespace AssignmentCSharp.View
     
     public partial class POSpageForm : Form
     {
+        private String categoryChosen = null;
         public POSpageForm()
         {
             InitializeComponent();
@@ -25,47 +26,122 @@ namespace AssignmentCSharp.View
             this.orderType.Items.Insert(0, "Dine-In");
             this.orderType.Items.Insert(1, "Take Away");
             this.orderType.SelectedIndex = 0;
+            displayListOfCategories();
+        }
+
+        private void displayListOfCategories()
+        {
+            this.categoryContainer.Controls.Clear();
+
+            //Create All Button
+            System.Windows.Forms.Button allButton = new System.Windows.Forms.Button();
+
+            allButton.FlatAppearance.BorderSize = 1;
+            allButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            allButton.Location = new System.Drawing.Point(10, 10);
+            allButton.Margin = new System.Windows.Forms.Padding(5);
+            allButton.Name = "button1";
+            allButton.Size = new System.Drawing.Size(140, 23);
+            allButton.TabIndex = 7;
+            allButton.Text = "All";
+            allButton.Tag = (String)null;
+            allButton.UseVisualStyleBackColor = false;
+            allButton.BackColor = System.Drawing.Color.Green;
+            allButton.Click += new System.EventHandler(this.chooseCategory);
+
+            this.categoryContainer.Controls.Add(allButton);
+            this.categoryChosen = null;
+
+            foreach (Model.FoodCategory category in Model.FoodCategory.getFoodCategory())
+            {
+                
+                System.Windows.Forms.Button newButton = new System.Windows.Forms.Button();
+
+                newButton.FlatAppearance.BorderSize = 1;
+                newButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+                newButton.Location = new System.Drawing.Point(10, 10);
+                newButton.Margin = new System.Windows.Forms.Padding(5);
+                newButton.Name = "button1";
+                newButton.Size = new System.Drawing.Size(140, 23);
+                newButton.TabIndex = 7;
+                newButton.Text = category.Category;
+                newButton.Tag = category.Category;
+                newButton.UseVisualStyleBackColor = false;
+                newButton.BackColor = System.Drawing.Color.Yellow;
+                newButton.Click += new System.EventHandler(this.chooseCategory);
+          
+                this.categoryContainer.Controls.Add(newButton);    
+            }
+        }
+
+        private void chooseCategory(object sender, EventArgs e)
+        {
+            foreach (Button b in this.categoryContainer.Controls)
+            {
+                b.BackColor = System.Drawing.Color.Yellow;
+            }
+
+            System.Windows.Forms.Button buttonObject = (System.Windows.Forms.Button)sender;
+            //save it to class variable so we can reference it later
+            this.categoryChosen = (String)buttonObject.Tag;
+            buttonObject.BackColor = System.Drawing.Color.Green;
+
+            searchAndUpdateList(this.searchBar.Text);
         }
 
         //function to search and update the food menu
-        public void searchAndUpdateList(String search)
+        private void searchAndUpdateList(String search)
         {
             this.foodListContainer.Controls.Clear();
-            foreach (Model.FoodStock food in Model.FoodStock.getFoodStocks())
+
+            //filter food name
+            var filteredList = from food in Model.FoodStock.getFoodStocks()
+                              where food.Name.ToLower().Contains(search.ToLower())
+                              select food;
+            //if category all is not chosen
+            if (this.categoryChosen != null)
             {
-                if (food.Name.ToLower().Contains(search.ToLower()))
+                //filter category
+                filteredList = from food in filteredList
+                               where food.Category.Equals(this.categoryChosen)
+                               select food;
+            }
+
+
+            foreach (Model.FoodStock food in filteredList)
+            {
+               
+                System.Windows.Forms.Button newButton = new System.Windows.Forms.Button();
+
+                    
+                newButton.FlatAppearance.BorderSize = 2;
+                newButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+                newButton.Location = new System.Drawing.Point(10, 10);
+                newButton.Margin = new System.Windows.Forms.Padding(10);
+                newButton.Name = "button1";
+                newButton.Size = new System.Drawing.Size(199, 191);
+                newButton.TabIndex = 7;
+                newButton.Text = food.Name;
+                newButton.Tag = food;
+                newButton.UseVisualStyleBackColor = false;
+
+                //if the item is no stock the color will be red
+                if (food.Quantity > 0)
                 {
-                    System.Windows.Forms.Button newButton = new System.Windows.Forms.Button();
-
-                    
-                    newButton.FlatAppearance.BorderSize = 2;
-                    newButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-                    newButton.Location = new System.Drawing.Point(10, 10);
-                    newButton.Margin = new System.Windows.Forms.Padding(10);
-                    newButton.Name = "button1";
-                    newButton.Size = new System.Drawing.Size(199, 191);
-                    newButton.TabIndex = 7;
-                    newButton.Text = food.Name;
-                    newButton.Tag = food;
-                    newButton.UseVisualStyleBackColor = false;
-
-                    //if the item is no stock the color will be red
-                    if (food.Quantity > 0)
-                    {
-                        newButton.BackColor = System.Drawing.Color.White;
-                        newButton.Click += new System.EventHandler(this.addItem);
-                    }
-                    else
-                    {
-                        newButton.BackColor = System.Drawing.Color.Red;
-                        newButton.Click += (sender, e) => {
-                            MessageBox.Show("This Item is Out of Stock!");
-                        };
-                    }
+                    newButton.BackColor = System.Drawing.Color.White;
+                    newButton.Click += new System.EventHandler(this.addItem);
+                }
+                else
+                {
+                    newButton.BackColor = System.Drawing.Color.Red;
+                    newButton.Click += (sender, e) => {
+                        MessageBox.Show("This Item is Out of Stock!");
+                    };
+                }
                     
 
-                    this.foodListContainer.Controls.Add(newButton);
-                }   
+                this.foodListContainer.Controls.Add(newButton);
+                 
             }
         }
 
@@ -356,7 +432,8 @@ namespace AssignmentCSharp.View
                     {
                         int foodid = (int)row.Cells[1].Value;
                         int quantity = (int)row.Cells[3].Value;
-                        foodlist.Add(new Receipt_Food(foodid, quantity));
+                        FoodStock foodObj = FoodStock.findById(foodid);
+                        foodlist.Add(new Receipt_Food(foodid,foodObj.Name,foodObj.Price, quantity));
                     }
 
                     //make the receipt
@@ -381,8 +458,9 @@ namespace AssignmentCSharp.View
                         foreach(Receipt_Food currFood in newReceipt.FoodOrdered)
                         {
                             //food stock quantity minus ordered quantity
-                            currFood.Food.Quantity -= currFood.Quantity;
-                            currFood.Food.save();
+                            FoodStock foodObj = FoodStock.findById(currFood.FoodId);
+                            foodObj.Quantity -= currFood.QuantityOrdered;
+                            foodObj.save();
                         }
 
                         this.Hide();
@@ -430,7 +508,9 @@ namespace AssignmentCSharp.View
                 {
                     int foodid = (int)row.Cells[1].Value;
                     int quantity = (int)row.Cells[3].Value;
-                    foodlist.Add(new Receipt_Food(foodid, quantity));
+                    FoodStock foodObj = FoodStock.findById(foodid);
+
+                    foodlist.Add(new Receipt_Food(foodid, foodObj.Name, foodObj.Price, quantity));
                 }
 
                 //make the receipt
@@ -454,8 +534,9 @@ namespace AssignmentCSharp.View
                 foreach (Receipt_Food currFood in newReceipt.FoodOrdered)
                 {
                     //food stock quantity minus ordered quantity
-                    currFood.Food.Quantity -= currFood.Quantity;
-                    currFood.Food.save();
+                    FoodStock foodObj = FoodStock.findById(currFood.FoodId);
+                    foodObj.Quantity -= currFood.QuantityOrdered;
+                    foodObj.save();
                 }
 
                 this.Hide();
@@ -477,5 +558,6 @@ namespace AssignmentCSharp.View
             MessageBox.Show("Thank you for using our POS system! Have a nice day =D");
             this.Close();
         }
+
     }
 }

@@ -10,25 +10,29 @@ namespace AssignmentCSharp.Model
 {
     static class Program
     {
+        public static Form1 homePageFormReference = null;
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
         static void Main()
         {
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new mainForm());
+            homePageFormReference = new Form1();
+            Application.Run(new KitchenForm());
 
      
         }
     }
 
-    public class mainForm : Form
+    class Fromm : Form
     {
-        public mainForm()
+        public Fromm()
         {
-            new FoodStockForm().Show();
+            POSpageForm p = new POSpageForm();
+            p.Show();
         }
     }
 }
