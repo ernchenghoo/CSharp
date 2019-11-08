@@ -168,7 +168,13 @@ namespace AssignmentCSharp.View
             }
             else
             {
-                MessageBox.Show("Item Already in Cart! Added 1 quantity for you");
+                //if enough quantity then show sucessfully added
+                int currentNumberOfItem = (int)foundItemInCart.Cells[3].Value;
+                if (FoodStock.findById((int)foundItemInCart.Cells[1].Value).Quantity > currentNumberOfItem+1)
+                {
+                    MessageBox.Show("Item Already in Cart! Added 1 quantity for you");
+                }
+                
                 addQuantityToRow(foundItemInCart);
             }
             updateTotalCalculation();
@@ -458,9 +464,16 @@ namespace AssignmentCSharp.View
                         foreach(Receipt_Food currFood in newReceipt.FoodOrdered)
                         {
                             //food stock quantity minus ordered quantity
+
                             FoodStock foodObj = FoodStock.findById(currFood.FoodId);
                             foodObj.Quantity -= currFood.QuantityOrdered;
                             foodObj.save();
+                            
+                            if (foodObj.Food.Quantity <= 0)
+                            {
+                                EmailSupplierForm emailSupplier = new EmailSupplierForm(foodObj.Food.Name);
+                                emailSupplier.Show();
+                            }
                         }
 
                         this.Hide();
@@ -537,6 +550,12 @@ namespace AssignmentCSharp.View
                     FoodStock foodObj = FoodStock.findById(currFood.FoodId);
                     foodObj.Quantity -= currFood.QuantityOrdered;
                     foodObj.save();
+                    
+                    if (foodObj.Food.Quantity <= 0)
+                    {
+                        EmailSupplierForm emailSupplier = new EmailSupplierForm(foodObj.Food.Name);
+                        emailSupplier.Show();
+                    }
                 }
 
                 this.Hide();

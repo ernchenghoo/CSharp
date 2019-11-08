@@ -28,11 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
             this.dataFoodStock = new System.Windows.Forms.DataGridView();
             this.no = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.itemName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.category = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.quantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.price = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.addItem = new System.Windows.Forms.Button();
@@ -41,6 +42,7 @@
             this.searchBar = new System.Windows.Forms.TextBox();
             this.searchButton = new System.Windows.Forms.Button();
             this.clearSearchButton = new System.Windows.Forms.Button();
+            this.manageStock = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataFoodStock)).BeginInit();
             this.SuspendLayout();
             // 
@@ -63,19 +65,20 @@
             this.dataFoodStock.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
             this.dataFoodStock.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dataFoodStock.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.LightSteelBlue;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Elephant", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.LightSteelBlue;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataFoodStock.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightSteelBlue;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Elephant", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.LightSteelBlue;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataFoodStock.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataFoodStock.ColumnHeadersHeight = 40;
             this.dataFoodStock.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dataFoodStock.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.no,
             this.itemName,
+            this.category,
             this.quantity,
             this.price});
             this.dataFoodStock.EnableHeadersVisualStyles = false;
@@ -87,7 +90,7 @@
             this.dataFoodStock.RowHeadersVisible = false;
             this.dataFoodStock.RowHeadersWidth = 51;
             this.dataFoodStock.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataFoodStock.Size = new System.Drawing.Size(317, 241);
+            this.dataFoodStock.Size = new System.Drawing.Size(441, 229);
             this.dataFoodStock.TabIndex = 3;
             // 
             // no
@@ -105,6 +108,12 @@
             this.itemName.Name = "itemName";
             this.itemName.ReadOnly = true;
             this.itemName.Width = 160;
+            // 
+            // category
+            // 
+            this.category.HeaderText = "Category";
+            this.category.Name = "category";
+            this.category.ReadOnly = true;
             // 
             // quantity
             // 
@@ -124,31 +133,31 @@
             // 
             // addItem
             // 
-            this.addItem.Location = new System.Drawing.Point(362, 94);
+            this.addItem.Location = new System.Drawing.Point(469, 94);
             this.addItem.Name = "addItem";
-            this.addItem.Size = new System.Drawing.Size(75, 23);
+            this.addItem.Size = new System.Drawing.Size(119, 29);
             this.addItem.TabIndex = 4;
-            this.addItem.Text = "Add";
+            this.addItem.Text = "Add Item";
             this.addItem.UseVisualStyleBackColor = true;
             this.addItem.Click += new System.EventHandler(this.AddItem_Click);
             // 
             // editItem
             // 
-            this.editItem.Location = new System.Drawing.Point(362, 163);
+            this.editItem.Location = new System.Drawing.Point(469, 152);
             this.editItem.Name = "editItem";
-            this.editItem.Size = new System.Drawing.Size(75, 23);
+            this.editItem.Size = new System.Drawing.Size(119, 29);
             this.editItem.TabIndex = 5;
-            this.editItem.Text = "Edit";
+            this.editItem.Text = "Edit Item";
             this.editItem.UseVisualStyleBackColor = true;
             this.editItem.Click += new System.EventHandler(this.EditItem_Click);
             // 
             // deleteItem
             // 
-            this.deleteItem.Location = new System.Drawing.Point(362, 239);
+            this.deleteItem.Location = new System.Drawing.Point(469, 259);
             this.deleteItem.Name = "deleteItem";
-            this.deleteItem.Size = new System.Drawing.Size(75, 23);
+            this.deleteItem.Size = new System.Drawing.Size(119, 29);
             this.deleteItem.TabIndex = 6;
-            this.deleteItem.Text = "Delete";
+            this.deleteItem.Text = "Delete Item";
             this.deleteItem.UseVisualStyleBackColor = true;
             this.deleteItem.Click += new System.EventHandler(this.DeleteItem_Click);
             // 
@@ -183,7 +192,7 @@
             this.clearSearchButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.clearSearchButton.FlatAppearance.BorderSize = 0;
             this.clearSearchButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.clearSearchButton.Location = new System.Drawing.Point(339, 28);
+            this.clearSearchButton.Location = new System.Drawing.Point(359, 28);
             this.clearSearchButton.Margin = new System.Windows.Forms.Padding(2);
             this.clearSearchButton.Name = "clearSearchButton";
             this.clearSearchButton.Size = new System.Drawing.Size(98, 28);
@@ -191,11 +200,22 @@
             this.clearSearchButton.UseVisualStyleBackColor = true;
             this.clearSearchButton.Click += new System.EventHandler(this.ClearSearchButton_Click_1);
             // 
+            // manageStock
+            // 
+            this.manageStock.Location = new System.Drawing.Point(469, 204);
+            this.manageStock.Name = "manageStock";
+            this.manageStock.Size = new System.Drawing.Size(119, 29);
+            this.manageStock.TabIndex = 10;
+            this.manageStock.Text = "Add Stock";
+            this.manageStock.UseVisualStyleBackColor = true;
+            this.manageStock.Click += new System.EventHandler(this.ManageStock_Click);
+            // 
             // FoodStockForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(450, 343);
+            this.ClientSize = new System.Drawing.Size(621, 332);
+            this.Controls.Add(this.manageStock);
             this.Controls.Add(this.clearSearchButton);
             this.Controls.Add(this.searchButton);
             this.Controls.Add(this.searchBar);
@@ -217,15 +237,17 @@
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataGridView dataFoodStock;
-        private System.Windows.Forms.DataGridViewTextBoxColumn no;
-        private System.Windows.Forms.DataGridViewTextBoxColumn itemName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn quantity;
-        private System.Windows.Forms.DataGridViewTextBoxColumn price;
         private System.Windows.Forms.Button addItem;
         private System.Windows.Forms.Button editItem;
         private System.Windows.Forms.Button deleteItem;
         private System.Windows.Forms.TextBox searchBar;
         private System.Windows.Forms.Button searchButton;
         private System.Windows.Forms.Button clearSearchButton;
+        private System.Windows.Forms.DataGridViewTextBoxColumn no;
+        private System.Windows.Forms.DataGridViewTextBoxColumn itemName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn category;
+        private System.Windows.Forms.DataGridViewTextBoxColumn quantity;
+        private System.Windows.Forms.DataGridViewTextBoxColumn price;
+        private System.Windows.Forms.Button manageStock;
     }
 }

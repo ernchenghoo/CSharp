@@ -31,8 +31,7 @@ namespace AssignmentCSharp.Model
     {
         public Fromm()
         {
-            POSpageForm p = new POSpageForm();
-            p.Show();
+            new POSpageForm().Show();
         }
     }
 }

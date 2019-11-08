@@ -20,6 +20,9 @@ namespace AssignmentCSharp.View
             getAllRecord("");
         }
 
+        public static string emailSubject = "";
+        public static string emailContent = "";
+
         private void FoodStock_Load(object sender, EventArgs e)
         {
 
@@ -32,7 +35,22 @@ namespace AssignmentCSharp.View
             {
                 if (food.Name.ToLower().Contains(search.ToLower()))
                 {
-                    this.dataFoodStock.Rows.Add(food.Id, food.Name, food.Quantity, food.Price);
+                    if(food.Quantity != 0)
+                    {
+                        dataFoodStock.ClearSelection();
+                        this.dataFoodStock.Rows.Add(food.Id, food.Name,food.Category, food.Quantity, food.Price);
+                    }
+
+                    else
+                    {                        
+                        emailSubject = food.Name;                        
+                        emailContent = food.Quantity.ToString();
+                        //create email form to supplier
+                        EmailSupplierForm emailSupplier = new EmailSupplierForm(food.Name);
+                        emailSupplier.Show();
+                        this.dataFoodStock.Rows.Add(food.Id, food.Name, food.Category, food.Quantity, food.Price);
+                    }
+                    
                 }
             }
         }
@@ -40,6 +58,22 @@ namespace AssignmentCSharp.View
         private void AddItem_Click(object sender, EventArgs e)
         {
             string userinput = ShowInputDialog("Enter item name :","Enter quantity : (enter more than 15)","Enter price :","Select Category:", "Add new item Box",-1);
+        }
+
+        private void EditItem_Click(object sender, EventArgs e)
+        {
+            if (this.dataFoodStock.SelectedRows.Count > 0)
+            {
+                // have row selected
+                int itemId = (int)dataFoodStock.SelectedRows[0].Cells[0].Value;
+                string userinput = ShowInputDialog("Enter item name :", "Enter quantity :", "Enter price :", "Select Category:", "Edit item Box", itemId);
+
+            }
+            else
+            {
+                // no  row is selected 
+                MessageBox.Show("No row is Selected");
+            }
         }
 
         public string ShowInputDialog(string itemname,string quantity,string price,string category, string caption,int getId)
@@ -65,7 +99,7 @@ namespace AssignmentCSharp.View
 
             foreach (Model.FoodCategory food in Model.FoodCategory.getFoodCategory())
             {
-
+                categoryListBox.Sorted = true;
                 categoryListBox.Items.Add(food.Category);
                 
             }
@@ -83,11 +117,18 @@ namespace AssignmentCSharp.View
             confirmation.Click += (sender, e) => {
                 try
                 {
-                    string inputItemName = itemNameTextBox.Text;
-                    string selectedItem = categoryListBox.Items[categoryListBox.SelectedIndex].ToString();
+                    string inputItemName = itemNameTextBox.Text;                    
                     int inputQuantity = Convert.ToInt32(quantityTextBox.Text);
                     decimal inputPrice = Convert.ToDecimal(priceTextBox.Text);
+                    string selectedItem = "";
                     string errorMessages = "";
+                    if (categoryListBox.SelectedItem != null) {
+                        selectedItem = categoryListBox.Items[categoryListBox.SelectedIndex].ToString();
+                    }
+                    else
+                    {
+                        errorMessages += "Please select one food category\n";
+                    }                   
 
                     if (inputQuantity < 0)
                     {
@@ -99,7 +140,7 @@ namespace AssignmentCSharp.View
                         errorMessages += "Please enter positive integer for Price\n";
                     }
 
-                    if(errorMessages != "")
+                    if (errorMessages != "")
                     {
                         MessageBox.Show(errorMessages);
                     }
@@ -110,7 +151,7 @@ namespace AssignmentCSharp.View
                         {
                             FoodStock newItem = new FoodStock(inputItemName, selectedItem, inputQuantity, inputPrice);
                             newItem.save();
-                            getAllRecord("");
+                            getAllRecord("");                            
                         }
                         else
                         {
@@ -127,7 +168,7 @@ namespace AssignmentCSharp.View
                 }
                 catch
                 {
-                    MessageBox.Show("Please Enter only Integer!");
+                    MessageBox.Show("Please Enter only Integer for quantity and price!\nPlease select one food category");
                 }
             };
             cancel.Click += (sender, e) => { prompt.Close(); };
@@ -145,22 +186,6 @@ namespace AssignmentCSharp.View
             prompt.AcceptButton = confirmation;
 
             return prompt.ShowDialog() == DialogResult.OK ? itemNameTextBox.Text : "";
-        }
-
-        private void EditItem_Click(object sender, EventArgs e)
-        {
-            if (this.dataFoodStock.SelectedRows.Count > 0)
-            {
-                // have row selected
-                int itemId = (int)dataFoodStock.SelectedRows[0].Cells[0].Value;
-                string userinput = ShowInputDialog("Enter item name :", "Enter quantity :", "Enter price :","Select Category:", "Add new item Box", itemId);
-
-            }
-            else
-            {
-                // no  row is selected 
-                MessageBox.Show("No row is Selected");
-            }
         }
 
         private void DeleteItem_Click(object sender, EventArgs e)
@@ -192,5 +217,96 @@ namespace AssignmentCSharp.View
             getAllRecord("");
             searchBar.Text = "";
         }
+
+        private void ManageStock_Click(object sender, EventArgs e)
+        {
+            if (this.dataFoodStock.SelectedRows.Count > 0)
+            {
+                // have row selected
+                int itemId = (int)dataFoodStock.SelectedRows[0].Cells[0].Value;
+                string userinput = ShowInputQuantityDialog("Enter number of amount will be added in the stock", "Manage Stock Box", itemId);
+
+            }
+            else
+            {
+                // no  row is selected 
+                MessageBox.Show("No row is Selected");
+            }
+
+        }
+
+        public string ShowInputQuantityDialog(string quantity, string caption,int getId)
+        {
+            Form prompt = new Form()
+            {
+                Width = 300,
+                Height = 470,
+                FormBorderStyle = FormBorderStyle.FixedDialog,
+                Text = caption,
+                StartPosition = FormStartPosition.CenterScreen
+            };
+            Label quantityLabel = new Label() { Left = 20, Top = 10, Text = quantity, Width =300 };
+            Label originalQuantityLabel = new Label() { Left = 20, Top = 200, Text = quantity };
+            TextBox quantityTextBox = new TextBox() { Left = 20, Top = 30, Width = 200 };
+            Button confirmation = new Button() { Text = "Ok", Left = 20, Width = 70, Top = 360 };
+            Button cancel = new Button() { Text = "Cancel", Left = 120, Width = 70, Top = 360 };
+
+            if (getId != -1)
+            {
+                FoodStock foodId = FoodStock.findById(getId);
+                originalQuantityLabel.Text = string.Format("Original quantity {0}",foodId.Quantity.ToString());
+            }
+
+            //button click event handler
+            confirmation.Click += (sender, e) => {
+                try
+                {
+                    FoodStock foodId = FoodStock.findById(getId);
+                    int total = foodId.Quantity;
+                    int inputQuantity = Convert.ToInt32(quantityTextBox.Text);                    
+                    string errorMessages = "";
+
+                    if (inputQuantity < 0)
+                    {
+                        errorMessages += "Please enter positive integer for Quantity\n";
+                    }
+                    else
+                    {                        
+                        total += inputQuantity;
+                    }
+
+                    if (errorMessages != "")
+                    {
+                        MessageBox.Show(errorMessages);
+                    }
+                    else
+                    {
+                        prompt.DialogResult = DialogResult.OK;
+                        FoodStock foodAdd = FoodStock.findById(getId);
+                        foodAdd.Quantity = total;
+                        foodAdd.addStock();
+                        getAllRecord("");
+
+
+                    }
+                }
+                catch
+                {
+                    MessageBox.Show("Please Enter only Integer for quantity and price!\nPlease select one food category");
+                }
+            };
+            cancel.Click += (sender, e) => { prompt.Close(); };
+
+   
+            prompt.Controls.Add(quantityTextBox);
+            prompt.Controls.Add(quantityLabel);
+            prompt.Controls.Add(originalQuantityLabel);
+            prompt.Controls.Add(confirmation);
+            prompt.Controls.Add(cancel);
+            prompt.AcceptButton = confirmation;
+
+            return prompt.ShowDialog() == DialogResult.OK ? quantityTextBox.Text : "";
+        }
+
     }
 }
