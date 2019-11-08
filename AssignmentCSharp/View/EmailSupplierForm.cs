@@ -15,9 +15,12 @@ namespace AssignmentCSharp.View
 {
     public partial class EmailSupplierForm : Form
     {
-        public EmailSupplierForm()
+        public EmailSupplierForm(String foodname)
         {
             InitializeComponent();
+            textBoxSubject.Text = "Request for more stock for item ";
+            textBoxSubject.Text += foodname;
+            textBoxContent.Text = "The number of amount will be needed is ";
         }
 
         private void EmailSupplierForm_Load(object sender, EventArgs e)
@@ -27,8 +30,10 @@ namespace AssignmentCSharp.View
 
         private void ButtonSend_Click(object sender, EventArgs e)
         {
+            
             try
             {
+                
                 SmtpClient client = new SmtpClient("smtp.gmail.com", 587);
                 client.EnableSsl = true;
                 client.Timeout = 10000;

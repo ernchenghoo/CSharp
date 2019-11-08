@@ -40,6 +40,12 @@ namespace AssignmentCSharp.Model
             this.Quantity = quantity;
         }
 
+        public FoodStock(int id,int quantity)
+        {
+            this.Id = id;
+            this.Quantity = quantity;
+        }
+
         //method for saving object into database
         public void save()
         {
@@ -144,6 +150,29 @@ namespace AssignmentCSharp.Model
                 command.ExecuteNonQuery();
                 cnn.Close();
              
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Connection failed");
+                MessageBox.Show(e.ToString());
+            }
+        }
+
+        public void addStock()
+        {
+            try
+            {
+                //dalete the record
+                cnn = new MySqlConnection(connectionString);
+                cnn.Open();
+                MySqlCommand command = new MySqlCommand();
+                command.Connection = cnn;
+                command.CommandText = "update FoodStock set Quantity=@quantity where foodId =@id";
+                command.Parameters.AddWithValue("@id", Id);
+                command.Parameters.AddWithValue("@quantity", Quantity);
+                command.ExecuteNonQuery();
+                cnn.Close();
+
             }
             catch (Exception e)
             {

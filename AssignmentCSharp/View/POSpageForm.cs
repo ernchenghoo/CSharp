@@ -92,7 +92,13 @@ namespace AssignmentCSharp.View
             }
             else
             {
-                MessageBox.Show("Item Already in Cart! Added 1 quantity for you");
+                //if enough quantity then show sucessfully added
+                int currentNumberOfItem = (int)foundItemInCart.Cells[3].Value;
+                if (FoodStock.findById((int)foundItemInCart.Cells[1].Value).Quantity > currentNumberOfItem+1)
+                {
+                    MessageBox.Show("Item Already in Cart! Added 1 quantity for you");
+                }
+                
                 addQuantityToRow(foundItemInCart);
             }
             updateTotalCalculation();
@@ -383,6 +389,12 @@ namespace AssignmentCSharp.View
                             //food stock quantity minus ordered quantity
                             currFood.Food.Quantity -= currFood.Quantity;
                             currFood.Food.save();
+
+                            if (currFood.Food.Quantity <= 0)
+                            {
+                                EmailSupplierForm emailSupplier = new EmailSupplierForm(currFood.Food.Name);
+                                emailSupplier.Show();
+                            }
                         }
 
                         this.Hide();
@@ -456,6 +468,12 @@ namespace AssignmentCSharp.View
                     //food stock quantity minus ordered quantity
                     currFood.Food.Quantity -= currFood.Quantity;
                     currFood.Food.save();
+                    if (currFood.Food.Quantity <= 0)
+                    {
+                        EmailSupplierForm emailSupplier = new EmailSupplierForm(currFood.Food.Name);
+                        emailSupplier.Show();
+                    }
+                    
                 }
 
                 this.Hide();

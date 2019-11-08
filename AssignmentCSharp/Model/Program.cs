@@ -28,7 +28,7 @@ namespace AssignmentCSharp.Model
     {
         public mainForm()
         {
-            new EmailSupplierForm().Show();
+            new POSpageForm().Show();
         }
     }
 }
