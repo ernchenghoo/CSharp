@@ -29,10 +29,10 @@ namespace AssignmentCSharp.View
                 }
                 
             });
+            t2.IsBackground = true;
             t2.Start();
 
-        }
-        int test = 0;
+        }        
         public void updateOrderList()
         {
             List<Receipt> orderNotDone = new List<Receipt>();
