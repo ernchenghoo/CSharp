@@ -20,8 +20,8 @@ namespace AssignmentCSharp.View
             getAllRecord("");
         }
 
+        public static int itemId = 0;
         public static string emailSubject = "";
-        public static string emailContent = "";
 
         private void FoodStock_Load(object sender, EventArgs e)
         {
@@ -35,19 +35,25 @@ namespace AssignmentCSharp.View
             {
                 if (food.Name.ToLower().Contains(search.ToLower()))
                 {
-                    if(food.Quantity != 0)
+                    if(food.Quantity == 0 && food.AllowSendEmail == true)
+                    {
+                        itemId = food.Id;
+                        emailSubject = food.Name;
+                        //create email form to supplier
+                        EmailSupplierForm emailSupplier = new EmailSupplierForm(food.Id, food.Name);
+                        emailSupplier.Show();
+                        this.dataFoodStock.Rows.Add(food.Id, food.Name, food.Category, food.Quantity, food.Price);
+                  
+                    }
+
+                    else if(food.Quantity > 0)
                     {
                         dataFoodStock.ClearSelection();
-                        this.dataFoodStock.Rows.Add(food.Id, food.Name,food.Category, food.Quantity, food.Price);
+                        this.dataFoodStock.Rows.Add(food.Id, food.Name, food.Category, food.Quantity, food.Price);
                     }
 
                     else
-                    {                        
-                        emailSubject = food.Name;                        
-                        emailContent = food.Quantity.ToString();
-                        //create email form to supplier
-                        EmailSupplierForm emailSupplier = new EmailSupplierForm(food.Name);
-                        emailSupplier.Show();
+                    {
                         this.dataFoodStock.Rows.Add(food.Id, food.Name, food.Category, food.Quantity, food.Price);
                     }
                     
@@ -104,6 +110,7 @@ namespace AssignmentCSharp.View
                 
             }
 
+            //if getId is not equal negative 1 that means its a existing object
             if (getId != -1)
             {
                 FoodStock foodId = FoodStock.findById(getId);
@@ -122,6 +129,16 @@ namespace AssignmentCSharp.View
                     decimal inputPrice = Convert.ToDecimal(priceTextBox.Text);
                     string selectedItem = "";
                     string errorMessages = "";
+                    bool validSendEmail = true;
+
+                    foreach (Model.FoodStock food in Model.FoodStock.getFoodStocks())
+                    {
+                        if (itemNameTextBox.Text.ToLower() == food.Name.ToLower())
+                        {
+                            errorMessages += "Food name already exist please enter another food name\n";
+                        }
+                    }
+
                     if (categoryListBox.SelectedItem != null) {
                         selectedItem = categoryListBox.Items[categoryListBox.SelectedIndex].ToString();
                     }
@@ -149,7 +166,8 @@ namespace AssignmentCSharp.View
                         prompt.DialogResult = DialogResult.OK;
                         if (getId == -1)
                         {
-                            FoodStock newItem = new FoodStock(inputItemName, selectedItem, inputQuantity, inputPrice);
+                            validSendEmail = true;
+                            FoodStock newItem = new FoodStock(inputItemName, selectedItem, inputQuantity, inputPrice, validSendEmail);
                             newItem.save();
                             getAllRecord("");                            
                         }
@@ -159,7 +177,12 @@ namespace AssignmentCSharp.View
                             foodId.Name = inputItemName;
                             foodId.Category = selectedItem;
                             foodId.Quantity = inputQuantity;
-                            foodId.Price = inputPrice;                        
+                            foodId.Price = inputPrice;       
+                            if (inputQuantity >= 1)
+                            {
+                                validSendEmail = true;
+                            }
+                            foodId.AllowSendEmail = validSendEmail;
                             foodId.save();
                             getAllRecord("");
                         }
@@ -267,8 +290,10 @@ namespace AssignmentCSharp.View
                 {
                     FoodStock foodId = FoodStock.findById(getId);
                     int total = foodId.Quantity;
-                    int inputQuantity = Convert.ToInt32(quantityTextBox.Text);                    
+                    int inputQuantity = Convert.ToInt32(quantityTextBox.Text);
+                    bool validSendEmail = true;
                     string errorMessages = "";
+                    
 
                     if (inputQuantity < 0)
                     {
@@ -288,6 +313,15 @@ namespace AssignmentCSharp.View
                         prompt.DialogResult = DialogResult.OK;
                         FoodStock foodAdd = FoodStock.findById(getId);
                         foodAdd.Quantity = total;
+                        if (total >= 1)
+                        {
+                            validSendEmail = true;
+                        }
+                        else
+                        {
+                            validSendEmail = false;
+                        }
+                        foodAdd.AllowSendEmail = validSendEmail;
                         foodAdd.addStock();
                         getAllRecord("");
 
@@ -296,7 +330,7 @@ namespace AssignmentCSharp.View
                 }
                 catch
                 {
-                    MessageBox.Show("Please Enter only Integer for quantity and price!\nPlease select one food category");
+                    MessageBox.Show("Please Enter only Integer!\n");
                 }
             };
             cancel.Click += (sender, e) => { prompt.Close(); };
