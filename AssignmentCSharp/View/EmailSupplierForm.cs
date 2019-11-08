@@ -47,6 +47,7 @@ namespace AssignmentCSharp.View
                 msg.Body = textBoxContent.Text;
                 client.Send(msg);
                 MessageBox.Show(string.Format("Successful send to {0}", textBoxTo.Text));
+                this.Close();
 
             }
             catch (Exception exp)

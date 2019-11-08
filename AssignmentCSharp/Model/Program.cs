@@ -21,7 +21,7 @@ namespace AssignmentCSharp.Model
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             homePageFormReference = new Form1();
-            Application.Run(new KitchenForm());
+            Application.Run(new Fromm());
 
      
         }
@@ -31,7 +31,7 @@ namespace AssignmentCSharp.Model
     {
         public Fromm()
         {
-            new POSpageForm().Show();
+            new FoodStockForm().Show();
         }
     }
 }

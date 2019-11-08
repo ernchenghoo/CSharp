@@ -469,9 +469,9 @@ namespace AssignmentCSharp.View
                             foodObj.Quantity -= currFood.QuantityOrdered;
                             foodObj.save();
                             
-                            if (foodObj.Food.Quantity <= 0)
+                            if (foodObj.Quantity <= 0)
                             {
-                                EmailSupplierForm emailSupplier = new EmailSupplierForm(foodObj.Food.Name);
+                                EmailSupplierForm emailSupplier = new EmailSupplierForm(foodObj.Name);
                                 emailSupplier.Show();
                             }
                         }
@@ -551,9 +551,9 @@ namespace AssignmentCSharp.View
                     foodObj.Quantity -= currFood.QuantityOrdered;
                     foodObj.save();
                     
-                    if (foodObj.Food.Quantity <= 0)
+                    if (foodObj.Quantity <= 0)
                     {
-                        EmailSupplierForm emailSupplier = new EmailSupplierForm(foodObj.Food.Name);
+                        EmailSupplierForm emailSupplier = new EmailSupplierForm(foodObj.Name);
                         emailSupplier.Show();
                     }
                 }

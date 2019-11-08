@@ -240,21 +240,25 @@ namespace AssignmentCSharp.View
             Form prompt = new Form()
             {
                 Width = 300,
-                Height = 470,
+                Height = 180,
                 FormBorderStyle = FormBorderStyle.FixedDialog,
                 Text = caption,
                 StartPosition = FormStartPosition.CenterScreen
             };
-            Label quantityLabel = new Label() { Left = 20, Top = 10, Text = quantity, Width =300 };
-            Label originalQuantityLabel = new Label() { Left = 20, Top = 200, Text = quantity };
-            TextBox quantityTextBox = new TextBox() { Left = 20, Top = 30, Width = 200 };
-            Button confirmation = new Button() { Text = "Ok", Left = 20, Width = 70, Top = 360 };
-            Button cancel = new Button() { Text = "Cancel", Left = 120, Width = 70, Top = 360 };
+            Label foodNameLabel = new Label() { Left = 20, Top = 10, Width = 300 };
+            foodNameLabel.Font = new Font(foodNameLabel.Font, FontStyle.Bold);
+            Label originalQuantityLabel = new Label() { Left = 20, Top = 30,Width =150 };
+            originalQuantityLabel.Font = new Font(originalQuantityLabel.Font, FontStyle.Bold);            
+            Label quantityLabel = new Label() { Left = 20, Top = 50, Text = quantity, Width =300 };            
+            TextBox quantityTextBox = new TextBox() { Left = 20, Top = 70, Width = 200 };
+            Button confirmation = new Button() { Text = "Ok", Left = 20, Width = 70, Top = 100 };
+            Button cancel = new Button() { Text = "Cancel", Left = 120, Width = 70, Top = 100 };
 
             if (getId != -1)
             {
                 FoodStock foodId = FoodStock.findById(getId);
-                originalQuantityLabel.Text = string.Format("Original quantity {0}",foodId.Quantity.ToString());
+                foodNameLabel.Text = string.Format("Food name: {0}", foodId.Name);
+                originalQuantityLabel.Text = string.Format("Original quantity: {0}",foodId.Quantity.ToString());                
             }
 
             //button click event handler
@@ -301,6 +305,7 @@ namespace AssignmentCSharp.View
             prompt.Controls.Add(quantityTextBox);
             prompt.Controls.Add(quantityLabel);
             prompt.Controls.Add(originalQuantityLabel);
+            prompt.Controls.Add(foodNameLabel);
             prompt.Controls.Add(confirmation);
             prompt.Controls.Add(cancel);
             prompt.AcceptButton = confirmation;
