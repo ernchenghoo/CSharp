@@ -471,7 +471,7 @@ namespace AssignmentCSharp.View
                             
                             if (foodObj.Quantity <= 0)
                             {
-                                EmailSupplierForm emailSupplier = new EmailSupplierForm(foodObj.Name);
+                                EmailSupplierForm emailSupplier = new EmailSupplierForm(foodObj.Id,foodObj.Name);
                                 emailSupplier.Show();
                             }
                         }
@@ -553,7 +553,7 @@ namespace AssignmentCSharp.View
                     
                     if (foodObj.Quantity <= 0)
                     {
-                        EmailSupplierForm emailSupplier = new EmailSupplierForm(foodObj.Name);
+                        EmailSupplierForm emailSupplier = new EmailSupplierForm(foodObj.Id,foodObj.Name);
                         emailSupplier.Show();
                     }
                 }

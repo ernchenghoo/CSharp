@@ -15,13 +15,15 @@ namespace AssignmentCSharp.View
 {
     public partial class EmailSupplierForm : Form
     {
-        public EmailSupplierForm(String foodname)
+        public EmailSupplierForm(int itemId,String foodname)
         {
             InitializeComponent();
             textBoxSubject.Text = "Request for more stock for item ";
             textBoxSubject.Text += foodname;
             textBoxContent.Text = "The number of amount will be needed is ";
+            this.id = itemId;
         }
+        readonly int id = 0;
 
         private void EmailSupplierForm_Load(object sender, EventArgs e)
         {
@@ -39,14 +41,16 @@ namespace AssignmentCSharp.View
                 client.Timeout = 10000;
                 client.DeliveryMethod = SmtpDeliveryMethod.Network;
                 client.UseDefaultCredentials = false;
-                client.Credentials = new NetworkCredential("hahahahaluffy@gmail.com","Asd@1234");
+                client.Credentials = new NetworkCredential("restaurantGoodFood923@gmail.com","Asd@1234");
                 MailMessage msg = new MailMessage();
                 msg.To.Add(textBoxTo.Text);
-                msg.From = new MailAddress("hahahahaluffy@gmail.com");
+                msg.From = new MailAddress("restaurantGoodFood923@gmail.com");
                 msg.Subject = textBoxSubject.Text;
                 msg.Body = textBoxContent.Text;
                 client.Send(msg);
                 MessageBox.Show(string.Format("Successful send to {0}", textBoxTo.Text));
+                Model.FoodStock foodId = new Model.FoodStock(id, false);
+                foodId.validToSendEmail();
                 this.Close();
 
             }
