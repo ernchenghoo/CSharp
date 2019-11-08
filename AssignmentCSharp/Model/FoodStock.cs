@@ -57,13 +57,20 @@ namespace AssignmentCSharp.Model
                 {
                     cnn = new MySqlConnection(connectionString);
                     cnn.Open();
-                    MySqlCommand command = new MySqlCommand("select Max(foodstock.foodId) from foodstock", cnn);
+                    MySqlCommand command = new MySqlCommand("select COUNT(foodstock.foodId),Max(foodstock.foodId) from foodstock", cnn);
                     MySqlDataReader dataReader = command.ExecuteReader();
 
                     int currentBiggestId = -1;
                     while (dataReader.Read())
                     {
-                        currentBiggestId = dataReader.GetInt32(0);
+                        if (dataReader.GetInt32(0) == 0)
+                        {
+                            currentBiggestId = 0;
+                        }
+                        else
+                        {
+                            currentBiggestId = dataReader.GetInt32(1);
+                        }
                     }
                     cnn.Close();
 
@@ -202,9 +209,10 @@ namespace AssignmentCSharp.Model
 
 
             }
-            catch
+            catch(Exception e)
             {
                 MessageBox.Show("Connection failed");
+                Console.WriteLine(e.ToString());
             }
             return foodlist;
         }

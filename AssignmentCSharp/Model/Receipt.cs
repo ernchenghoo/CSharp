@@ -51,13 +51,21 @@ namespace AssignmentCSharp.Model
                     cnn = new MySqlConnection(connectionString);
                     cnn.Open();
 
-                    MySqlCommand command = new MySqlCommand("select MAX(receipt.id) from receipt", cnn);
+                    MySqlCommand command = new MySqlCommand("select COUNT(receipt.id),MAX(receipt.id) from receipt", cnn);
                     MySqlDataReader dataReader = command.ExecuteReader();
 
                     int currentBiggestId = -1;
                     while (dataReader.Read())
                     {
-                        currentBiggestId = dataReader.GetInt32(0);
+                        if(dataReader.GetInt32(0) == 0)
+                        {
+                            currentBiggestId = 0;
+                        }
+                        else
+                        {
+                            currentBiggestId = dataReader.GetInt32(1);
+                        }
+                        
                     }
                     cnn.Close();
                     
@@ -135,11 +143,11 @@ namespace AssignmentCSharp.Model
                     List<Receipt_Food> foodList = new List<Receipt_Food>();
                     MySqlConnection foodcon = new MySqlConnection(connectionString);
                     foodcon.Open();
-                    MySqlCommand getFoodOrder = new MySqlCommand("select receiptid,foodid,quantity,isDone from receipt_food WHERE receiptid="+id, foodcon);
+                    MySqlCommand getFoodOrder = new MySqlCommand("select receiptid,foodid,foodname,foodprice,quantityOrdered,isDone from receipt_food where receiptid=" + id, foodcon);
                     MySqlDataReader foodOrderDataReader = getFoodOrder.ExecuteReader();
                     while (foodOrderDataReader.Read())
                     {
-                        foodList.Add(new Receipt_Food(foodOrderDataReader.GetInt32(0), foodOrderDataReader.GetInt32(1), foodOrderDataReader.GetInt32(2),foodOrderDataReader.GetBoolean(3)));
+                        foodList.Add(new Receipt_Food(foodOrderDataReader.GetInt32(0), foodOrderDataReader.GetInt32(1), foodOrderDataReader.GetString(2), foodOrderDataReader.GetDecimal(3), foodOrderDataReader.GetInt32(4), foodOrderDataReader.GetBoolean(5)));
                     }
                     foodcon.Close();
                     foundReceiptObject = new Receipt(dataReader.GetInt32(0), dataReader.GetDateTime(1),dataReader.GetDecimal(2),dataReader.GetDecimal(3),dataReader.GetDecimal(4),foodList);
@@ -174,11 +182,11 @@ namespace AssignmentCSharp.Model
                     List<Receipt_Food> foodList = new List<Receipt_Food>();
                     MySqlConnection foodCon = new MySqlConnection(connectionString);
                     foodCon.Open();
-                    MySqlCommand getFoodOrder = new MySqlCommand("select receiptid,foodid,quantity,isDone from receipt_food where receiptid="+dataReader.GetInt32(0), foodCon);
+                    MySqlCommand getFoodOrder = new MySqlCommand("select receiptid,foodid,foodname,foodprice,quantityOrdered,isDone from receipt_food where receiptid="+dataReader.GetInt32(0), foodCon);
                     MySqlDataReader foodOrderDataReader = getFoodOrder.ExecuteReader();
                     while (foodOrderDataReader.Read())
                     {
-                        foodList.Add(new Receipt_Food(foodOrderDataReader.GetInt32(0), foodOrderDataReader.GetInt32(1), foodOrderDataReader.GetInt32(2),foodOrderDataReader.GetBoolean(3)));
+                        foodList.Add(new Receipt_Food(foodOrderDataReader.GetInt32(0), foodOrderDataReader.GetInt32(1), foodOrderDataReader.GetString(2), foodOrderDataReader.GetDecimal(3),foodOrderDataReader.GetInt32(4),foodOrderDataReader.GetBoolean(5)));
                     }
                     foodCon.Close();
 

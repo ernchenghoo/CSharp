@@ -31,7 +31,7 @@ namespace AssignmentCSharp.View
             foreach(Receipt_Food food in MyReceipt.FoodOrdered)
             {
                 int newNo = this.itemList.Rows.Count+1;
-                this.itemList.Rows.Add(newNo, food.Food.Name,food.Quantity,food.Food.Price*food.Quantity );
+                this.itemList.Rows.Add(newNo, food.FoodName,food.QuantityOrdered,food.FoodPrice*food.QuantityOrdered );
             }
             this.subtotal.Text = "RM "+(MyReceipt.Total - MyReceipt.ServiceTax - MyReceipt.Tax).ToString();
             this.servicetax.Text = "RM " + MyReceipt.ServiceTax.ToString();
