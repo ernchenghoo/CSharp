@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
 using AssignmentCSharp.View;
+using AssignmentCSharp.Model;
 
 namespace AssignmentCSharp.Controller
 {
@@ -15,7 +16,7 @@ namespace AssignmentCSharp.Controller
             MySqlConnection cnn;
             string connectionString = "server=localhost;database=pos;uid=root;pwd=;";
             cnn = new MySqlConnection(connectionString);
-            int loginInfo = 10;
+            int loginFail = 0;
             try
             {
                 cnn.Open();
@@ -33,38 +34,35 @@ namespace AssignmentCSharp.Controller
                 
                 if (loginAccount != null)
                 {
-                    //login info = 10 : account does not exist
-                    //login info = 11 : email exist, but password wrong
-                    //login info = 1 : admin login
-                    //login info = 2 : stockkeeper login
-                    //login info = 3 : kitchen login
-                    //login info = 4 : cashier login
-                    //login info = 5 : supplier login
+                    //login info = 0 : account does not exist
+                    //login info = 1 : email exist, but password wrong
+                    //login info = 2 : successful login   
 
                     if (string.Equals(loginAccount.Email, email))
                     {
-                        loginInfo = 11;
+                        loginFail = 1;
                     }
 
                     if (string.Equals(loginAccount.Email, email) &&
                         string.Equals(loginAccount.Password,password))
                     {
+                        loginFail = 2;
                         switch (loginAccount.AccountID)
                         {
                             case 1:
-                                loginInfo = 1;
+                                //admin
                                 break;
                             case 2:
-                                loginInfo = 2;
+                                //stockkeeper
                                 break;
                             case 3:
-                                loginInfo = 3;
+                                //kitchen
                                 break;
                             case 4:
-                                loginInfo = 4;
+                                Program.LoadCashier();
                                 break;
                             case 5:
-                                loginInfo = 5;
+                                //supplier
                                 break;
 
                         }
@@ -75,7 +73,7 @@ namespace AssignmentCSharp.Controller
             {
                 Console.WriteLine(System.Environment.StackTrace);
             }
-            return loginInfo;
+            return loginFail;
         }
     }
 }
