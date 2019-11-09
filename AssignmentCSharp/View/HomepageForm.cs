@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using AssignmentCSharp.Controller;
+using AssignmentCSharp.Model;
 
 namespace AssignmentCSharp.View
 {
@@ -21,32 +22,49 @@ namespace AssignmentCSharp.View
 
         private void LoginButton_click(object sender, EventArgs e)
         {
-            if (String.IsNullOrEmpty(usernameBox.Text) && String.IsNullOrEmpty(passwordBox.Text))
+            if (String.IsNullOrEmpty(emailBox.Text) && String.IsNullOrEmpty(passwordBox.Text))
                 MessageBox.Show("Login fields are empty.");
-            else if (String.IsNullOrEmpty(usernameBox.Text))
+            else if (String.IsNullOrEmpty(emailBox.Text))
                 MessageBox.Show("Username field is empty.");
             else if (String.IsNullOrEmpty(passwordBox.Text))
                 MessageBox.Show("Password field is empty");
             else
             {
-                int loginStatus = HomepageController.Login(usernameBox.Text, passwordBox.Text);
+                int loginStatus = HomepageController.Login(emailBox.Text, passwordBox.Text);
                 switch (loginStatus)
                 {
-                    case 0:
+                    //login status = 10 : account does not exist
+                    //login status = 11 : email exist, but password wrong
+                    //login status = 1 : admin login
+                    //login status = 2 : stockkeeper login
+                    //login status = 3 : kitchen login
+                    //login status = 4 : cashier login
+                    //login status = 5 : supplier login
+                    case 10:
                         MessageBox.Show("Account does not exist!");
                         break;
-                    case 1:
+                    case 11:
                         MessageBox.Show("Account exist, but invalid password");
                         break;
+                    case 1:
+                        MessageBox.Show("Admin login");
+                        break;
                     case 2:
-                        MessageBox.Show("Login successful");
+                        MessageBox.Show("Stockkeeper login");
+                        break;
+                    case 3:
+                        MessageBox.Show("Kitchen login");
+                        break;
+                    case 4:
+                        Program.LoadCashier();
+                        break;
+                    case 5:
+                        MessageBox.Show("Supplier login");
                         break;
                 }
 
             }            
         }
-
-        
     }
 
 }

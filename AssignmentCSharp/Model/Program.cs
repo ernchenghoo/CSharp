@@ -21,9 +21,14 @@ namespace AssignmentCSharp.Model
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             homePageFormReference = new Form1();
-            Application.Run(new Fromm());
+            Application.Run(new Form1());
 
      
+        }
+
+        public static void LoadCashier ()
+        {
+            new POSpageForm().Show();
         }
     }
 
@@ -33,5 +38,6 @@ namespace AssignmentCSharp.Model
         {
             new FoodStockForm().Show();
         }
+
     }
 }
