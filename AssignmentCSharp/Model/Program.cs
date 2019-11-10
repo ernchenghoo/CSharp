@@ -10,17 +10,34 @@ namespace AssignmentCSharp.Model
 {
     static class Program
     {
+        public static Form1 homePageFormReference = null;
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
         static void Main()
         {
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            homePageFormReference = new Form1();
             Application.Run(new Form1());
 
      
         }
+
+        public static void LoadCashier ()
+        {
+            new POSpageForm().Show();
+        }
+    }
+
+    class Fromm : Form
+    {
+        public Fromm()
+        {
+            new FoodStockForm().Show();
+        }
+
     }
 }

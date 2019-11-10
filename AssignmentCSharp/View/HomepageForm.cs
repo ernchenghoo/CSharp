@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using AssignmentCSharp.Controller;
 
+
 namespace AssignmentCSharp.View
 {
     public partial class Form1 : Form
@@ -21,32 +22,28 @@ namespace AssignmentCSharp.View
 
         private void LoginButton_click(object sender, EventArgs e)
         {
-            if (String.IsNullOrEmpty(usernameBox.Text) && String.IsNullOrEmpty(passwordBox.Text))
+            if (String.IsNullOrEmpty(emailBox.Text) && String.IsNullOrEmpty(passwordBox.Text))
                 MessageBox.Show("Login fields are empty.");
-            else if (String.IsNullOrEmpty(usernameBox.Text))
+            else if (String.IsNullOrEmpty(emailBox.Text))
                 MessageBox.Show("Username field is empty.");
             else if (String.IsNullOrEmpty(passwordBox.Text))
                 MessageBox.Show("Password field is empty");
             else
             {
-                int loginStatus = HomepageController.Login(usernameBox.Text, passwordBox.Text);
-                switch (loginStatus)
+                int failLogin = HomepageController.Login(emailBox.Text, passwordBox.Text);
+                switch (failLogin)
                 {
                     case 0:
-                        MessageBox.Show("Account does not exist!");
+                        MessageBox.Show("Account does not exist.");
                         break;
                     case 1:
-                        MessageBox.Show("Account exist, but invalid password");
+                        MessageBox.Show("Invalid Password.");
                         break;
                     case 2:
-                        MessageBox.Show("Login successful");
                         break;
+
                 }
-
-            }            
-        }
-
-        
+            }
+        }       
     }
-
 }

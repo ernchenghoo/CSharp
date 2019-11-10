@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.Homepage = new System.Windows.Forms.Label();
-            this.usernameBox = new System.Windows.Forms.TextBox();
+            this.emailBox = new System.Windows.Forms.TextBox();
             this.passwordBox = new System.Windows.Forms.TextBox();
             this.usernameLabel = new System.Windows.Forms.Label();
             this.passwordLabel = new System.Windows.Forms.Label();
@@ -46,12 +46,12 @@
             this.Homepage.TabIndex = 0;
             this.Homepage.Text = "HomePage";
             // 
-            // usernameBox
+            // emailBox
             // 
-            this.usernameBox.Location = new System.Drawing.Point(214, 197);
-            this.usernameBox.Name = "usernameBox";
-            this.usernameBox.Size = new System.Drawing.Size(339, 22);
-            this.usernameBox.TabIndex = 1;
+            this.emailBox.Location = new System.Drawing.Point(214, 197);
+            this.emailBox.Name = "emailBox";
+            this.emailBox.Size = new System.Drawing.Size(339, 22);
+            this.emailBox.TabIndex = 1;
             // 
             // passwordBox
             // 
@@ -63,11 +63,11 @@
             // usernameLabel
             // 
             this.usernameLabel.AutoSize = true;
-            this.usernameLabel.Location = new System.Drawing.Point(131, 200);
+            this.usernameLabel.Location = new System.Drawing.Point(162, 200);
             this.usernameLabel.Name = "usernameLabel";
-            this.usernameLabel.Size = new System.Drawing.Size(77, 17);
+            this.usernameLabel.Size = new System.Drawing.Size(46, 17);
             this.usernameLabel.TabIndex = 3;
-            this.usernameLabel.Text = "Username:";
+            this.usernameLabel.Text = "Email:";
             // 
             // passwordLabel
             // 
@@ -97,7 +97,7 @@
             this.Controls.Add(this.passwordLabel);
             this.Controls.Add(this.usernameLabel);
             this.Controls.Add(this.passwordBox);
-            this.Controls.Add(this.usernameBox);
+            this.Controls.Add(this.emailBox);
             this.Controls.Add(this.Homepage);
             this.Name = "Form1";
             this.Text = "Form1";
@@ -109,7 +109,7 @@
         #endregion
 
         private System.Windows.Forms.Label Homepage;
-        private System.Windows.Forms.TextBox usernameBox;
+        private System.Windows.Forms.TextBox emailBox;
         private System.Windows.Forms.TextBox passwordBox;
         private System.Windows.Forms.Label usernameLabel;
         private System.Windows.Forms.Label passwordLabel;

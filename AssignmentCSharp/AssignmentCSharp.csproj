@@ -50,28 +50,69 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controller\POSpageController.cs" />
     <Compile Include="Controller\HomepageController.cs" />
     <Compile Include="Model\Account.cs" />
+    <Compile Include="Model\FoodCategory.cs" />
+    <Compile Include="Model\Receipt_Food.cs" />
+    <Compile Include="Model\Receipt.cs" />
+    <Compile Include="Model\FoodStock.cs" />
+    <Compile Include="View\EmailSupplierForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\EmailSupplierForm.Designer.cs">
+      <DependentUpon>EmailSupplierForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\FoodStockForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\FoodStockForm.Designer.cs">
+      <DependentUpon>FoodStockForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\KitchenForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\KitchenForm.Designer.cs">
+      <DependentUpon>KitchenForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\ReceiptPage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\ReceiptPage.Designer.cs">
+      <DependentUpon>ReceiptPage.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\HomepageForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="View\HomepageForm.Designer.cs">
       <DependentUpon>HomepageForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form2.cs">
+    <Compile Include="View\POSpageForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form2.Designer.cs">
-      <DependentUpon>Form2.cs</DependentUpon>
+    <Compile Include="View\POSpageForm.Designer.cs">
+      <DependentUpon>POSpageForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Model\Login.cs" />
     <Compile Include="Model\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="View\EmailSupplierForm.resx">
+      <DependentUpon>EmailSupplierForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\FoodStockForm.resx">
+      <DependentUpon>FoodStockForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\KitchenForm.resx">
+      <DependentUpon>KitchenForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\ReceiptPage.resx">
+      <DependentUpon>ReceiptPage.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\HomepageForm.resx">
       <DependentUpon>HomepageForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form2.resx">
-      <DependentUpon>Form2.cs</DependentUpon>
+    <EmbeddedResource Include="View\POSpageForm.resx">
+      <DependentUpon>POSpageForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -112,6 +153,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\quantityx.png" />
-  </ItemGroup>  
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\continue.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
