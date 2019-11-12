@@ -26,6 +26,13 @@ namespace AssignmentCSharp.Main
      
         }
 
+        public static class LoggedinAccount
+        {
+            public static string email;
+            public static string password;
+            public static int role;
+        }
+
         public static void LoadCashier ()
         {
             new POSpageForm().Show();
@@ -49,7 +56,11 @@ namespace AssignmentCSharp.Main
         public static void LoadAdmin ()
         {
             new AdminForm().Show();
-        }        
+        }
+        public static void LoadEditAccount()
+        {
+            new EditAccountForm().Show();
+        }
     }
 
    public class FormManager
@@ -58,15 +69,15 @@ namespace AssignmentCSharp.Main
         {
             get
             {
-                if (ShowHomePage == null)
+                if (homePage == null)
                 {
-                    ShowHomePage = new HomepageForm();
+                    homePage = new HomepageForm();
                 }
-                return ShowHomePage;
+                return homePage;
             }
         }
-        private static HomepageForm ShowHomePage;
-    }
+        private static HomepageForm homePage;
+    }    
 
     class Fromm : Form
     {

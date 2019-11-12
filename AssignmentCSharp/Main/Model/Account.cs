@@ -14,12 +14,12 @@ namespace AssignmentCSharp.Main.Model
         public int AccountID { get; set; }
         public int TypeID { get; set; }
 
-        public Account (string usnm, string pwd, int accID, string role)
+        public Account(string usnm, string pwd, int accID, string role)
         {
             Email = usnm;
             Password = pwd;
             AccountID = accID;
-            TypeID = generateTypeID(role);
+            TypeID = RoleToID(role);
         }
 
         public Account(string usnm, string pwd, int accID, int role) //overloaded constructor
@@ -30,12 +30,12 @@ namespace AssignmentCSharp.Main.Model
             TypeID = role;
         }
 
-        private int generateTypeID (string accType)
+        private int RoleToID(string accType)
         {
             int typeID = 0;
             switch (accType)
             {
-                
+
                 case "Stock Keeper":
                     typeID = 2;
                     break;
@@ -47,6 +47,6 @@ namespace AssignmentCSharp.Main.Model
                     break;
             }
             return typeID;
-        }
-    }
+        }       
+    }    
 }

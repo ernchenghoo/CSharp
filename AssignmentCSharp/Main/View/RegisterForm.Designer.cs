@@ -38,6 +38,7 @@
             this.reenterBox = new System.Windows.Forms.TextBox();
             this.roleBox = new System.Windows.Forms.ComboBox();
             this.RegisterButton = new System.Windows.Forms.Button();
+            this.cancelButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -123,7 +124,7 @@
             // 
             // RegisterButton
             // 
-            this.RegisterButton.Location = new System.Drawing.Point(357, 369);
+            this.RegisterButton.Location = new System.Drawing.Point(235, 371);
             this.RegisterButton.Name = "RegisterButton";
             this.RegisterButton.Size = new System.Drawing.Size(75, 23);
             this.RegisterButton.TabIndex = 9;
@@ -131,11 +132,22 @@
             this.RegisterButton.UseVisualStyleBackColor = true;
             this.RegisterButton.Click += new System.EventHandler(this.RegisterButton_Click);
             // 
+            // cancelButton
+            // 
+            this.cancelButton.Location = new System.Drawing.Point(482, 371);
+            this.cancelButton.Name = "cancelButton";
+            this.cancelButton.Size = new System.Drawing.Size(75, 23);
+            this.cancelButton.TabIndex = 10;
+            this.cancelButton.Text = "Cancel";
+            this.cancelButton.UseVisualStyleBackColor = true;
+            this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
+            // 
             // RegisterForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.RegisterButton);
             this.Controls.Add(this.roleBox);
             this.Controls.Add(this.reenterBox);
@@ -166,5 +178,6 @@
         private System.Windows.Forms.TextBox reenterBox;
         private System.Windows.Forms.ComboBox roleBox;
         private System.Windows.Forms.Button RegisterButton;
+        private System.Windows.Forms.Button cancelButton;
     }
 }

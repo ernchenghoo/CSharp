@@ -51,6 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Main\Controller\HomepageController.cs" />
+    <Compile Include="Main\Controller\ManageAccountController.cs" />
     <Compile Include="Main\Controller\POSpageController.cs" />
     <Compile Include="Main\Controller\RegisterController.cs" />
     <Compile Include="Main\Model\Account.cs" />
@@ -88,6 +89,12 @@
     <Compile Include="Main\View\KitchenForm.Designer.cs">
       <DependentUpon>KitchenForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Main\View\EditAccountForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Main\View\EditAccountForm.Designer.cs">
+      <DependentUpon>EditAccountForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Main\View\ReceiptPage.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -123,6 +130,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Main\View\KitchenForm.resx">
       <DependentUpon>KitchenForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Main\View\EditAccountForm.resx">
+      <DependentUpon>EditAccountForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Main\View\ReceiptPage.resx">
       <DependentUpon>ReceiptPage.cs</DependentUpon>
