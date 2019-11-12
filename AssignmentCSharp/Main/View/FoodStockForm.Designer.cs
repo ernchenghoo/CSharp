@@ -1,4 +1,4 @@
-﻿namespace AssignmentCSharp.View
+﻿namespace AssignmentCSharp.Main.View
 {
     partial class FoodStockForm
     {

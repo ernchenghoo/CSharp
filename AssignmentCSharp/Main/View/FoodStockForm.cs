@@ -8,9 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
-using AssignmentCSharp.Model;
+using AssignmentCSharp.Main.Model;
 
-namespace AssignmentCSharp.View
+namespace AssignmentCSharp.Main.View
 {
     public partial class FoodStockForm : Form
     {

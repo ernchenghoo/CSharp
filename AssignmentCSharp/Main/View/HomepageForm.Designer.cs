@@ -1,6 +1,6 @@
-﻿namespace AssignmentCSharp.View
+﻿namespace AssignmentCSharp.Main.View
 {
-    partial class Form1
+    partial class HomepageForm
     {
         /// <summary>
         /// Required designer variable.

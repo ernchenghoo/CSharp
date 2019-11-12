@@ -7,14 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using AssignmentCSharp.Controller;
+using AssignmentCSharp.Main.Controller;
 
 
-namespace AssignmentCSharp.View
+namespace AssignmentCSharp.Main.View
 {
-    public partial class Form1 : Form
+    public partial class HomepageForm : Form
     {
-        public Form1()
+        public HomepageForm()
         {
             InitializeComponent();
             passwordBox.PasswordChar = '*';
@@ -40,6 +40,7 @@ namespace AssignmentCSharp.View
                         MessageBox.Show("Invalid Password.");
                         break;
                     case 2:
+                        this.Hide();
                         break;
 
                 }

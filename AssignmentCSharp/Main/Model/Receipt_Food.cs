@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace AssignmentCSharp.Model
+namespace AssignmentCSharp.Main.Model
 {
     public class Receipt_Food
     {
