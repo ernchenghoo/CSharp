@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
 using System.Windows.Forms;
 
-namespace AssignmentCSharp.Model
+namespace AssignmentCSharp.Main.Model
 {
     public class Receipt
     {
