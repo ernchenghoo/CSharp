@@ -54,5 +54,11 @@ namespace AssignmentCSharp.Main.View
                 }
             }           
         }
+
+        private void cancelButton_Click(object sender, EventArgs e)
+        {
+            Program.LoadAdmin();
+            this.Close();
+        }
     }
 }

@@ -36,5 +36,22 @@ namespace AssignmentCSharp.Main.View
         {
             Program.LoadAccounts();
         }
+
+        private void LogoutButton_Click(object sender, EventArgs e)
+        { 
+            this.Close();
+            FormManager.HomePage.Show();            
+        }
+
+        private void EditAccountDetailsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Program.LoadEditAccount();
+            this.Close();
+        }
+
+        private void logoutButton_Click(object sender, EventArgs e)
+        {
+            FormManager.HomePage.Show();
+        }
     }
 }
