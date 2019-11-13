@@ -9,23 +9,41 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using AssignmentCSharp.Main.Controller;
 using AssignmentCSharp.Main;
+using AssignmentCSharp.Main.Model;
 
 namespace AssignmentCSharp.Main.View
 {
     public partial class EditAccountForm : Form
     {
-        public EditAccountForm()
+        Account accountToEdit;
+        public EditAccountForm (Account acc)
         {
-            InitializeComponent();            
+            InitializeComponent();
+            passwordBox.PasswordChar = '*';
+            accountToEdit = acc;
+            emailLabel.Text = accountToEdit.Email;
+            roleBox.Text = accountToEdit.IDToRole();
+            if (accountToEdit.TypeID != 1)
+            {
+                roleBox.Enabled = true;
+            }
+            else
+            {
+                roleBox.Enabled = false;
+            }            
         }      
 
-        private void RegisterButton_Click(object sender, EventArgs e)
+        private void SaveButton_Click(object sender, EventArgs e)
         {
-            if (string.Equals(passwordBox.Text, Program.LoggedinAccount.password)) {
-                MessageBox.Show("Please enter a new password!");
+            if (string.Equals(passwordBox.Text, accountToEdit.Password)) {
+                MessageBox.Show("This password is the same as the old one, please enter a new password.");
             }
-            else if (ManageAccountController.EditCredentials(Program.LoggedinAccount.email, 
-                passwordBox.Text, Program.LoggedinAccount.role)) //edit successful
+            else if (!string.Equals(retypeBox.Text, passwordBox.Text))
+            {
+                MessageBox.Show("Re-typed password and password is not identical.");
+            }
+            else if (EditAccountController.EditCredentials(accountToEdit.Email, 
+                passwordBox.Text, accountToEdit.TypeID)) //edit successful
             {
                 MessageBox.Show("Account details has been edited!");
                 Program.LoadAdmin();
@@ -42,6 +60,6 @@ namespace AssignmentCSharp.Main.View
         {
             Program.LoadAdmin();
             this.Close();
-        }
+        }       
     }
 }
