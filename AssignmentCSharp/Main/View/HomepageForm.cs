@@ -7,18 +7,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using AssignmentCSharp.Controller;
+using AssignmentCSharp.Main.Controller;
 
 
-namespace AssignmentCSharp.View
+namespace AssignmentCSharp.Main.View
 {
-    public partial class Form1 : Form
+    public partial class HomepageForm : Form
     {
-        public Form1()
+        public HomepageForm()
         {
             InitializeComponent();
             passwordBox.PasswordChar = '*';
-        }       
+        }
+
+        int loginAttemps = 0;
 
         private void LoginButton_click(object sender, EventArgs e)
         {
@@ -34,16 +36,24 @@ namespace AssignmentCSharp.View
                 switch (failLogin)
                 {
                     case 0:
-                        MessageBox.Show("Account does not exist.");
+                        MessageBox.Show("Account does not exist.");                        
                         break;
                     case 1:
-                        MessageBox.Show("Invalid Password.");
-                        break;
+                        MessageBox.Show("Invalid Password.");                        
+                        break;                        
                     case 2:
+                        this.Hide();
                         break;
 
-                }
+                }                
             }
-        }       
+            loginAttemps += 1;
+            if (loginAttemps >= 5)
+            {
+                MessageBox.Show("You have attempted 5 failed logins. The system will be closed due to security purposes.");
+                Application.Exit();
+            }
+        }
+        
     }
 }

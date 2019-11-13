@@ -11,7 +11,7 @@ using System.Net;
 using System.Net.Mail;
 using System.Net.Mime;
 
-namespace AssignmentCSharp.View
+namespace AssignmentCSharp.Main.View
 {
     public partial class EmailSupplierForm : Form
     {

@@ -1,13 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
-using AssignmentCSharp.View;
-using AssignmentCSharp.Model;
+using AssignmentCSharp.Main.Model;
 
-namespace AssignmentCSharp.Controller
+namespace AssignmentCSharp.Main.Controller
 {
     class HomepageController
     {
@@ -47,16 +42,18 @@ namespace AssignmentCSharp.Controller
                         string.Equals(loginAccount.Password,password))
                     {
                         loginFail = 2;
-                        switch (loginAccount.AccountID)
+                        Program.LoggedinAccount.account = loginAccount;
+
+                        switch (loginAccount.TypeID)
                         {
                             case 1:
-                                //admin
+                                Program.LoadAdmin();
                                 break;
                             case 2:
-                                //stockkeeper
+                                Program.LoadStocks();
                                 break;
                             case 3:
-                                //kitchen
+                                Program.LoadKitchen();
                                 break;
                             case 4:
                                 Program.LoadCashier();

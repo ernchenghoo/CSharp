@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace AssignmentCSharp.Model
+namespace AssignmentCSharp.Main.Model
 {
     public class Receipt_Food
     {
@@ -82,7 +82,7 @@ namespace AssignmentCSharp.Model
                 command.ExecuteNonQuery();
                 cnn.Close();
             }
-            catch(Exception ex)
+            catch
             {
                 MessageBox.Show("Error saving food to receipt!");
             }

@@ -1,6 +1,6 @@
-﻿namespace AssignmentCSharp.View
+﻿namespace AssignmentCSharp.Main.View
 {
-    partial class Form1
+    partial class HomepageForm
     {
         /// <summary>
         /// Required designer variable.
@@ -88,7 +88,7 @@
             this.LoginButton.UseVisualStyleBackColor = true;
             this.LoginButton.Click += new System.EventHandler(this.LoginButton_click);
             // 
-            // Form1
+            // HomepageForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -99,8 +99,8 @@
             this.Controls.Add(this.passwordBox);
             this.Controls.Add(this.emailBox);
             this.Controls.Add(this.Homepage);
-            this.Name = "Form1";
-            this.Text = "Form1";
+            this.Name = "HomepageForm";
+            this.Text = "Form1";            
             this.ResumeLayout(false);
             this.PerformLayout();
 
