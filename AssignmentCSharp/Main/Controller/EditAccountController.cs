@@ -17,8 +17,7 @@ namespace AssignmentCSharp.Main.Controller
             cnn = new MySqlConnection(connectionString);
             try
             {
-                cnn.Open();
-                Account loginAccount = null;
+                cnn.Open();                
                 String sql = "update account set password= '" + newpw + "', typeID='" + rl + "' where email= '" + em + "'";
                 MySqlCommand command = new MySqlCommand(sql, cnn);
                 MySqlDataReader dataReader = command.ExecuteReader();

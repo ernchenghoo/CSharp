@@ -17,6 +17,7 @@ namespace AssignmentCSharp.Main.View
         {
             InitializeComponent();
             passwordBox.PasswordChar = '*';
+            reenterBox.PasswordChar = '*';
         }
 
         private void RegisterForm_Load(object sender, EventArgs e)

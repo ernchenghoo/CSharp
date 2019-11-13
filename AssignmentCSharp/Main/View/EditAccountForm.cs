@@ -20,6 +20,7 @@ namespace AssignmentCSharp.Main.View
         {
             InitializeComponent();
             passwordBox.PasswordChar = '*';
+            retypeBox.PasswordChar = '*';
             accountToEdit = acc;
             emailLabel.Text = accountToEdit.Email;
             roleBox.Text = accountToEdit.IDToRole();
