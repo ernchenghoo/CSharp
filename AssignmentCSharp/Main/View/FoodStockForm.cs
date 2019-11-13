@@ -17,30 +17,33 @@ namespace AssignmentCSharp.Main.View
         public FoodStockForm()
         {
             InitializeComponent();
-            getAllRecord("");
+            GetAllRecord("");
         }
 
-        public static int itemId = 0;
-        public static string emailSubject = "";
+        //public static string supplierEmailAddress = "";
+        //public static int itemId = 0;
+        //public static string emailSubject = "";
 
         private void FoodStock_Load(object sender, EventArgs e)
         {
 
         }
 
-        private void getAllRecord(string search)
+        private void GetAllRecord(string search)
         {
             this.dataFoodStock.Rows.Clear();
-            foreach (Model.FoodStock food in Model.FoodStock.getFoodStocks())
+            foreach (Model.FoodStock food in Model.FoodStock.GetFoodStocks())
             {
                 if (food.Name.ToLower().Contains(search.ToLower()))
                 {
                     if(food.Quantity == 0 && food.AllowSendEmail == true)
                     {
-                        itemId = food.Id;
-                        emailSubject = food.Name;
+                        Account myAcc = Model.Account.GetSupplierAcc();
+                        //supplierEmailAddress = myAcc.Email;
+                        //itemId = food.Id;
+                        //emailSubject = food.Name;
                         //create email form to supplier
-                        EmailSupplierForm emailSupplier = new EmailSupplierForm(food.Id, food.Name);
+                        EmailSupplierForm emailSupplier = new EmailSupplierForm(myAcc.Email, food.Id, food.Name);
                         emailSupplier.Show();
                         this.dataFoodStock.Rows.Add(food.Id, food.Name, food.Category, food.Quantity, food.Price);
                   
@@ -63,7 +66,7 @@ namespace AssignmentCSharp.Main.View
 
         private void AddItem_Click(object sender, EventArgs e)
         {
-            string userinput = ShowInputDialog("Enter item name :","Enter quantity : (enter more than 15)","Enter price :","Select Category:", "Add new item Box",-1);
+            ShowInputDialog("Enter item name :","Enter quantity : (enter more than 15)","Enter price :","Select Category:", "Add new item Box",-1);
         }
 
         private void EditItem_Click(object sender, EventArgs e)
@@ -72,7 +75,7 @@ namespace AssignmentCSharp.Main.View
             {
                 // have row selected
                 int itemId = (int)dataFoodStock.SelectedRows[0].Cells[0].Value;
-                string userinput = ShowInputDialog("Enter item name :", "Enter quantity :", "Enter price :", "Select Category:", "Edit item Box", itemId);
+                ShowInputDialog("Enter item name :", "Enter quantity :", "Enter price :", "Select Category:", "Edit item Box", itemId);
 
             }
             else
@@ -82,7 +85,7 @@ namespace AssignmentCSharp.Main.View
             }
         }
 
-        public string ShowInputDialog(string itemname,string quantity,string price,string category, string caption,int getId)
+        public void ShowInputDialog(string itemname,string quantity,string price,string category, string caption,int getId)
         {
             Form prompt = new Form()
             {
@@ -113,7 +116,7 @@ namespace AssignmentCSharp.Main.View
             //if getId is not equal negative 1 that means its a existing object
             if (getId != -1)
             {
-                FoodStock foodId = FoodStock.findById(getId);
+                FoodStock foodId = FoodStock.FindById(getId);
                 itemNameTextBox.Text = foodId.Name;
                 categoryListBox.SelectedItem = foodId.Category;
                 quantityTextBox.Text = foodId.Quantity.ToString();
@@ -131,13 +134,14 @@ namespace AssignmentCSharp.Main.View
                     string errorMessages = "";
                     bool validSendEmail = true;
 
-                    foreach (Model.FoodStock food in Model.FoodStock.getFoodStocks())
+                    foreach (Model.FoodStock food in Model.FoodStock.GetFoodStocks())
                     {
-                        if (itemNameTextBox.Text.ToLower() == food.Name.ToLower())
+                        if (itemNameTextBox.Text.ToLower() == food.Name.ToLower() && getId != food.Id)
                         {
                             errorMessages += "Food name already exist please enter another food name\n";
                         }
                     }
+
 
                     if (categoryListBox.SelectedItem != null) {
                         selectedItem = categoryListBox.Items[categoryListBox.SelectedIndex].ToString();
@@ -168,12 +172,12 @@ namespace AssignmentCSharp.Main.View
                         {
                             validSendEmail = true;
                             FoodStock newItem = new FoodStock(inputItemName, selectedItem, inputQuantity, inputPrice, validSendEmail);
-                            newItem.save();
-                            getAllRecord("");                            
+                            newItem.Save();
+                            GetAllRecord("");                            
                         }
                         else
                         {
-                            FoodStock foodId = FoodStock.findById(getId);
+                            FoodStock foodId = FoodStock.FindById(getId);
                             foodId.Name = inputItemName;
                             foodId.Category = selectedItem;
                             foodId.Quantity = inputQuantity;
@@ -183,8 +187,8 @@ namespace AssignmentCSharp.Main.View
                                 validSendEmail = true;
                             }
                             foodId.AllowSendEmail = validSendEmail;
-                            foodId.save();
-                            getAllRecord("");
+                            foodId.Save();
+                            GetAllRecord("");
                         }
                         
                     }
@@ -207,8 +211,8 @@ namespace AssignmentCSharp.Main.View
             prompt.Controls.Add(confirmation);
             prompt.Controls.Add(cancel);            
             prompt.AcceptButton = confirmation;
-
-            return prompt.ShowDialog() == DialogResult.OK ? itemNameTextBox.Text : "";
+            prompt.ShowDialog();
+            
         }
 
         private void DeleteItem_Click(object sender, EventArgs e)
@@ -217,9 +221,9 @@ namespace AssignmentCSharp.Main.View
             {
                 // have row selected
                 int itemId = (int)dataFoodStock.SelectedRows[0].Cells[0].Value;
-                FoodStock foodId = FoodStock.findById(itemId);
-                foodId.delete();
-                getAllRecord("");
+                FoodStock foodId = FoodStock.FindById(itemId);
+                foodId.Delete();
+                GetAllRecord("");
 
             }
             else
@@ -232,12 +236,12 @@ namespace AssignmentCSharp.Main.View
         private void SearchButton_Click(object sender, EventArgs e)
         {
             this.dataFoodStock.Controls.Clear();
-            getAllRecord(searchBar.Text);
+            GetAllRecord(searchBar.Text);
         }
 
         private void ClearSearchButton_Click_1(object sender, EventArgs e)
         {
-            getAllRecord("");
+            GetAllRecord("");
             searchBar.Text = "";
         }
 
@@ -279,7 +283,7 @@ namespace AssignmentCSharp.Main.View
 
             if (getId != -1)
             {
-                FoodStock foodId = FoodStock.findById(getId);
+                FoodStock foodId = FoodStock.FindById(getId);
                 foodNameLabel.Text = string.Format("Food name: {0}", foodId.Name);
                 originalQuantityLabel.Text = string.Format("Original quantity: {0}",foodId.Quantity.ToString());                
             }
@@ -288,7 +292,7 @@ namespace AssignmentCSharp.Main.View
             confirmation.Click += (sender, e) => {
                 try
                 {
-                    FoodStock foodId = FoodStock.findById(getId);
+                    FoodStock foodId = FoodStock.FindById(getId);
                     int total = foodId.Quantity;
                     int inputQuantity = Convert.ToInt32(quantityTextBox.Text);
                     bool validSendEmail = true;
@@ -311,7 +315,7 @@ namespace AssignmentCSharp.Main.View
                     else
                     {
                         prompt.DialogResult = DialogResult.OK;
-                        FoodStock foodAdd = FoodStock.findById(getId);
+                        FoodStock foodAdd = FoodStock.FindById(getId);
                         foodAdd.Quantity = total;
                         if (total >= 1)
                         {
@@ -322,8 +326,8 @@ namespace AssignmentCSharp.Main.View
                             validSendEmail = false;
                         }
                         foodAdd.AllowSendEmail = validSendEmail;
-                        foodAdd.addStock();
-                        getAllRecord("");
+                        foodAdd.AddStock();
+                        GetAllRecord("");
 
 
                     }
@@ -347,5 +351,67 @@ namespace AssignmentCSharp.Main.View
             return prompt.ShowDialog() == DialogResult.OK ? quantityTextBox.Text : "";
         }
 
+        private void SupplierEmail_Click(object sender, EventArgs e)
+        {
+            ShowSupplierEmailDialog("Supplier Email :", "Supplier Email");
+        }
+
+        public void ShowSupplierEmailDialog(string email, string caption)
+        {
+            Form prompt = new Form()
+            {
+                Width = 280,
+                Height = 150,
+                FormBorderStyle = FormBorderStyle.FixedDialog,
+                Text = caption,
+                StartPosition = FormStartPosition.CenterScreen
+            };
+            Label supplierEmailLabel = new Label() { Left = 20, Top = 10, Width = 200, Text = email};              
+            TextBox supplierEmailTextBox = new TextBox() { Left = 20, Top = 30, Width = 200 };
+            Button confirmation = new Button() { Text = "Change", Left = 20, Width = 60, Top = 60 };
+            Button cancel = new Button() { Text = "Cancel", Left = 120, Width = 50, Top = 60 };
+
+            Account myAcc = Model.Account.GetSupplierAcc();
+            supplierEmailTextBox.Text = myAcc.Email;
+
+            //button click event handler
+            confirmation.Click += (sender, e) => {
+                try
+                {                   
+                    string inputSupplierEmail = supplierEmailTextBox.Text;                    
+                    string errorMessages = "";
+
+                    if (inputSupplierEmail == "")
+                    {
+                        errorMessages += "Email Address cannot be empty";
+                    }
+
+                    if (errorMessages != "")
+                    {
+                        MessageBox.Show(errorMessages);
+                    }
+                    else
+                    {
+                        prompt.DialogResult = DialogResult.OK;
+                        Account supplierEmail = Model.Account.GetSupplierAcc();
+                        supplierEmail.Email = inputSupplierEmail;
+                        supplierEmail.Save();
+                    }
+                }
+                catch
+                {
+                    MessageBox.Show("Please Enter Email Address only!\n");
+                }
+            };
+            cancel.Click += (sender, e) => { prompt.Close(); };
+
+
+            prompt.Controls.Add(supplierEmailTextBox);
+            prompt.Controls.Add(supplierEmailLabel);
+            prompt.Controls.Add(confirmation);
+            prompt.Controls.Add(cancel);
+            prompt.AcceptButton = confirmation;
+            prompt.ShowDialog();
+        }
     }
 }

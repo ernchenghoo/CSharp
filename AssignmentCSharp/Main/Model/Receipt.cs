@@ -41,7 +41,7 @@ namespace AssignmentCSharp.Main.Model
             this.FoodOrdered = foodOrdered;
         }
 
-        public void save()
+        public void Save()
         {
             try
             {
@@ -89,7 +89,7 @@ namespace AssignmentCSharp.Main.Model
                     foreach(Receipt_Food food in FoodOrdered)
                     {
                         //pass receipt id to indicate this food record belongs to this receipt
-                        food.save(this.Id);
+                        food.Save(this.Id);
                     }
                 }
                 else
@@ -112,7 +112,7 @@ namespace AssignmentCSharp.Main.Model
                     foreach (Receipt_Food food in FoodOrdered)
                     {
                         //pass receipt id to indicate this food record belongs to this receipt
-                        food.save();
+                        food.Save();
                     }
 
                 }
@@ -124,7 +124,7 @@ namespace AssignmentCSharp.Main.Model
                 Console.WriteLine(ex.ToString());
             }
         }
-        public static Receipt findById(int id)
+        public static Receipt FindById(int id)
         {
             cnn = new MySqlConnection(connectionString);
             Receipt foundReceiptObject = null;
@@ -163,7 +163,7 @@ namespace AssignmentCSharp.Main.Model
             return foundReceiptObject; ;
         }
 
-        public static List<Receipt> getReceipts()
+        public static List<Receipt> GetReceipts()
         {
             List<Receipt> receiptList = new List<Receipt>();
 

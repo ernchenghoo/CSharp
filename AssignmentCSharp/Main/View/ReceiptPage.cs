@@ -19,14 +19,14 @@ namespace AssignmentCSharp.Main.View
         {
             InitializeComponent();
             MyReceipt = receipt;
-            intitiallizeReceipt();
+            IntitiallizeReceipt();
             this.amountPaid.Text ="RM " + cashPayed.ToString();
             this.balance.Text = "RM " + (cashPayed - MyReceipt.Total).ToString();
             this.date.Text = MyReceipt.DatePrinted.ToString("yyyy/MM/dd");
             this.time.Text = MyReceipt.DatePrinted.ToString("hh:mm:ss tt");
         }
 
-        private void intitiallizeReceipt()
+        private void IntitiallizeReceipt()
         {
             foreach(Receipt_Food food in MyReceipt.FoodOrdered)
             {
@@ -40,14 +40,14 @@ namespace AssignmentCSharp.Main.View
             
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void Button1_Click(object sender, EventArgs e)
         {
             this.Close();
             POSpageForm newPosPage = new POSpageForm();
             newPosPage.Show();
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void Button2_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Thank you for using our POS system! Have a nice day =D");
             this.Close();

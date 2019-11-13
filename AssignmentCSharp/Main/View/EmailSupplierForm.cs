@@ -15,9 +15,10 @@ namespace AssignmentCSharp.Main.View
 {
     public partial class EmailSupplierForm : Form
     {
-        public EmailSupplierForm(int itemId,String foodname)
+        public EmailSupplierForm(string email,int itemId,String foodname)
         {
             InitializeComponent();
+            textBoxTo.Text = email;
             textBoxSubject.Text = "Request for more stock for item ";
             textBoxSubject.Text += foodname;
             textBoxContent.Text = "The number of amount will be needed is ";
@@ -50,7 +51,7 @@ namespace AssignmentCSharp.Main.View
                 client.Send(msg);
                 MessageBox.Show(string.Format("Successful send to {0}", textBoxTo.Text));
                 Model.FoodStock foodId = new Model.FoodStock(id, false);
-                foodId.validToSendEmail();
+                foodId.ValidToSendEmail();
                 this.Close();
 
             }

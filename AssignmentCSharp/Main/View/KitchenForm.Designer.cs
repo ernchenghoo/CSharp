@@ -82,7 +82,7 @@
             this.button1.Size = new System.Drawing.Size(160, 32);
             this.button1.TabIndex = 1;
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button1.Click += new System.EventHandler(this.Button1_Click);
             // 
             // label1
             // 
@@ -147,7 +147,7 @@
             this.orderList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.orderList.Size = new System.Drawing.Size(331, 497);
             this.orderList.TabIndex = 1;
-            this.orderList.SelectionChanged += new System.EventHandler(this.orderList_OnSelectionChanged);
+            this.orderList.SelectionChanged += new System.EventHandler(this.OrderList_OnSelectionChanged);
             // 
             // timeOrdered
             // 
@@ -190,7 +190,7 @@
             this.orderDoneButton.TabIndex = 8;
             this.orderDoneButton.Text = "Order Done";
             this.orderDoneButton.UseVisualStyleBackColor = false;
-            this.orderDoneButton.Click += new System.EventHandler(this.button2_Click);
+            this.orderDoneButton.Click += new System.EventHandler(this.Button2_Click);
             // 
             // detail_numoffood
             // 

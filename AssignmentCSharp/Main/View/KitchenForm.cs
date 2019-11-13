@@ -24,7 +24,7 @@ namespace AssignmentCSharp.Main.View
             {
                 while (true)
                 {
-                    updateOrderList();
+                    UpdateOrderList();
                     Thread.Sleep(1000);
                 }
                 
@@ -33,11 +33,11 @@ namespace AssignmentCSharp.Main.View
             t2.Start();
 
         }        
-        public void updateOrderList()
+        public void UpdateOrderList()
         {
             List<Receipt> orderNotDone = new List<Receipt>();
 
-            foreach (Receipt currReceipt in Receipt.getReceipts())
+            foreach (Receipt currReceipt in Receipt.GetReceipts())
             {
                 bool gotUnfinishFood = false;
                 foreach(Receipt_Food food in currReceipt.FoodOrdered)
@@ -92,10 +92,10 @@ namespace AssignmentCSharp.Main.View
             }
         }
 
-        public void updateOrderDetail(int receiptId)
+        public void UpdateOrderDetail(int receiptId)
         {
             this.foodList.Rows.Clear();
-            Receipt receiptObject = Receipt.findById(receiptId);
+            Receipt receiptObject = Receipt.FindById(receiptId);
 
             this.detail_id.Text = receiptObject.Id.ToString();
             this.detail_time.Text = receiptObject.DatePrinted.ToString("yyyy/MM/dd hh:mm:ss tt");
@@ -111,14 +111,14 @@ namespace AssignmentCSharp.Main.View
 
         }
 
-        private void orderList_OnSelectionChanged(object sender, EventArgs e)
+        private void OrderList_OnSelectionChanged(object sender, EventArgs e)
         {
             if (this.orderList.SelectedRows.Count > 0)
             {
                 DataGridViewRow row = this.orderList.SelectedRows[0];
 
                 int orderid = (int)row.Cells[1].Value;
-                updateOrderDetail(orderid);
+                UpdateOrderDetail(orderid);
             }
             else
             {
@@ -129,25 +129,25 @@ namespace AssignmentCSharp.Main.View
             }
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void Button2_Click(object sender, EventArgs e)
         {
             try
             {
                 int orderid = Convert.ToInt32(this.detail_id.Text);
 
-                Receipt receiptObj = Receipt.findById(orderid);
+                Receipt receiptObj = Receipt.FindById(orderid);
 
                 foreach(Receipt_Food food in receiptObj.FoodOrdered)
                 {
                     food.IsDone = true;
-                    food.save();
+                    food.Save();
                 }
                 currentReceiptCount -= 1;
 
                 //update the orderlist
                 List<Receipt> orderNotDone = new List<Receipt>();
 
-                foreach (Receipt currReceipt in Receipt.getReceipts())
+                foreach (Receipt currReceipt in Receipt.GetReceipts())
                 {
                     bool gotUnfinishFood = false;
                     foreach (Receipt_Food food in currReceipt.FoodOrdered)
@@ -190,7 +190,7 @@ namespace AssignmentCSharp.Main.View
                 if(this.orderList.RowCount > 0)
                 {
                     int id = (int)this.orderList.Rows[0].Cells[1].Value; ;
-                    updateOrderDetail(id);
+                    UpdateOrderDetail(id);
                 }
 
 
@@ -204,7 +204,7 @@ namespace AssignmentCSharp.Main.View
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void Button1_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Thank you for using our POS system! Have a nice day =D");
             this.Close();
