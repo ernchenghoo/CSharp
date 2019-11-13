@@ -40,7 +40,7 @@ namespace AssignmentCSharp.Main.Model
             this.IsDone = false;
         }
 
-        public void save()
+        public void Save()
         {
             try
             {
@@ -63,7 +63,7 @@ namespace AssignmentCSharp.Main.Model
                 MessageBox.Show("Error saving food to receipt!");
             }            
         }
-        public void save(int receiptId)
+        public void Save(int receiptId)
         {
             this.ReceiptId = receiptId;
             try

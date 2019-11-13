@@ -57,7 +57,7 @@ namespace AssignmentCSharp.Main.Model
         }
 
         //method for saving object into database
-        public void save()
+        public void Save()
         {
             try
             {
@@ -127,7 +127,7 @@ namespace AssignmentCSharp.Main.Model
             }
         }
 
-        public static FoodStock findById(int id)
+        public static FoodStock FindById(int id)
         {
             cnn = new MySqlConnection(connectionString);
             FoodStock foundFoodStockObject = null;
@@ -155,7 +155,7 @@ namespace AssignmentCSharp.Main.Model
             return foundFoodStockObject; ;
         }
 
-        public void delete()
+        public void Delete()
         {
             try
             {
@@ -177,7 +177,7 @@ namespace AssignmentCSharp.Main.Model
             }
         }
 
-        public void addStock()
+        public void AddStock()
         {
             try
             {
@@ -201,7 +201,7 @@ namespace AssignmentCSharp.Main.Model
             }
         }
 
-        public void validToSendEmail()
+        public void ValidToSendEmail()
         {
             try
             {
@@ -225,7 +225,7 @@ namespace AssignmentCSharp.Main.Model
         }
 
 
-        public static List<FoodStock> getFoodStocks()
+        public static List<FoodStock> GetFoodStocks()
         {
             cnn = new MySqlConnection(connectionString);
             List<FoodStock> foodlist = new List<FoodStock>();

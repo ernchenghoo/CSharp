@@ -43,6 +43,7 @@
             this.searchButton = new System.Windows.Forms.Button();
             this.clearSearchButton = new System.Windows.Forms.Button();
             this.manageStock = new System.Windows.Forms.Button();
+            this.supplierEmail = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataFoodStock)).BeginInit();
             this.SuspendLayout();
             // 
@@ -177,7 +178,7 @@
             this.searchButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.searchButton.FlatAppearance.BorderSize = 0;
             this.searchButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.searchButton.Location = new System.Drawing.Point(305, 32);
+            this.searchButton.Location = new System.Drawing.Point(287, 29);
             this.searchButton.Margin = new System.Windows.Forms.Padding(2);
             this.searchButton.Name = "searchButton";
             this.searchButton.Size = new System.Drawing.Size(28, 26);
@@ -192,7 +193,7 @@
             this.clearSearchButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.clearSearchButton.FlatAppearance.BorderSize = 0;
             this.clearSearchButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.clearSearchButton.Location = new System.Drawing.Point(359, 28);
+            this.clearSearchButton.Location = new System.Drawing.Point(335, 27);
             this.clearSearchButton.Margin = new System.Windows.Forms.Padding(2);
             this.clearSearchButton.Name = "clearSearchButton";
             this.clearSearchButton.Size = new System.Drawing.Size(98, 28);
@@ -210,11 +211,22 @@
             this.manageStock.UseVisualStyleBackColor = true;
             this.manageStock.Click += new System.EventHandler(this.ManageStock_Click);
             // 
+            // supplierEmail
+            // 
+            this.supplierEmail.Location = new System.Drawing.Point(469, 29);
+            this.supplierEmail.Name = "supplierEmail";
+            this.supplierEmail.Size = new System.Drawing.Size(119, 29);
+            this.supplierEmail.TabIndex = 11;
+            this.supplierEmail.Text = "Supplier Email";
+            this.supplierEmail.UseVisualStyleBackColor = true;
+            this.supplierEmail.Click += new System.EventHandler(this.SupplierEmail_Click);
+            // 
             // FoodStockForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(621, 332);
+            this.Controls.Add(this.supplierEmail);
             this.Controls.Add(this.manageStock);
             this.Controls.Add(this.clearSearchButton);
             this.Controls.Add(this.searchButton);
@@ -249,5 +261,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn quantity;
         private System.Windows.Forms.DataGridViewTextBoxColumn price;
         private System.Windows.Forms.Button manageStock;
+        private System.Windows.Forms.Button supplierEmail;
     }
 }

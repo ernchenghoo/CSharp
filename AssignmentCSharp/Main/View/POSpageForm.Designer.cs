@@ -108,7 +108,7 @@
             this.endBusinessButton.Size = new System.Drawing.Size(188, 39);
             this.endBusinessButton.TabIndex = 1;
             this.endBusinessButton.UseVisualStyleBackColor = true;
-            this.endBusinessButton.Click += new System.EventHandler(this.endBusinessButton_Click);
+            this.endBusinessButton.Click += new System.EventHandler(this.EndBusinessButton_Click);
             // 
             // label1
             // 
@@ -191,7 +191,7 @@
             this.orderType.Name = "orderType";
             this.orderType.Size = new System.Drawing.Size(129, 24);
             this.orderType.TabIndex = 22;
-            this.orderType.SelectedIndexChanged += new System.EventHandler(this.orderType_SelectedIndexChanged);
+            this.orderType.SelectedIndexChanged += new System.EventHandler(this.OrderType_SelectedIndexChanged);
             // 
             // creditCardPay
             // 
@@ -206,7 +206,7 @@
             this.creditCardPay.Size = new System.Drawing.Size(163, 46);
             this.creditCardPay.TabIndex = 21;
             this.creditCardPay.UseVisualStyleBackColor = true;
-            this.creditCardPay.Click += new System.EventHandler(this.creditCardPay_Click);
+            this.creditCardPay.Click += new System.EventHandler(this.CreditCardPay_Click);
             // 
             // cashPayButton
             // 
@@ -221,7 +221,7 @@
             this.cashPayButton.Size = new System.Drawing.Size(160, 41);
             this.cashPayButton.TabIndex = 20;
             this.cashPayButton.UseVisualStyleBackColor = true;
-            this.cashPayButton.Click += new System.EventHandler(this.cashPayButton_Click);
+            this.cashPayButton.Click += new System.EventHandler(this.CashPayButton_Click);
             // 
             // pictureBox1
             // 
@@ -247,7 +247,7 @@
             this.clearAllButton.Size = new System.Drawing.Size(67, 68);
             this.clearAllButton.TabIndex = 18;
             this.clearAllButton.UseVisualStyleBackColor = true;
-            this.clearAllButton.Click += new System.EventHandler(this.clearAllButton_Click);
+            this.clearAllButton.Click += new System.EventHandler(this.ClearAllButton_Click);
             // 
             // deleteButton
             // 
@@ -262,7 +262,7 @@
             this.deleteButton.Size = new System.Drawing.Size(64, 64);
             this.deleteButton.TabIndex = 17;
             this.deleteButton.UseVisualStyleBackColor = true;
-            this.deleteButton.Click += new System.EventHandler(this.deleteButton_Click);
+            this.deleteButton.Click += new System.EventHandler(this.DeleteButton_Click);
             // 
             // minusQtyButton
             // 
@@ -277,7 +277,7 @@
             this.minusQtyButton.Size = new System.Drawing.Size(71, 69);
             this.minusQtyButton.TabIndex = 16;
             this.minusQtyButton.UseVisualStyleBackColor = true;
-            this.minusQtyButton.Click += new System.EventHandler(this.minusQtyButton_Click);
+            this.minusQtyButton.Click += new System.EventHandler(this.MinusQtyButton_Click);
             // 
             // plusQtyButton
             // 
@@ -292,7 +292,7 @@
             this.plusQtyButton.Size = new System.Drawing.Size(69, 70);
             this.plusQtyButton.TabIndex = 15;
             this.plusQtyButton.UseVisualStyleBackColor = true;
-            this.plusQtyButton.Click += new System.EventHandler(this.plusQtyButton_Click);
+            this.plusQtyButton.Click += new System.EventHandler(this.PlusQtyButton_Click);
             // 
             // xQtyButton
             // 

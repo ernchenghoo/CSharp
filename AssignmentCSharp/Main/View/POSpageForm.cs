@@ -20,16 +20,16 @@ namespace AssignmentCSharp.Main.View
         public POSpageForm()
         {
             InitializeComponent();
-            searchAndUpdateList("");
+            SearchAndUpdateList("");
 
             //add value to comboBox
             this.orderType.Items.Insert(0, "Dine-In");
             this.orderType.Items.Insert(1, "Take Away");
             this.orderType.SelectedIndex = 0;
-            displayListOfCategories();
+            DisplayListOfCategories();
         }
 
-        private void displayListOfCategories()
+        private void DisplayListOfCategories()
         {
             this.categoryContainer.Controls.Clear();
 
@@ -47,7 +47,7 @@ namespace AssignmentCSharp.Main.View
             allButton.Tag = (String)null;
             allButton.UseVisualStyleBackColor = false;
             allButton.BackColor = System.Drawing.Color.Green;
-            allButton.Click += new System.EventHandler(this.chooseCategory);
+            allButton.Click += new System.EventHandler(this.ChooseCategory);
 
             this.categoryContainer.Controls.Add(allButton);
             this.categoryChosen = null;
@@ -68,13 +68,13 @@ namespace AssignmentCSharp.Main.View
                 newButton.Tag = category.Category;
                 newButton.UseVisualStyleBackColor = false;
                 newButton.BackColor = System.Drawing.Color.Yellow;
-                newButton.Click += new System.EventHandler(this.chooseCategory);
+                newButton.Click += new System.EventHandler(this.ChooseCategory);
           
                 this.categoryContainer.Controls.Add(newButton);    
             }
         }
 
-        private void chooseCategory(object sender, EventArgs e)
+        private void ChooseCategory(object sender, EventArgs e)
         {
             foreach (Button b in this.categoryContainer.Controls)
             {
@@ -86,16 +86,16 @@ namespace AssignmentCSharp.Main.View
             this.categoryChosen = (String)buttonObject.Tag;
             buttonObject.BackColor = System.Drawing.Color.Green;
 
-            searchAndUpdateList(this.searchBar.Text);
+            SearchAndUpdateList(this.searchBar.Text);
         }
 
         //function to search and update the food menu
-        private void searchAndUpdateList(String search)
+        private void SearchAndUpdateList(String search)
         {
             this.foodListContainer.Controls.Clear();
 
             //filter food name
-            var filteredList = from food in Model.FoodStock.getFoodStocks()
+            var filteredList = from food in Model.FoodStock.GetFoodStocks()
                               where food.Name.ToLower().Contains(search.ToLower())
                               select food;
             //if category all is not chosen
@@ -129,7 +129,7 @@ namespace AssignmentCSharp.Main.View
                 if (food.Quantity > 0)
                 {
                     newButton.BackColor = System.Drawing.Color.White;
-                    newButton.Click += new System.EventHandler(this.addItem);
+                    newButton.Click += new System.EventHandler(this.AddItem);
                 }
                 else
                 {
@@ -146,7 +146,7 @@ namespace AssignmentCSharp.Main.View
         }
 
         //function to add the item to the cart
-        private void addItem(object sender, EventArgs e)
+        private void AddItem(object sender, EventArgs e)
         {
             System.Windows.Forms.Button buttonObject = (System.Windows.Forms.Button)sender;
             Model.FoodStock chosenFood = (Model.FoodStock)buttonObject.Tag;
@@ -170,23 +170,23 @@ namespace AssignmentCSharp.Main.View
             {
                 //if enough quantity then show sucessfully added
                 int currentNumberOfItem = (int)foundItemInCart.Cells[3].Value;
-                if (FoodStock.findById((int)foundItemInCart.Cells[1].Value).Quantity > currentNumberOfItem+1)
+                if (FoodStock.FindById((int)foundItemInCart.Cells[1].Value).Quantity > currentNumberOfItem+1)
                 {
                     MessageBox.Show("Item Already in Cart! Added 1 quantity for you");
                 }
                 
-                addQuantityToRow(foundItemInCart);
+                AddQuantityToRow(foundItemInCart);
             }
-            updateTotalCalculation();
+            UpdateTotalCalculation();
         }
 
-        private void addQuantityToRow(DataGridViewRow row)
+        private void AddQuantityToRow(DataGridViewRow row)
         {
 
             int itemId = (int)row.Cells[1].Value;
             int currentNumberOfItem = (int)row.Cells[3].Value;
 
-            Model.FoodStock itemObject = Model.FoodStock.findById(itemId);
+            Model.FoodStock itemObject = Model.FoodStock.FindById(itemId);
 
             int newQuantity = currentNumberOfItem + 1;
             if(itemObject.Quantity >= newQuantity)
@@ -195,7 +195,7 @@ namespace AssignmentCSharp.Main.View
                 row.Cells[3].Value = newQuantity;
                 row.Cells[4].Value = itemObject.Price;
                 row.Cells[5].Value = newQuantity * itemObject.Price;
-                updateTotalCalculation();
+                UpdateTotalCalculation();
             }
             else
             {
@@ -204,13 +204,13 @@ namespace AssignmentCSharp.Main.View
             
         }
 
-        private void minusQuantityToRow(DataGridViewRow row)
+        private void MinusQuantityToRow(DataGridViewRow row)
         {
 
             int itemId = (int)row.Cells[1].Value;
             int currentNumberOfItem = (int)row.Cells[3].Value;
 
-            Model.FoodStock itemObject = Model.FoodStock.findById(itemId);
+            Model.FoodStock itemObject = Model.FoodStock.FindById(itemId);
 
             int newQuantity = currentNumberOfItem - 1;
 
@@ -226,10 +226,10 @@ namespace AssignmentCSharp.Main.View
                 row.Cells[4].Value = itemObject.Price;
                 row.Cells[5].Value = newQuantity * itemObject.Price;
             }
-            updateTotalCalculation();
+            UpdateTotalCalculation();
         }
 
-        private void updateTotalCalculation()
+        private void UpdateTotalCalculation()
         {
             decimal totalPrice = 0;
 
@@ -258,7 +258,7 @@ namespace AssignmentCSharp.Main.View
         private void SearchButton_Click(object sender, EventArgs e)
         {
             this.foodListContainer.Controls.Clear();
-            searchAndUpdateList(searchBar.Text);
+            SearchAndUpdateList(searchBar.Text);
         }
 
         
@@ -282,7 +282,7 @@ namespace AssignmentCSharp.Main.View
                         int itemId = (int)row.Cells[1].Value;
                         int currentNumberOfItem = (int)row.Cells[3].Value;
 
-                        Model.FoodStock itemObject = Model.FoodStock.findById(itemId);
+                        Model.FoodStock itemObject = Model.FoodStock.FindById(itemId);
 
                         if(itemObject.Quantity >= newQuantity)
                         {
@@ -297,7 +297,7 @@ namespace AssignmentCSharp.Main.View
                         }
                         
                     }
-                    updateTotalCalculation();
+                    UpdateTotalCalculation();
                 }                
             }
             else
@@ -354,18 +354,18 @@ namespace AssignmentCSharp.Main.View
         }
         private void ClearSearchButton_Click(object sender, EventArgs e)
         {
-            searchAndUpdateList("");
+            SearchAndUpdateList("");
             searchBar.Text = "";
         }
 
-        private void minusQtyButton_Click(object sender, EventArgs e)
+        private void MinusQtyButton_Click(object sender, EventArgs e)
         {
             if (this.itemListInCart.SelectedRows.Count > 0)
             {
                 // have row selected
                 foreach(DataGridViewRow row in this.itemListInCart.SelectedRows)
                 {
-                    minusQuantityToRow(row);
+                    MinusQuantityToRow(row);
                 }
                 
             }
@@ -377,7 +377,7 @@ namespace AssignmentCSharp.Main.View
             
         }
 
-        private void deleteButton_Click(object sender, EventArgs e)
+        private void DeleteButton_Click(object sender, EventArgs e)
         {
             if (this.itemListInCart.SelectedRows.Count > 0)
             {
@@ -386,7 +386,7 @@ namespace AssignmentCSharp.Main.View
                 {
                     this.itemListInCart.Rows.Remove(row);
                 }
-                updateTotalCalculation();
+                UpdateTotalCalculation();
             }
             else
             {
@@ -395,20 +395,20 @@ namespace AssignmentCSharp.Main.View
             }     
         }
 
-        private void clearAllButton_Click(object sender, EventArgs e)
+        private void ClearAllButton_Click(object sender, EventArgs e)
         {
             this.itemListInCart.Rows.Clear();
-            updateTotalCalculation();
+            UpdateTotalCalculation();
         }
 
-        private void plusQtyButton_Click(object sender, EventArgs e)
+        private void PlusQtyButton_Click(object sender, EventArgs e)
         {
             if (this.itemListInCart.SelectedRows.Count > 0)
             {
                 // have row selected
                 foreach (DataGridViewRow row in this.itemListInCart.SelectedRows)
                 {
-                    addQuantityToRow(row);
+                    AddQuantityToRow(row);
                 }
 
             }
@@ -419,12 +419,12 @@ namespace AssignmentCSharp.Main.View
             }
         }
 
-        private void orderType_SelectedIndexChanged(object sender, EventArgs e)
+        private void OrderType_SelectedIndexChanged(object sender, EventArgs e)
         {
-            updateTotalCalculation();
+            UpdateTotalCalculation();
         }
 
-        private void cashPayButton_Click(object sender, EventArgs e)
+        private void CashPayButton_Click(object sender, EventArgs e)
         {
             try
             {
@@ -438,7 +438,7 @@ namespace AssignmentCSharp.Main.View
                     {
                         int foodid = (int)row.Cells[1].Value;
                         int quantity = (int)row.Cells[3].Value;
-                        FoodStock foodObj = FoodStock.findById(foodid);
+                        FoodStock foodObj = FoodStock.FindById(foodid);
                         foodlist.Add(new Receipt_Food(foodid,foodObj.Name,foodObj.Price, quantity));
                     }
 
@@ -458,20 +458,20 @@ namespace AssignmentCSharp.Main.View
                     if (cashPayed >= finaltotal)
                     {
                         Receipt newReceipt = new Receipt(tax, servTax, finaltotal, foodlist);
-                        newReceipt.save();
+                        newReceipt.Save();
 
                         /*Minus the stock from database*/
                         foreach(Receipt_Food currFood in newReceipt.FoodOrdered)
                         {
+                            Account myAcc = Model.Account.GetSupplierAcc();
                             //food stock quantity minus ordered quantity
-
-                            FoodStock foodObj = FoodStock.findById(currFood.FoodId);
+                            FoodStock foodObj = FoodStock.FindById(currFood.FoodId);
                             foodObj.Quantity -= currFood.QuantityOrdered;
-                            foodObj.save();
+                            foodObj.Save();
                             
                             if (foodObj.Quantity <= 0)
                             {
-                                EmailSupplierForm emailSupplier = new EmailSupplierForm(foodObj.Id,foodObj.Name);
+                                EmailSupplierForm emailSupplier = new EmailSupplierForm(myAcc.Email, foodObj.Id,foodObj.Name);
                                 emailSupplier.Show();
                             }
                         }
@@ -511,7 +511,7 @@ namespace AssignmentCSharp.Main.View
             }
         }
 
-        private void creditCardPay_Click(object sender, EventArgs e)
+        private void CreditCardPay_Click(object sender, EventArgs e)
         {
             if (this.itemListInCart.Rows.Count > 0)
             {
@@ -521,7 +521,7 @@ namespace AssignmentCSharp.Main.View
                 {
                     int foodid = (int)row.Cells[1].Value;
                     int quantity = (int)row.Cells[3].Value;
-                    FoodStock foodObj = FoodStock.findById(foodid);
+                    FoodStock foodObj = FoodStock.FindById(foodid);
 
                     foodlist.Add(new Receipt_Food(foodid, foodObj.Name, foodObj.Price, quantity));
                 }
@@ -541,19 +541,20 @@ namespace AssignmentCSharp.Main.View
 
                
                 Receipt newReceipt = new Receipt(tax, servTax, finaltotal, foodlist);
-                newReceipt.save();
+                newReceipt.Save();
 
                 /*Minus the stock from database*/
                 foreach (Receipt_Food currFood in newReceipt.FoodOrdered)
                 {
                     //food stock quantity minus ordered quantity
-                    FoodStock foodObj = FoodStock.findById(currFood.FoodId);
+                    FoodStock foodObj = FoodStock.FindById(currFood.FoodId);
                     foodObj.Quantity -= currFood.QuantityOrdered;
-                    foodObj.save();
+                    foodObj.Save();
                     
                     if (foodObj.Quantity <= 0)
                     {
-                        EmailSupplierForm emailSupplier = new EmailSupplierForm(foodObj.Id,foodObj.Name);
+                        Account myAcc = Model.Account.GetSupplierAcc();
+                        EmailSupplierForm emailSupplier = new EmailSupplierForm(myAcc.Email,foodObj.Id,foodObj.Name);
                         emailSupplier.Show();
                     }
                 }
@@ -572,7 +573,7 @@ namespace AssignmentCSharp.Main.View
             }
         }
 
-        private void endBusinessButton_Click(object sender, EventArgs e)
+        private void EndBusinessButton_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Thank you for using our POS system! Have a nice day =D");
             this.Close();
