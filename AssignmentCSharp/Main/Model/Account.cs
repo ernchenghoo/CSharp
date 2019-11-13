@@ -84,7 +84,7 @@ namespace AssignmentCSharp.Main.Model
         public void Save()
         {
             try
-            {                
+            {
                 //update the record
                 cnn = new MySqlConnection(connectionString);
                 cnn.Open();
@@ -94,13 +94,14 @@ namespace AssignmentCSharp.Main.Model
                 command.Parameters.AddWithValue("@email", Email);
                 command.ExecuteNonQuery();
                 cnn.Close();
-               
+
             }
             catch (Exception e)
             {
                 MessageBox.Show("Connection failed");
                 MessageBox.Show(e.ToString());
             }
+        }
 
         public string IDToRole()
         {
