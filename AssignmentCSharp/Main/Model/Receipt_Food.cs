@@ -82,7 +82,7 @@ namespace AssignmentCSharp.Main.Model
                 command.ExecuteNonQuery();
                 cnn.Close();
             }
-            catch(Exception ex)
+            catch
             {
                 MessageBox.Show("Error saving food to receipt!");
             }
