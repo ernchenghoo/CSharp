@@ -8,7 +8,7 @@ using MySql.Data.MySqlClient;
 
 namespace AssignmentCSharp.Main.Model
 {
-    class Account
+    public class Account
     {
         public string Email { get; set; }
         public string Password { get; set; }
@@ -101,6 +101,27 @@ namespace AssignmentCSharp.Main.Model
                 MessageBox.Show("Connection failed");
                 MessageBox.Show(e.ToString());
             }
+
+        public string IDToRole()
+        {
+            string typeName = "";
+            switch (TypeID)
+            {
+                case 1:
+                    typeName = "Admin";
+                    break;
+                case 2:
+                    typeName = "Stock Keeper";
+                    break;
+                case 3:
+                    typeName = "Kitchen Staff";
+                    break;
+                case 4:
+                    typeName = "Cashier";
+                    break;
+            }
+            return typeName;
+
         }
     }    
 }

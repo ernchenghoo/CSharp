@@ -51,6 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Main\Controller\HomepageController.cs" />
+    <Compile Include="Main\Controller\EditAccountController.cs" />
     <Compile Include="Main\Controller\ManageAccountController.cs" />
     <Compile Include="Main\Controller\POSpageController.cs" />
     <Compile Include="Main\Controller\RegisterController.cs" />
@@ -95,6 +96,12 @@
     <Compile Include="Main\View\EditAccountForm.Designer.cs">
       <DependentUpon>EditAccountForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Main\View\ManageAccountsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Main\View\ManageAccountsForm.Designer.cs">
+      <DependentUpon>ManageAccountsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Main\View\ReceiptPage.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -133,6 +140,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Main\View\EditAccountForm.resx">
       <DependentUpon>EditAccountForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Main\View\ManageAccountsForm.resx">
+      <DependentUpon>ManageAccountsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Main\View\ReceiptPage.resx">
       <DependentUpon>ReceiptPage.cs</DependentUpon>

@@ -11,34 +11,35 @@ namespace AssignmentCSharp.Main.Controller
 {
     class RegisterController
     {
-        private static int NumOfAccounts()
+        private static int GenerateID()
         {
-            int numAccount = 0;
+            int ID = 0;
             try
             {
+                
                 MySqlConnection cnn;
                 string connectionString = "server=localhost;database=pos;uid=root;pwd=;";
                 cnn = new MySqlConnection(connectionString);
                 cnn.Open();
 
                 
-                String sql = "select count(*) from account";
+                String sql = "SELECT MAX(accountID) AS 'Largest ID' from account";
                 MySqlCommand command = new MySqlCommand(sql, cnn);
                 MySqlDataReader dataReader = command.ExecuteReader();
                 while (dataReader.Read())
                 {
-                    numAccount = dataReader.GetInt32(0);
+                    ID = dataReader.GetInt32(0) + 1;
                 }
                 cnn.Close();                
             }
             catch
             {
-                Console.WriteLine(System.Environment.StackTrace);
+                
             }
-            return numAccount;
+            return ID;
         }
 
-        private static bool checkAccountExistence(string em)
+        private static bool CheckAccountExistence(string em)
         {
             try
             {
@@ -81,7 +82,7 @@ namespace AssignmentCSharp.Main.Controller
                 return true;
                 
             }
-            catch (Exception ex)
+            catch
             {                
                 return false;
             }            
@@ -89,19 +90,19 @@ namespace AssignmentCSharp.Main.Controller
         
         public static int Register (string email, string pw, string repw, string role)
         {
-            int registerStatus = 1;
+            int registerStatus = 0;
 
-            if (string.Equals(pw, repw)) //check if password and re-entered password is same
+            if (!string.Equals(pw, repw)) //check if password and re-entered password is same
             {
-                registerStatus = 0;
+                registerStatus = 1;
             }            
-            if (checkAccountExistence(email)) //if account already exist
+            if (CheckAccountExistence(email)) //if account already exist
             {
                 registerStatus = 2;
             }
             if (registerStatus == 0)
             {
-                Account registerAccount = new Account(email, pw, NumOfAccounts() + 1, role);
+                Account registerAccount = new Account(email, pw, GenerateID(), role);
                 if (!addAccountToDB(registerAccount))
                 {
                     registerStatus = 3;

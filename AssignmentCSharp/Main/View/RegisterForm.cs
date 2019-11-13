@@ -17,6 +17,7 @@ namespace AssignmentCSharp.Main.View
         {
             InitializeComponent();
             passwordBox.PasswordChar = '*';
+            reenterBox.PasswordChar = '*';
         }
 
         private void RegisterForm_Load(object sender, EventArgs e)
@@ -40,6 +41,7 @@ namespace AssignmentCSharp.Main.View
                 {
                     case 0:
                         MessageBox.Show("Account registered!");
+                        Program.LoadAccounts();
                         this.Close();
                         break;
                     case 1:
@@ -55,9 +57,9 @@ namespace AssignmentCSharp.Main.View
             }           
         }
 
-        private void cancelButton_Click(object sender, EventArgs e)
+        private void CancelButton_Click(object sender, EventArgs e)
         {
-            Program.LoadAdmin();
+            Program.LoadAccounts();
             this.Close();
         }
     }

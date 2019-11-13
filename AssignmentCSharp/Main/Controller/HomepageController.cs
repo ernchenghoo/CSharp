@@ -42,9 +42,7 @@ namespace AssignmentCSharp.Main.Controller
                         string.Equals(loginAccount.Password,password))
                     {
                         loginFail = 2;
-                        Program.LoggedinAccount.email = loginAccount.Email;
-                        Program.LoggedinAccount.password = loginAccount.Password;
-                        Program.LoggedinAccount.role = loginAccount.TypeID;
+                        Program.LoggedinAccount.account = loginAccount;
 
                         switch (loginAccount.TypeID)
                         {

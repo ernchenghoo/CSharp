@@ -45,11 +45,11 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 22.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(321, 51);
+            this.label1.Location = new System.Drawing.Point(272, 61);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(162, 44);
+            this.label1.Size = new System.Drawing.Size(242, 44);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Register";
+            this.label1.Text = "New Account";
             // 
             // label2
             // 
@@ -115,8 +115,7 @@
             this.roleBox.Items.AddRange(new object[] {
             "Stock Keeper",
             "Kitchen Staff",
-            "Cashier",
-            ""});
+            "Cashier"});
             this.roleBox.Location = new System.Drawing.Point(196, 282);
             this.roleBox.Name = "roleBox";
             this.roleBox.Size = new System.Drawing.Size(146, 24);
@@ -140,7 +139,7 @@
             this.cancelButton.TabIndex = 10;
             this.cancelButton.Text = "Cancel";
             this.cancelButton.UseVisualStyleBackColor = true;
-            this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
+            this.cancelButton.Click += new System.EventHandler(this.CancelButton_Click);
             // 
             // RegisterForm
             // 
