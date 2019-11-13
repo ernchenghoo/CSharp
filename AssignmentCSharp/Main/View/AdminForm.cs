@@ -20,21 +20,25 @@ namespace AssignmentCSharp.Main.View
         private void CashierButton_Click(object sender, EventArgs e)
         {
             Program.LoadCashier();
+            this.Close();
         }
 
         private void StocksButton_Click(object sender, EventArgs e)
         {
             Program.LoadStocks();
+            this.Close();
         }
 
         private void KitchenButton_Click(object sender, EventArgs e)
         {
             Program.LoadKitchen();
+            this.Close();
         }
 
         private void AccountButton_Click(object sender, EventArgs e)
         {
             Program.LoadAccounts();
+            this.Close();
         }
 
         private void LogoutButton_Click(object sender, EventArgs e)
@@ -45,13 +49,8 @@ namespace AssignmentCSharp.Main.View
 
         private void EditAccountDetailsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Program.LoadEditAccount();
+            Program.LoadEditAccount(Program.LoggedinAccount.account);
             this.Close();
-        }
-
-        private void logoutButton_Click(object sender, EventArgs e)
-        {
-            FormManager.HomePage.Show();
-        }
+        }        
     }
 }

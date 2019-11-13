@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using AssignmentCSharp;
 using AssignmentCSharp.Main.View;
+using AssignmentCSharp.Main.Model;
 
 namespace AssignmentCSharp.Main
 {
@@ -26,11 +27,10 @@ namespace AssignmentCSharp.Main
      
         }
 
+        
         public static class LoggedinAccount
         {
-            public static string email;
-            public static string password;
-            public static int role;
+            public static Account account;
         }
 
         public static void LoadCashier ()
@@ -43,9 +43,14 @@ namespace AssignmentCSharp.Main
             new FoodStockForm().Show();
         }
 
-        public static void LoadAccounts()
+        public static void LoadRegister()
         {
             new RegisterForm().Show();
+        }
+
+        public static void LoadAccounts()
+        {
+            new ManageAccountsForm().Show();
         }
 
         public static void LoadKitchen()
@@ -57,9 +62,10 @@ namespace AssignmentCSharp.Main
         {
             new AdminForm().Show();
         }
-        public static void LoadEditAccount()
+        public static void LoadEditAccount(Account acc)
         {
-            new EditAccountForm().Show();
+            EditAccountForm editForm = new EditAccountForm (acc);
+            editForm.ShowDialog();
         }
     }
 
