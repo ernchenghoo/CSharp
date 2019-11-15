@@ -65,7 +65,7 @@ namespace AssignmentCSharp.Main.View
             if (this.currentReceiptCount != count)
             {
                 this.currentReceiptCount = count;
-                MessageBox.Show("There are a new Order!");
+                MessageBox.Show("There are new orders!");
 
                 if (this.InvokeRequired)
                 {
