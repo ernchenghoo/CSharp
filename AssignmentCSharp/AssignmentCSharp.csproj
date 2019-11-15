@@ -60,6 +60,7 @@
     <Compile Include="Main\Model\Receipt_Food.cs" />
     <Compile Include="Main\Model\Receipt.cs" />
     <Compile Include="Main\Model\FoodStock.cs" />
+    <Compile Include="Main\Model\SupplierEmail.cs" />
     <Compile Include="Main\View\AdminForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -122,6 +123,12 @@
     <Compile Include="Main\View\RegisterForm.Designer.cs">
       <DependentUpon>RegisterForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Main\View\SupplierEmailForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Main\View\SupplierEmailForm.Designer.cs">
+      <DependentUpon>SupplierEmailForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Main\View\AdminForm.resx">
       <DependentUpon>AdminForm.cs</DependentUpon>
@@ -152,6 +159,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Main\View\RegisterForm.resx">
       <DependentUpon>RegisterForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Main\View\SupplierEmailForm.resx">
+      <DependentUpon>SupplierEmailForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
