@@ -51,6 +51,8 @@ namespace AssignmentCSharp.Main.View
         {
             MessageBox.Show("Thank you for using our POS system! Have a nice day =D");
             this.Close();
+            Program.homePageFormReference.clearAllTextBox();
+            Program.homePageFormReference.Show();
         }
     }
 }

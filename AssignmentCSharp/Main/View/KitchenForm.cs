@@ -215,9 +215,9 @@ namespace AssignmentCSharp.Main.View
 
             //stop the background thread that constantly check DB for new order
             backgroundCheckThread.Abort();
-    
 
 
+            Program.homePageFormReference.clearAllTextBox();
             Program.homePageFormReference.Show();
         }
     }   

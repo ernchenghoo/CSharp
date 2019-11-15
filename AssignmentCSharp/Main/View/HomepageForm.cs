@@ -54,6 +54,12 @@ namespace AssignmentCSharp.Main.View
                 Application.Exit();
             }
         }
+
+        public void clearAllTextBox()
+        {
+            emailBox.Text = "";
+            passwordBox.Text = "";
+        }
         
     }
 }

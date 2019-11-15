@@ -413,5 +413,14 @@ namespace AssignmentCSharp.Main.View
             prompt.AcceptButton = confirmation;
             prompt.ShowDialog();
         }
+
+        private void LogoutButton_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("See You Soon!=D");
+            this.Close();
+
+            Program.homePageFormReference.clearAllTextBox();
+            Program.homePageFormReference.Show();
+        }
     }
 }
