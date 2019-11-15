@@ -15,13 +15,16 @@ namespace AssignmentCSharp.Main.View
     public partial class KitchenForm : Form
     {
         public int currentReceiptCount = 0;
+        Thread backgroundCheckThread = null;
         public KitchenForm()
         {
             InitializeComponent();
             this.detail_id.Text = "";
+            
 
-            Thread t2 = new Thread(delegate ()
+            backgroundCheckThread = new Thread(delegate ()
             {
+
                 while (true)
                 {
                     UpdateOrderList();
@@ -29,8 +32,8 @@ namespace AssignmentCSharp.Main.View
                 }
                 
             });
-            t2.IsBackground = true;
-            t2.Start();
+            backgroundCheckThread.IsBackground = true;
+            backgroundCheckThread.Start();
 
         }        
         public void UpdateOrderList()
@@ -108,6 +111,7 @@ namespace AssignmentCSharp.Main.View
             }
 
             this.detail_numoffood.Text = totalFoodOrdered.ToString();
+            foodList.ClearSelection();
 
         }
 
@@ -208,6 +212,13 @@ namespace AssignmentCSharp.Main.View
         {
             MessageBox.Show("Thank you for using our POS system! Have a nice day =D");
             this.Close();
+
+            //stop the background thread that constantly check DB for new order
+            backgroundCheckThread.Abort();
+    
+
+
+            Program.homePageFormReference.Show();
         }
     }   
 }

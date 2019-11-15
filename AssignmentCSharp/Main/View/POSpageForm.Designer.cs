@@ -30,23 +30,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(POSpageForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.endBusinessButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.label14 = new System.Windows.Forms.Label();
             this.orderType = new System.Windows.Forms.ComboBox();
-            this.creditCardPay = new System.Windows.Forms.Button();
-            this.cashPayButton = new System.Windows.Forms.Button();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.clearAllButton = new System.Windows.Forms.Button();
-            this.deleteButton = new System.Windows.Forms.Button();
-            this.minusQtyButton = new System.Windows.Forms.Button();
-            this.plusQtyButton = new System.Windows.Forms.Button();
-            this.xQtyButton = new System.Windows.Forms.Button();
             this.cashAmount = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
             this.totalPrice = new System.Windows.Forms.TextBox();
@@ -68,18 +59,27 @@
             this.label2 = new System.Windows.Forms.Label();
             this.categoryContainer = new System.Windows.Forms.FlowLayoutPanel();
             this.foodListContainer = new System.Windows.Forms.FlowLayoutPanel();
-            this.clearSearchButton = new System.Windows.Forms.Button();
-            this.searchButton = new System.Windows.Forms.Button();
             this.searchBar = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
+            this.creditCardPay = new System.Windows.Forms.Button();
+            this.cashPayButton = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.clearAllButton = new System.Windows.Forms.Button();
+            this.deleteButton = new System.Windows.Forms.Button();
+            this.minusQtyButton = new System.Windows.Forms.Button();
+            this.plusQtyButton = new System.Windows.Forms.Button();
+            this.xQtyButton = new System.Windows.Forms.Button();
+            this.clearSearchButton = new System.Windows.Forms.Button();
+            this.searchButton = new System.Windows.Forms.Button();
+            this.endBusinessButton = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.itemListInCart)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -93,22 +93,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1407, 47);
             this.panel1.TabIndex = 0;
-            // 
-            // endBusinessButton
-            // 
-            this.endBusinessButton.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.endBusinessButton.BackgroundImage = global::AssignmentCSharp.Properties.Resources.endbusiness;
-            this.endBusinessButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.endBusinessButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.endBusinessButton.FlatAppearance.BorderSize = 0;
-            this.endBusinessButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.endBusinessButton.Location = new System.Drawing.Point(1216, 5);
-            this.endBusinessButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.endBusinessButton.Name = "endBusinessButton";
-            this.endBusinessButton.Size = new System.Drawing.Size(188, 39);
-            this.endBusinessButton.TabIndex = 1;
-            this.endBusinessButton.UseVisualStyleBackColor = true;
-            this.endBusinessButton.Click += new System.EventHandler(this.EndBusinessButton_Click);
             // 
             // label1
             // 
@@ -192,6 +176,276 @@
             this.orderType.Size = new System.Drawing.Size(129, 24);
             this.orderType.TabIndex = 22;
             this.orderType.SelectedIndexChanged += new System.EventHandler(this.OrderType_SelectedIndexChanged);
+            // 
+            // cashAmount
+            // 
+            this.cashAmount.Location = new System.Drawing.Point(597, 505);
+            this.cashAmount.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.cashAmount.Name = "cashAmount";
+            this.cashAmount.Size = new System.Drawing.Size(73, 22);
+            this.cashAmount.TabIndex = 13;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(460, 505);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(125, 20);
+            this.label11.TabIndex = 12;
+            this.label11.Text = "Cash amount:";
+            // 
+            // totalPrice
+            // 
+            this.totalPrice.Font = new System.Drawing.Font("Impact", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.totalPrice.Location = new System.Drawing.Point(321, 565);
+            this.totalPrice.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.totalPrice.Multiline = true;
+            this.totalPrice.Name = "totalPrice";
+            this.totalPrice.ReadOnly = true;
+            this.totalPrice.Size = new System.Drawing.Size(167, 62);
+            this.totalPrice.TabIndex = 11;
+            this.totalPrice.Text = "RM 0";
+            this.totalPrice.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Impact", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Location = new System.Drawing.Point(333, 507);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(106, 41);
+            this.label10.TabIndex = 10;
+            this.label10.Text = "Total :";
+            // 
+            // serviceTax
+            // 
+            this.serviceTax.AutoSize = true;
+            this.serviceTax.Font = new System.Drawing.Font("Impact", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.serviceTax.Location = new System.Drawing.Point(191, 610);
+            this.serviceTax.Name = "serviceTax";
+            this.serviceTax.Size = new System.Drawing.Size(27, 29);
+            this.serviceTax.TabIndex = 9;
+            this.serviceTax.Text = "0";
+            // 
+            // tax
+            // 
+            this.tax.AutoSize = true;
+            this.tax.Font = new System.Drawing.Font("Impact", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tax.Location = new System.Drawing.Point(189, 562);
+            this.tax.Name = "tax";
+            this.tax.Size = new System.Drawing.Size(27, 29);
+            this.tax.TabIndex = 8;
+            this.tax.Text = "0";
+            // 
+            // subTotal
+            // 
+            this.subTotal.AutoSize = true;
+            this.subTotal.Font = new System.Drawing.Font("Impact", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.subTotal.Location = new System.Drawing.Point(193, 507);
+            this.subTotal.Name = "subTotal";
+            this.subTotal.Size = new System.Drawing.Size(27, 29);
+            this.subTotal.TabIndex = 7;
+            this.subTotal.Text = "0";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Impact", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(3, 610);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(189, 29);
+            this.label6.TabIndex = 6;
+            this.label6.Text = "Service (10%) : RM";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Impact", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(53, 562);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(137, 29);
+            this.label5.TabIndex = 5;
+            this.label5.Text = "Tax (6%) : RM";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Impact", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(44, 507);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(141, 29);
+            this.label4.TabIndex = 4;
+            this.label4.Text = "SubTotal : RM";
+            // 
+            // itemListInCart
+            // 
+            this.itemListInCart.AllowUserToAddRows = false;
+            this.itemListInCart.AllowUserToDeleteRows = false;
+            this.itemListInCart.AllowUserToResizeColumns = false;
+            this.itemListInCart.AllowUserToResizeRows = false;
+            this.itemListInCart.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
+            this.itemListInCart.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.itemListInCart.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightSteelBlue;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Elephant", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.LightSteelBlue;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.itemListInCart.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.itemListInCart.ColumnHeadersHeight = 40;
+            this.itemListInCart.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.itemListInCart.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.No,
+            this.id,
+            this.ItemName,
+            this.quantity,
+            this.price,
+            this.total});
+            this.itemListInCart.Cursor = System.Windows.Forms.Cursors.Default;
+            this.itemListInCart.EnableHeadersVisualStyles = false;
+            this.itemListInCart.Location = new System.Drawing.Point(3, 46);
+            this.itemListInCart.Margin = new System.Windows.Forms.Padding(0);
+            this.itemListInCart.Name = "itemListInCart";
+            this.itemListInCart.ReadOnly = true;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(0, 10, 0, 10);
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.itemListInCart.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            this.itemListInCart.RowHeadersVisible = false;
+            this.itemListInCart.RowHeadersWidth = 51;
+            this.itemListInCart.RowTemplate.Height = 24;
+            this.itemListInCart.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.itemListInCart.Size = new System.Drawing.Size(572, 452);
+            this.itemListInCart.TabIndex = 3;
+            // 
+            // No
+            // 
+            this.No.FillWeight = 40F;
+            this.No.Frozen = true;
+            this.No.HeaderText = "No";
+            this.No.MinimumWidth = 6;
+            this.No.Name = "No";
+            this.No.ReadOnly = true;
+            this.No.Width = 40;
+            // 
+            // id
+            // 
+            this.id.FillWeight = 40F;
+            this.id.HeaderText = "ID";
+            this.id.MinimumWidth = 6;
+            this.id.Name = "id";
+            this.id.ReadOnly = true;
+            this.id.Width = 40;
+            // 
+            // ItemName
+            // 
+            this.ItemName.FillWeight = 140F;
+            this.ItemName.HeaderText = "Item Name";
+            this.ItemName.MinimumWidth = 6;
+            this.ItemName.Name = "ItemName";
+            this.ItemName.ReadOnly = true;
+            this.ItemName.Width = 160;
+            // 
+            // quantity
+            // 
+            this.quantity.FillWeight = 45F;
+            this.quantity.HeaderText = "Qty";
+            this.quantity.MinimumWidth = 6;
+            this.quantity.Name = "quantity";
+            this.quantity.ReadOnly = true;
+            this.quantity.Width = 45;
+            // 
+            // price
+            // 
+            this.price.FillWeight = 70F;
+            this.price.HeaderText = "Price";
+            this.price.MinimumWidth = 6;
+            this.price.Name = "price";
+            this.price.ReadOnly = true;
+            this.price.Width = 70;
+            // 
+            // total
+            // 
+            this.total.FillWeight = 70F;
+            this.total.HeaderText = "Total";
+            this.total.MinimumWidth = 6;
+            this.total.Name = "total";
+            this.total.ReadOnly = true;
+            this.total.Width = 70;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft YaHei", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(148, 14);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(99, 25);
+            this.label3.TabIndex = 1;
+            this.label3.Text = "John Doe";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft YaHei", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(4, 12);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(98, 27);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "Cashier :";
+            // 
+            // categoryContainer
+            // 
+            this.categoryContainer.Location = new System.Drawing.Point(18, 42);
+            this.categoryContainer.Name = "categoryContainer";
+            this.categoryContainer.Size = new System.Drawing.Size(679, 79);
+            this.categoryContainer.TabIndex = 9;
+            // 
+            // foodListContainer
+            // 
+            this.foodListContainer.AutoScroll = true;
+            this.foodListContainer.Location = new System.Drawing.Point(18, 175);
+            this.foodListContainer.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.foodListContainer.Name = "foodListContainer";
+            this.foodListContainer.Size = new System.Drawing.Size(635, 482);
+            this.foodListContainer.TabIndex = 8;
+            // 
+            // searchBar
+            // 
+            this.searchBar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.searchBar.Location = new System.Drawing.Point(18, 135);
+            this.searchBar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.searchBar.Name = "searchBar";
+            this.searchBar.Size = new System.Drawing.Size(431, 22);
+            this.searchBar.TabIndex = 4;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.Location = new System.Drawing.Point(28, 101);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(614, 20);
+            this.label13.TabIndex = 3;
+            this.label13.Text = "                                                                                 " +
+    "                                        ";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.Location = new System.Drawing.Point(13, 9);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(77, 29);
+            this.label12.TabIndex = 0;
+            this.label12.Text = "Menu";
             // 
             // creditCardPay
             // 
@@ -309,246 +563,6 @@
             this.xQtyButton.UseVisualStyleBackColor = true;
             this.xQtyButton.Click += new System.EventHandler(this.XQtyButton_Click);
             // 
-            // cashAmount
-            // 
-            this.cashAmount.Location = new System.Drawing.Point(597, 505);
-            this.cashAmount.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.cashAmount.Name = "cashAmount";
-            this.cashAmount.Size = new System.Drawing.Size(73, 22);
-            this.cashAmount.TabIndex = 13;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(460, 505);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(125, 20);
-            this.label11.TabIndex = 12;
-            this.label11.Text = "Cash amount:";
-            // 
-            // totalPrice
-            // 
-            this.totalPrice.Font = new System.Drawing.Font("Impact", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.totalPrice.Location = new System.Drawing.Point(321, 565);
-            this.totalPrice.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.totalPrice.Multiline = true;
-            this.totalPrice.Name = "totalPrice";
-            this.totalPrice.ReadOnly = true;
-            this.totalPrice.Size = new System.Drawing.Size(167, 62);
-            this.totalPrice.TabIndex = 11;
-            this.totalPrice.Text = "RM 0";
-            this.totalPrice.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Impact", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(333, 507);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(106, 41);
-            this.label10.TabIndex = 10;
-            this.label10.Text = "Total :";
-            // 
-            // serviceTax
-            // 
-            this.serviceTax.AutoSize = true;
-            this.serviceTax.Font = new System.Drawing.Font("Impact", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.serviceTax.Location = new System.Drawing.Point(191, 610);
-            this.serviceTax.Name = "serviceTax";
-            this.serviceTax.Size = new System.Drawing.Size(27, 29);
-            this.serviceTax.TabIndex = 9;
-            this.serviceTax.Text = "0";
-            // 
-            // tax
-            // 
-            this.tax.AutoSize = true;
-            this.tax.Font = new System.Drawing.Font("Impact", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tax.Location = new System.Drawing.Point(189, 562);
-            this.tax.Name = "tax";
-            this.tax.Size = new System.Drawing.Size(27, 29);
-            this.tax.TabIndex = 8;
-            this.tax.Text = "0";
-            // 
-            // subTotal
-            // 
-            this.subTotal.AutoSize = true;
-            this.subTotal.Font = new System.Drawing.Font("Impact", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.subTotal.Location = new System.Drawing.Point(193, 507);
-            this.subTotal.Name = "subTotal";
-            this.subTotal.Size = new System.Drawing.Size(27, 29);
-            this.subTotal.TabIndex = 7;
-            this.subTotal.Text = "0";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Impact", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(3, 610);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(189, 29);
-            this.label6.TabIndex = 6;
-            this.label6.Text = "Service (10%) : RM";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Impact", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(53, 562);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(137, 29);
-            this.label5.TabIndex = 5;
-            this.label5.Text = "Tax (6%) : RM";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Impact", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(44, 507);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(141, 29);
-            this.label4.TabIndex = 4;
-            this.label4.Text = "SubTotal : RM";
-            // 
-            // itemListInCart
-            // 
-            this.itemListInCart.AllowUserToAddRows = false;
-            this.itemListInCart.AllowUserToDeleteRows = false;
-            this.itemListInCart.AllowUserToResizeColumns = false;
-            this.itemListInCart.AllowUserToResizeRows = false;
-            this.itemListInCart.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
-            this.itemListInCart.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.itemListInCart.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle9.BackColor = System.Drawing.Color.LightSteelBlue;
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("Elephant", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle9.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.Color.LightSteelBlue;
-            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.itemListInCart.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle9;
-            this.itemListInCart.ColumnHeadersHeight = 40;
-            this.itemListInCart.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            this.itemListInCart.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.No,
-            this.id,
-            this.ItemName,
-            this.quantity,
-            this.price,
-            this.total});
-            this.itemListInCart.Cursor = System.Windows.Forms.Cursors.Default;
-            this.itemListInCart.EnableHeadersVisualStyles = false;
-            this.itemListInCart.Location = new System.Drawing.Point(3, 46);
-            this.itemListInCart.Margin = new System.Windows.Forms.Padding(0);
-            this.itemListInCart.Name = "itemListInCart";
-            this.itemListInCart.ReadOnly = true;
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle10.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle10.Padding = new System.Windows.Forms.Padding(0, 10, 0, 10);
-            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.itemListInCart.RowHeadersDefaultCellStyle = dataGridViewCellStyle10;
-            this.itemListInCart.RowHeadersVisible = false;
-            this.itemListInCart.RowHeadersWidth = 51;
-            this.itemListInCart.RowTemplate.Height = 24;
-            this.itemListInCart.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.itemListInCart.Size = new System.Drawing.Size(572, 452);
-            this.itemListInCart.TabIndex = 3;
-            // 
-            // No
-            // 
-            this.No.FillWeight = 40F;
-            this.No.Frozen = true;
-            this.No.HeaderText = "No";
-            this.No.MinimumWidth = 6;
-            this.No.Name = "No";
-            this.No.ReadOnly = true;
-            this.No.Width = 40;
-            // 
-            // id
-            // 
-            this.id.FillWeight = 40F;
-            this.id.HeaderText = "ID";
-            this.id.MinimumWidth = 6;
-            this.id.Name = "id";
-            this.id.ReadOnly = true;
-            this.id.Width = 40;
-            // 
-            // ItemName
-            // 
-            this.ItemName.FillWeight = 140F;
-            this.ItemName.HeaderText = "Item Name";
-            this.ItemName.MinimumWidth = 6;
-            this.ItemName.Name = "ItemName";
-            this.ItemName.ReadOnly = true;
-            this.ItemName.Width = 160;
-            // 
-            // quantity
-            // 
-            this.quantity.FillWeight = 45F;
-            this.quantity.HeaderText = "Qty";
-            this.quantity.MinimumWidth = 6;
-            this.quantity.Name = "quantity";
-            this.quantity.ReadOnly = true;
-            this.quantity.Width = 45;
-            // 
-            // price
-            // 
-            this.price.FillWeight = 70F;
-            this.price.HeaderText = "Price";
-            this.price.MinimumWidth = 6;
-            this.price.Name = "price";
-            this.price.ReadOnly = true;
-            this.price.Width = 70;
-            // 
-            // total
-            // 
-            this.total.FillWeight = 70F;
-            this.total.HeaderText = "Total";
-            this.total.MinimumWidth = 6;
-            this.total.Name = "total";
-            this.total.ReadOnly = true;
-            this.total.Width = 70;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft YaHei", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(148, 14);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(99, 25);
-            this.label3.TabIndex = 1;
-            this.label3.Text = "John Doe";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft YaHei", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(4, 12);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(98, 27);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "Cashier :";
-            // 
-            // categoryContainer
-            // 
-            this.categoryContainer.Location = new System.Drawing.Point(18, 42);
-            this.categoryContainer.Name = "categoryContainer";
-            this.categoryContainer.Size = new System.Drawing.Size(679, 79);
-            this.categoryContainer.TabIndex = 9;
-            // 
-            // foodListContainer
-            // 
-            this.foodListContainer.AutoScroll = true;
-            this.foodListContainer.Location = new System.Drawing.Point(18, 175);
-            this.foodListContainer.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.foodListContainer.Name = "foodListContainer";
-            this.foodListContainer.Size = new System.Drawing.Size(635, 482);
-            this.foodListContainer.TabIndex = 8;
-            // 
             // clearSearchButton
             // 
             this.clearSearchButton.BackgroundImage = global::AssignmentCSharp.Properties.Resources.clearsearch;
@@ -579,35 +593,21 @@
             this.searchButton.UseVisualStyleBackColor = true;
             this.searchButton.Click += new System.EventHandler(this.SearchButton_Click);
             // 
-            // searchBar
+            // endBusinessButton
             // 
-            this.searchBar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.searchBar.Location = new System.Drawing.Point(18, 135);
-            this.searchBar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.searchBar.Name = "searchBar";
-            this.searchBar.Size = new System.Drawing.Size(431, 22);
-            this.searchBar.TabIndex = 4;
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.Location = new System.Drawing.Point(28, 101);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(614, 20);
-            this.label13.TabIndex = 3;
-            this.label13.Text = "                                                                                 " +
-    "                                        ";
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(13, 9);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(77, 29);
-            this.label12.TabIndex = 0;
-            this.label12.Text = "Menu";
+            this.endBusinessButton.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.endBusinessButton.BackgroundImage = global::AssignmentCSharp.Properties.Resources.logout;
+            this.endBusinessButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.endBusinessButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.endBusinessButton.FlatAppearance.BorderSize = 0;
+            this.endBusinessButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.endBusinessButton.Location = new System.Drawing.Point(1216, 5);
+            this.endBusinessButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.endBusinessButton.Name = "endBusinessButton";
+            this.endBusinessButton.Size = new System.Drawing.Size(188, 39);
+            this.endBusinessButton.TabIndex = 1;
+            this.endBusinessButton.UseVisualStyleBackColor = true;
+            this.endBusinessButton.Click += new System.EventHandler(this.EndBusinessButton_Click);
             // 
             // POSpageForm
             // 
@@ -627,8 +627,8 @@
             this.splitContainer1.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.itemListInCart)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
