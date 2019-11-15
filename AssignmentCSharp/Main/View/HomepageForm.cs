@@ -32,6 +32,7 @@ namespace AssignmentCSharp.Main.View
                 MessageBox.Show("Password field is empty");
             else
             {
+                loginAttemps += 1;
                 int failLogin = HomepageController.Login(emailBox.Text, passwordBox.Text);
                 switch (failLogin)
                 {
@@ -41,13 +42,13 @@ namespace AssignmentCSharp.Main.View
                     case 1:
                         MessageBox.Show("Invalid Password.");                        
                         break;                        
-                    case 2:
+                    case 2: //login successful
                         this.Hide();
+                        loginAttemps = 0;
                         break;
 
                 }                
-            }
-            loginAttemps += 1;
+            }            
             if (loginAttemps >= 5)
             {
                 MessageBox.Show("You have attempted 5 failed logins. The system will be closed due to security purposes.");

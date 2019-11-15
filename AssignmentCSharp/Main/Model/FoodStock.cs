@@ -122,7 +122,7 @@ namespace AssignmentCSharp.Main.Model
             }
             catch(Exception e)
             {
-                MessageBox.Show("Connection failed");
+                MessageBox.Show(e.Message);
                 MessageBox.Show(e.ToString());
             }
         }

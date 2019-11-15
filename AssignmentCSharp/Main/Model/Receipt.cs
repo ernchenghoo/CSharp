@@ -156,9 +156,9 @@ namespace AssignmentCSharp.Main.Model
 
 
             }
-            catch
+            catch (Exception ex)
             {
-                MessageBox.Show("Connection failed");
+                MessageBox.Show(ex.Message);
             }
             return foundReceiptObject; ;
         }
@@ -198,7 +198,7 @@ namespace AssignmentCSharp.Main.Model
             }
             catch(Exception ex)
             {
-                MessageBox.Show("Connection failed");
+                MessageBox.Show(ex.Message);
                 Console.WriteLine(ex.ToString());
             }
             return receiptList;
