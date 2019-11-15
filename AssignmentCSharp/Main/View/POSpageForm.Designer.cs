@@ -30,14 +30,21 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(POSpageForm));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.endBusinessButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.takeAwayRadioButton = new System.Windows.Forms.RadioButton();
+            this.dineInRadioButton = new System.Windows.Forms.RadioButton();
             this.label14 = new System.Windows.Forms.Label();
-            this.orderType = new System.Windows.Forms.ComboBox();
+            this.creditCardPay = new System.Windows.Forms.Button();
+            this.cashPayButton = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.clearAllButton = new System.Windows.Forms.Button();
+            this.deleteButton = new System.Windows.Forms.Button();
+            this.minusQtyButton = new System.Windows.Forms.Button();
             this.cashAmount = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
             this.totalPrice = new System.Windows.Forms.TextBox();
@@ -59,27 +66,18 @@
             this.label2 = new System.Windows.Forms.Label();
             this.categoryContainer = new System.Windows.Forms.FlowLayoutPanel();
             this.foodListContainer = new System.Windows.Forms.FlowLayoutPanel();
+            this.clearSearchButton = new System.Windows.Forms.Button();
+            this.searchButton = new System.Windows.Forms.Button();
             this.searchBar = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
-            this.creditCardPay = new System.Windows.Forms.Button();
-            this.cashPayButton = new System.Windows.Forms.Button();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.clearAllButton = new System.Windows.Forms.Button();
-            this.deleteButton = new System.Windows.Forms.Button();
-            this.minusQtyButton = new System.Windows.Forms.Button();
-            this.plusQtyButton = new System.Windows.Forms.Button();
-            this.xQtyButton = new System.Windows.Forms.Button();
-            this.clearSearchButton = new System.Windows.Forms.Button();
-            this.searchButton = new System.Windows.Forms.Button();
-            this.endBusinessButton = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.itemListInCart)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.itemListInCart)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -93,6 +91,22 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1407, 47);
             this.panel1.TabIndex = 0;
+            // 
+            // endBusinessButton
+            // 
+            this.endBusinessButton.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.endBusinessButton.BackgroundImage = global::AssignmentCSharp.Properties.Resources.logout;
+            this.endBusinessButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.endBusinessButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.endBusinessButton.FlatAppearance.BorderSize = 0;
+            this.endBusinessButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.endBusinessButton.Location = new System.Drawing.Point(1216, 5);
+            this.endBusinessButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.endBusinessButton.Name = "endBusinessButton";
+            this.endBusinessButton.Size = new System.Drawing.Size(188, 39);
+            this.endBusinessButton.TabIndex = 1;
+            this.endBusinessButton.UseVisualStyleBackColor = true;
+            this.endBusinessButton.Click += new System.EventHandler(this.EndBusinessButton_Click);
             // 
             // label1
             // 
@@ -116,16 +130,15 @@
             // splitContainer1.Panel1
             // 
             this.splitContainer1.Panel1.BackColor = System.Drawing.Color.LightGray;
+            this.splitContainer1.Panel1.Controls.Add(this.takeAwayRadioButton);
+            this.splitContainer1.Panel1.Controls.Add(this.dineInRadioButton);
             this.splitContainer1.Panel1.Controls.Add(this.label14);
-            this.splitContainer1.Panel1.Controls.Add(this.orderType);
             this.splitContainer1.Panel1.Controls.Add(this.creditCardPay);
             this.splitContainer1.Panel1.Controls.Add(this.cashPayButton);
             this.splitContainer1.Panel1.Controls.Add(this.pictureBox1);
             this.splitContainer1.Panel1.Controls.Add(this.clearAllButton);
             this.splitContainer1.Panel1.Controls.Add(this.deleteButton);
             this.splitContainer1.Panel1.Controls.Add(this.minusQtyButton);
-            this.splitContainer1.Panel1.Controls.Add(this.plusQtyButton);
-            this.splitContainer1.Panel1.Controls.Add(this.xQtyButton);
             this.splitContainer1.Panel1.Controls.Add(this.cashAmount);
             this.splitContainer1.Panel1.Controls.Add(this.label11);
             this.splitContainer1.Panel1.Controls.Add(this.totalPrice);
@@ -155,27 +168,126 @@
             this.splitContainer1.SplitterDistance = 709;
             this.splitContainer1.TabIndex = 1;
             // 
+            // takeAwayRadioButton
+            // 
+            this.takeAwayRadioButton.AutoSize = true;
+            this.takeAwayRadioButton.Location = new System.Drawing.Point(604, 13);
+            this.takeAwayRadioButton.Name = "takeAwayRadioButton";
+            this.takeAwayRadioButton.Size = new System.Drawing.Size(98, 21);
+            this.takeAwayRadioButton.TabIndex = 25;
+            this.takeAwayRadioButton.TabStop = true;
+            this.takeAwayRadioButton.Text = "Take Away";
+            this.takeAwayRadioButton.UseVisualStyleBackColor = true;
+            this.takeAwayRadioButton.CheckedChanged += new System.EventHandler(this.TakeAwayRadioButton_CheckedChanged);
+            // 
+            // dineInRadioButton
+            // 
+            this.dineInRadioButton.AutoSize = true;
+            this.dineInRadioButton.Location = new System.Drawing.Point(517, 13);
+            this.dineInRadioButton.Name = "dineInRadioButton";
+            this.dineInRadioButton.Size = new System.Drawing.Size(74, 21);
+            this.dineInRadioButton.TabIndex = 24;
+            this.dineInRadioButton.TabStop = true;
+            this.dineInRadioButton.Text = "Dine-In";
+            this.dineInRadioButton.UseVisualStyleBackColor = true;
+            this.dineInRadioButton.CheckedChanged += new System.EventHandler(this.DineInRadioButton_CheckedChanged);
+            // 
             // label14
             // 
             this.label14.AutoSize = true;
             this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.Location = new System.Drawing.Point(439, 14);
+            this.label14.Location = new System.Drawing.Point(381, 9);
             this.label14.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(129, 24);
             this.label14.TabIndex = 23;
             this.label14.Text = "Order Type :";
             // 
-            // orderType
+            // creditCardPay
             // 
-            this.orderType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.orderType.FormattingEnabled = true;
-            this.orderType.Location = new System.Drawing.Point(575, 12);
-            this.orderType.Margin = new System.Windows.Forms.Padding(4);
-            this.orderType.Name = "orderType";
-            this.orderType.Size = new System.Drawing.Size(129, 24);
-            this.orderType.TabIndex = 22;
-            this.orderType.SelectedIndexChanged += new System.EventHandler(this.OrderType_SelectedIndexChanged);
+            this.creditCardPay.BackgroundImage = global::AssignmentCSharp.Properties.Resources.creditccardpay;
+            this.creditCardPay.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.creditCardPay.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.creditCardPay.FlatAppearance.BorderSize = 0;
+            this.creditCardPay.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.creditCardPay.Location = new System.Drawing.Point(516, 603);
+            this.creditCardPay.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.creditCardPay.Name = "creditCardPay";
+            this.creditCardPay.Size = new System.Drawing.Size(163, 46);
+            this.creditCardPay.TabIndex = 21;
+            this.creditCardPay.UseVisualStyleBackColor = true;
+            this.creditCardPay.Click += new System.EventHandler(this.CreditCardPay_Click);
+            // 
+            // cashPayButton
+            // 
+            this.cashPayButton.BackgroundImage = global::AssignmentCSharp.Properties.Resources.cashpay;
+            this.cashPayButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.cashPayButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.cashPayButton.FlatAppearance.BorderSize = 0;
+            this.cashPayButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cashPayButton.Location = new System.Drawing.Point(516, 546);
+            this.cashPayButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.cashPayButton.Name = "cashPayButton";
+            this.cashPayButton.Size = new System.Drawing.Size(160, 41);
+            this.cashPayButton.TabIndex = 20;
+            this.cashPayButton.UseVisualStyleBackColor = true;
+            this.cashPayButton.Click += new System.EventHandler(this.CashPayButton_Click);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackgroundImage = global::AssignmentCSharp.Properties.Resources.usericon;
+            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBox1.Location = new System.Drawing.Point(115, 5);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(27, 34);
+            this.pictureBox1.TabIndex = 19;
+            this.pictureBox1.TabStop = false;
+            // 
+            // clearAllButton
+            // 
+            this.clearAllButton.BackgroundImage = global::AssignmentCSharp.Properties.Resources.clearall;
+            this.clearAllButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.clearAllButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.clearAllButton.FlatAppearance.BorderSize = 0;
+            this.clearAllButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.clearAllButton.Location = new System.Drawing.Point(595, 237);
+            this.clearAllButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.clearAllButton.Name = "clearAllButton";
+            this.clearAllButton.Size = new System.Drawing.Size(77, 77);
+            this.clearAllButton.TabIndex = 18;
+            this.clearAllButton.UseVisualStyleBackColor = true;
+            this.clearAllButton.Click += new System.EventHandler(this.ClearAllButton_Click);
+            // 
+            // deleteButton
+            // 
+            this.deleteButton.BackgroundImage = global::AssignmentCSharp.Properties.Resources.remove;
+            this.deleteButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.deleteButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.deleteButton.FlatAppearance.BorderSize = 0;
+            this.deleteButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.deleteButton.Location = new System.Drawing.Point(597, 148);
+            this.deleteButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.deleteButton.Name = "deleteButton";
+            this.deleteButton.Size = new System.Drawing.Size(73, 72);
+            this.deleteButton.TabIndex = 17;
+            this.deleteButton.UseVisualStyleBackColor = true;
+            this.deleteButton.Click += new System.EventHandler(this.DeleteButton_Click);
+            // 
+            // minusQtyButton
+            // 
+            this.minusQtyButton.BackgroundImage = global::AssignmentCSharp.Properties.Resources.quantityminus;
+            this.minusQtyButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.minusQtyButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.minusQtyButton.FlatAppearance.BorderSize = 0;
+            this.minusQtyButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.minusQtyButton.Location = new System.Drawing.Point(596, 51);
+            this.minusQtyButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.minusQtyButton.Name = "minusQtyButton";
+            this.minusQtyButton.Size = new System.Drawing.Size(79, 75);
+            this.minusQtyButton.TabIndex = 16;
+            this.minusQtyButton.UseVisualStyleBackColor = true;
+            this.minusQtyButton.Click += new System.EventHandler(this.MinusQtyButton_Click);
             // 
             // cashAmount
             // 
@@ -198,12 +310,12 @@
             // totalPrice
             // 
             this.totalPrice.Font = new System.Drawing.Font("Impact", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.totalPrice.Location = new System.Drawing.Point(321, 565);
+            this.totalPrice.Location = new System.Drawing.Point(291, 565);
             this.totalPrice.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.totalPrice.Multiline = true;
             this.totalPrice.Name = "totalPrice";
             this.totalPrice.ReadOnly = true;
-            this.totalPrice.Size = new System.Drawing.Size(167, 62);
+            this.totalPrice.Size = new System.Drawing.Size(212, 62);
             this.totalPrice.TabIndex = 11;
             this.totalPrice.Text = "RM 0";
             this.totalPrice.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -287,14 +399,14 @@
             this.itemListInCart.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
             this.itemListInCart.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.itemListInCart.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightSteelBlue;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Elephant", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.LightSteelBlue;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.itemListInCart.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.LightSteelBlue;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Elephant", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.LightSteelBlue;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.itemListInCart.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
             this.itemListInCart.ColumnHeadersHeight = 40;
             this.itemListInCart.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.itemListInCart.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -309,16 +421,15 @@
             this.itemListInCart.Location = new System.Drawing.Point(3, 46);
             this.itemListInCart.Margin = new System.Windows.Forms.Padding(0);
             this.itemListInCart.Name = "itemListInCart";
-            this.itemListInCart.ReadOnly = true;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(0, 10, 0, 10);
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.itemListInCart.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle6.Padding = new System.Windows.Forms.Padding(0, 10, 0, 10);
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.itemListInCart.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.itemListInCart.RowHeadersVisible = false;
             this.itemListInCart.RowHeadersWidth = 51;
             this.itemListInCart.RowTemplate.Height = 24;
@@ -360,7 +471,6 @@
             this.quantity.HeaderText = "Qty";
             this.quantity.MinimumWidth = 6;
             this.quantity.Name = "quantity";
-            this.quantity.ReadOnly = true;
             this.quantity.Width = 45;
             // 
             // price
@@ -417,152 +527,6 @@
             this.foodListContainer.Size = new System.Drawing.Size(635, 482);
             this.foodListContainer.TabIndex = 8;
             // 
-            // searchBar
-            // 
-            this.searchBar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.searchBar.Location = new System.Drawing.Point(18, 135);
-            this.searchBar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.searchBar.Name = "searchBar";
-            this.searchBar.Size = new System.Drawing.Size(431, 22);
-            this.searchBar.TabIndex = 4;
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.Location = new System.Drawing.Point(28, 101);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(614, 20);
-            this.label13.TabIndex = 3;
-            this.label13.Text = "                                                                                 " +
-    "                                        ";
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(13, 9);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(77, 29);
-            this.label12.TabIndex = 0;
-            this.label12.Text = "Menu";
-            // 
-            // creditCardPay
-            // 
-            this.creditCardPay.BackgroundImage = global::AssignmentCSharp.Properties.Resources.creditccardpay;
-            this.creditCardPay.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.creditCardPay.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.creditCardPay.FlatAppearance.BorderSize = 0;
-            this.creditCardPay.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.creditCardPay.Location = new System.Drawing.Point(516, 603);
-            this.creditCardPay.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.creditCardPay.Name = "creditCardPay";
-            this.creditCardPay.Size = new System.Drawing.Size(163, 46);
-            this.creditCardPay.TabIndex = 21;
-            this.creditCardPay.UseVisualStyleBackColor = true;
-            this.creditCardPay.Click += new System.EventHandler(this.CreditCardPay_Click);
-            // 
-            // cashPayButton
-            // 
-            this.cashPayButton.BackgroundImage = global::AssignmentCSharp.Properties.Resources.cashpay;
-            this.cashPayButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.cashPayButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.cashPayButton.FlatAppearance.BorderSize = 0;
-            this.cashPayButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cashPayButton.Location = new System.Drawing.Point(516, 546);
-            this.cashPayButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.cashPayButton.Name = "cashPayButton";
-            this.cashPayButton.Size = new System.Drawing.Size(160, 41);
-            this.cashPayButton.TabIndex = 20;
-            this.cashPayButton.UseVisualStyleBackColor = true;
-            this.cashPayButton.Click += new System.EventHandler(this.CashPayButton_Click);
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackgroundImage = global::AssignmentCSharp.Properties.Resources.usericon;
-            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox1.Location = new System.Drawing.Point(115, 5);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(27, 34);
-            this.pictureBox1.TabIndex = 19;
-            this.pictureBox1.TabStop = false;
-            // 
-            // clearAllButton
-            // 
-            this.clearAllButton.BackgroundImage = global::AssignmentCSharp.Properties.Resources.clearall;
-            this.clearAllButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.clearAllButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.clearAllButton.FlatAppearance.BorderSize = 0;
-            this.clearAllButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.clearAllButton.Location = new System.Drawing.Point(587, 353);
-            this.clearAllButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.clearAllButton.Name = "clearAllButton";
-            this.clearAllButton.Size = new System.Drawing.Size(67, 68);
-            this.clearAllButton.TabIndex = 18;
-            this.clearAllButton.UseVisualStyleBackColor = true;
-            this.clearAllButton.Click += new System.EventHandler(this.ClearAllButton_Click);
-            // 
-            // deleteButton
-            // 
-            this.deleteButton.BackgroundImage = global::AssignmentCSharp.Properties.Resources.remove;
-            this.deleteButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.deleteButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.deleteButton.FlatAppearance.BorderSize = 0;
-            this.deleteButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.deleteButton.Location = new System.Drawing.Point(589, 282);
-            this.deleteButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.deleteButton.Name = "deleteButton";
-            this.deleteButton.Size = new System.Drawing.Size(64, 64);
-            this.deleteButton.TabIndex = 17;
-            this.deleteButton.UseVisualStyleBackColor = true;
-            this.deleteButton.Click += new System.EventHandler(this.DeleteButton_Click);
-            // 
-            // minusQtyButton
-            // 
-            this.minusQtyButton.BackgroundImage = global::AssignmentCSharp.Properties.Resources.quantityminus;
-            this.minusQtyButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.minusQtyButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.minusQtyButton.FlatAppearance.BorderSize = 0;
-            this.minusQtyButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.minusQtyButton.Location = new System.Drawing.Point(587, 203);
-            this.minusQtyButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.minusQtyButton.Name = "minusQtyButton";
-            this.minusQtyButton.Size = new System.Drawing.Size(71, 69);
-            this.minusQtyButton.TabIndex = 16;
-            this.minusQtyButton.UseVisualStyleBackColor = true;
-            this.minusQtyButton.Click += new System.EventHandler(this.MinusQtyButton_Click);
-            // 
-            // plusQtyButton
-            // 
-            this.plusQtyButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("plusQtyButton.BackgroundImage")));
-            this.plusQtyButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.plusQtyButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.plusQtyButton.FlatAppearance.BorderSize = 0;
-            this.plusQtyButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.plusQtyButton.Location = new System.Drawing.Point(588, 127);
-            this.plusQtyButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.plusQtyButton.Name = "plusQtyButton";
-            this.plusQtyButton.Size = new System.Drawing.Size(69, 70);
-            this.plusQtyButton.TabIndex = 15;
-            this.plusQtyButton.UseVisualStyleBackColor = true;
-            this.plusQtyButton.Click += new System.EventHandler(this.PlusQtyButton_Click);
-            // 
-            // xQtyButton
-            // 
-            this.xQtyButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("xQtyButton.BackgroundImage")));
-            this.xQtyButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.xQtyButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.xQtyButton.FlatAppearance.BorderSize = 0;
-            this.xQtyButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.xQtyButton.Location = new System.Drawing.Point(587, 53);
-            this.xQtyButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.xQtyButton.Name = "xQtyButton";
-            this.xQtyButton.Size = new System.Drawing.Size(69, 68);
-            this.xQtyButton.TabIndex = 14;
-            this.xQtyButton.UseVisualStyleBackColor = true;
-            this.xQtyButton.Click += new System.EventHandler(this.XQtyButton_Click);
-            // 
             // clearSearchButton
             // 
             this.clearSearchButton.BackgroundImage = global::AssignmentCSharp.Properties.Resources.clearsearch;
@@ -593,21 +557,35 @@
             this.searchButton.UseVisualStyleBackColor = true;
             this.searchButton.Click += new System.EventHandler(this.SearchButton_Click);
             // 
-            // endBusinessButton
+            // searchBar
             // 
-            this.endBusinessButton.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.endBusinessButton.BackgroundImage = global::AssignmentCSharp.Properties.Resources.logout;
-            this.endBusinessButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.endBusinessButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.endBusinessButton.FlatAppearance.BorderSize = 0;
-            this.endBusinessButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.endBusinessButton.Location = new System.Drawing.Point(1216, 5);
-            this.endBusinessButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.endBusinessButton.Name = "endBusinessButton";
-            this.endBusinessButton.Size = new System.Drawing.Size(188, 39);
-            this.endBusinessButton.TabIndex = 1;
-            this.endBusinessButton.UseVisualStyleBackColor = true;
-            this.endBusinessButton.Click += new System.EventHandler(this.EndBusinessButton_Click);
+            this.searchBar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.searchBar.Location = new System.Drawing.Point(18, 135);
+            this.searchBar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.searchBar.Name = "searchBar";
+            this.searchBar.Size = new System.Drawing.Size(431, 22);
+            this.searchBar.TabIndex = 4;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.Location = new System.Drawing.Point(28, 101);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(614, 20);
+            this.label13.TabIndex = 3;
+            this.label13.Text = "                                                                                 " +
+    "                                        ";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.Location = new System.Drawing.Point(13, 9);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(77, 29);
+            this.label12.TabIndex = 0;
+            this.label12.Text = "Menu";
             // 
             // POSpageForm
             // 
@@ -627,8 +605,8 @@
             this.splitContainer1.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.itemListInCart)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.itemListInCart)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -651,8 +629,6 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.TextBox cashAmount;
-        private System.Windows.Forms.Button xQtyButton;
-        private System.Windows.Forms.Button plusQtyButton;
         private System.Windows.Forms.Button clearAllButton;
         private System.Windows.Forms.Button deleteButton;
         private System.Windows.Forms.Button minusQtyButton;
@@ -666,14 +642,15 @@
         private System.Windows.Forms.Button clearSearchButton;
         private System.Windows.Forms.Button searchButton;
         private System.Windows.Forms.TextBox searchBar;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.FlowLayoutPanel categoryContainer;
         private System.Windows.Forms.DataGridViewTextBoxColumn No;
         private System.Windows.Forms.DataGridViewTextBoxColumn id;
         private System.Windows.Forms.DataGridViewTextBoxColumn ItemName;
         private System.Windows.Forms.DataGridViewTextBoxColumn quantity;
         private System.Windows.Forms.DataGridViewTextBoxColumn price;
         private System.Windows.Forms.DataGridViewTextBoxColumn total;
-        private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.ComboBox orderType;
-        private System.Windows.Forms.FlowLayoutPanel categoryContainer;
+        private System.Windows.Forms.RadioButton takeAwayRadioButton;
+        private System.Windows.Forms.RadioButton dineInRadioButton;
     }
 }

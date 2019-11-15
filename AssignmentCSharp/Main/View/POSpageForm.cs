@@ -10,22 +10,25 @@ using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 using AssignmentCSharp.Main.Model;
 
-
 namespace AssignmentCSharp.Main.View
 {
     
     public partial class POSpageForm : Form
     {
         private String categoryChosen = null;
+        private String orderType = null;
         public POSpageForm()
         {
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+
             InitializeComponent();
             SearchAndUpdateList("");
 
             //add value to comboBox
-            this.orderType.Items.Insert(0, "Dine-In");
-            this.orderType.Items.Insert(1, "Take Away");
-            this.orderType.SelectedIndex = 0;
+            this.orderType = "Dine-In";
+            this.dineInRadioButton.Checked = true;
+
             DisplayListOfCategories();
         }
 
@@ -73,6 +76,74 @@ namespace AssignmentCSharp.Main.View
                 this.categoryContainer.Controls.Add(newButton);    
             }
         }
+
+        private int oldValueOfItemListInCart_CellEditing = 0;
+        private void itemListInCart_CellEditEnding(object sender, DataGridViewCellEventArgs e)
+        {
+            
+
+            int QuantityEntered = 0;
+            try
+            {
+                String newValue = null;
+                if(itemListInCart[e.ColumnIndex, e.RowIndex].Value is System.Int32)
+                {
+                    QuantityEntered = (System.Int32) itemListInCart[e.ColumnIndex, e.RowIndex].Value;
+                }
+                else
+                {
+                    newValue = (String)itemListInCart[e.ColumnIndex, e.RowIndex].Value;
+                    QuantityEntered = Convert.ToInt32(newValue);
+                }
+                
+                
+
+                if (QuantityEntered > 0)
+                {
+                    //check whether got enough stock
+                    foreach (DataGridViewRow row in this.itemListInCart.SelectedRows)
+                    {
+                        int itemId = (int)row.Cells[1].Value;
+
+                        Model.FoodStock itemObject = Model.FoodStock.FindById(itemId);
+
+                        if (itemObject.Quantity >= QuantityEntered)
+                        {
+                            //modify quantity
+                            row.Cells[3].Value = QuantityEntered;
+                            row.Cells[4].Value = itemObject.Price;
+                            row.Cells[5].Value = QuantityEntered * itemObject.Price;
+                        }
+                        else
+                        {
+                            MessageBox.Show(String.Format("Cannot modify item {0} because you have only {1} stock", itemObject.Name, itemObject.Quantity));
+                            //setback to only value
+                            itemListInCart[e.ColumnIndex, e.RowIndex].Value = oldValueOfItemListInCart_CellEditing;
+                        }
+
+                    }
+                    UpdateTotalCalculation();
+                }
+                else
+                {
+                    MessageBox.Show("Please Enter Integer more than 0!");
+                    //setback to only value
+                    itemListInCart[e.ColumnIndex, e.RowIndex].Value = oldValueOfItemListInCart_CellEditing;
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Please Enter only Integer!"+ex.Message);
+                Console.WriteLine(ex.ToString());
+                //setback to only value
+                itemListInCart[e.ColumnIndex, e.RowIndex].Value = oldValueOfItemListInCart_CellEditing;
+            }
+        }
+        private void itemListInCart_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
+        {
+            oldValueOfItemListInCart_CellEditing = (int)itemListInCart[e.ColumnIndex, e.RowIndex].Value;
+        }
+
 
         private void ChooseCategory(object sender, EventArgs e)
         {
@@ -170,11 +241,7 @@ namespace AssignmentCSharp.Main.View
             {
                 //if enough quantity then show sucessfully added
                 int currentNumberOfItem = (int)foundItemInCart.Cells[3].Value;
-                if (FoodStock.FindById((int)foundItemInCart.Cells[1].Value).Quantity > currentNumberOfItem+1)
-                {
-                    MessageBox.Show("Item Already in Cart! Added 1 quantity for you");
-                }
-                
+                                
                 AddQuantityToRow(foundItemInCart);
             }
             UpdateTotalCalculation();
@@ -239,7 +306,7 @@ namespace AssignmentCSharp.Main.View
             }
 
             //if orderType is dine in got dine in tax
-            if (orderType.SelectedIndex == 0)
+            if (orderType == "Dine-In")
             {
                 this.subTotal.Text = totalPrice.ToString();
                 this.tax.Text = (totalPrice * 6 / 100).ToString();
@@ -452,7 +519,7 @@ namespace AssignmentCSharp.Main.View
 
                     
                     decimal tax = (totalPrice * 6 / 100);
-                    decimal servTax = this.orderType.SelectedIndex == 0 ? totalPrice * 10 / 100 : 0;
+                    decimal servTax = this.orderType == "Dine-In" ? totalPrice * 10 / 100 : 0;
                     decimal finaltotal = totalPrice + tax + servTax;
 
                     if (cashPayed >= finaltotal)
@@ -536,7 +603,7 @@ namespace AssignmentCSharp.Main.View
 
 
                 decimal tax = (totalPrice * 6 / 100);
-                decimal servTax = this.orderType.SelectedIndex == 0 ? totalPrice * 10 / 100 : 0;
+                decimal servTax = this.orderType == "Dine-In" ? totalPrice * 10 / 100 : 0;
                 decimal finaltotal = totalPrice + tax + servTax;
 
                
@@ -581,5 +648,23 @@ namespace AssignmentCSharp.Main.View
             Program.homePageFormReference.Show();
         }
 
+        private void DineInRadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            if(dineInRadioButton.Checked == true)
+            {
+                this.orderType = "Dine-In";
+                UpdateTotalCalculation();
+            }
+            
+        }
+
+        private void TakeAwayRadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            if(takeAwayRadioButton.Checked == true)
+            {
+                this.orderType = "Take-Away";
+                UpdateTotalCalculation();
+            }
+        }
     }
 }
