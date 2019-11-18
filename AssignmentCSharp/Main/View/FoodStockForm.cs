@@ -88,7 +88,7 @@ namespace AssignmentCSharp.Main.View
         }
         Image ConvertBinaryToImage(byte[] image)
         {
-            using (System.IO.MemoryStream ms = new System.IO.MemoryStream(image, 0, image.Length))
+            using (MemoryStream ms = new MemoryStream(image, 0, image.Length))
             {
                 ms.Write(image, 0, image.Length);
                 //Set image variable value using memory stream.
@@ -99,8 +99,8 @@ namespace AssignmentCSharp.Main.View
         {
             Form prompt = new Form()
             {
-                Width = 500,
-                Height = 700,
+                Width = 400,
+                Height = 650,
                 FormBorderStyle = FormBorderStyle.FixedDialog,
                 Text = caption,
                 StartPosition = FormStartPosition.CenterScreen
@@ -113,11 +113,11 @@ namespace AssignmentCSharp.Main.View
             TextBox priceTextBox = new TextBox() { Left = 20, Top = 170, Width = 200 };
             Label categoryLabel = new Label() { Left = 20, Top = 220, Text = category };
             ListBox categoryListBox = new ListBox() { Left = 20, Top = 245, Width = 200 };
-            PictureBox imagePictureBox = new PictureBox() { Left = 20, Top = 500,Width= 150,Height = 100 };
-            Label imageLabel = new Label() { Left = 20, Top = 400, Width = 400,Text = "No file is selected" };
-            Button imageButton = new Button() { Text = "Browse image", Left = 20, Width = 70, Top = 430 };
-            Button confirmation = new Button() { Text = "Ok", Left = 20, Width = 70, Top = 360 };
-            Button cancel = new Button() { Text = "Cancel", Left = 120, Width = 70, Top = 360 };
+            PictureBox imagePictureBox = new PictureBox() { Left = 20, Top = 420,Width= 150,Height = 100 };
+            Label imageLabel = new Label() { Left = 20, Top = 360, Width = 400,Text = "No file is selected" };
+            Button imageButton = new Button() { Text = "Browse image", Left = 20, Width = 70, Top = 390 };
+            Button confirmation = new Button() { Text = "Ok", Left = 20, Width = 70, Top = 550 };
+            Button cancel = new Button() { Text = "Cancel", Left = 120, Width = 70, Top = 550 };
 
             imageButton.Click += (sender, e) =>
             {
@@ -133,7 +133,7 @@ namespace AssignmentCSharp.Main.View
                 }
             };
 
-            foreach (Model.FoodCategory food in Model.FoodCategory.getFoodCategory())
+            foreach (Model.FoodCategory food in Model.FoodCategory.GetFoodCategory())
             {
                 categoryListBox.Sorted = true;
                 categoryListBox.Items.Add(food.Category);
@@ -148,7 +148,9 @@ namespace AssignmentCSharp.Main.View
                 categoryListBox.SelectedItem = foodId.Category;
                 quantityTextBox.Text = foodId.Quantity.ToString();
                 priceTextBox.Text = foodId.Price.ToString();
-                
+                imagePictureBox.Image = ConvertBinaryToImage(foodId.Image);
+                imagePictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
+                /*
                 if (foodId.Image == null)
                 {
                     MessageBox.Show("hha");
@@ -159,7 +161,7 @@ namespace AssignmentCSharp.Main.View
                     imagePictureBox.Image = ConvertBinaryToImage(foodId.Image);
                     imagePictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
                 }
-                
+                */
 
             }
             //button click event handler
@@ -213,7 +215,7 @@ namespace AssignmentCSharp.Main.View
 
                             if (imageLabel.Text == "No file is selected")
                             {
-                                Image noImage = global::AssignmentCSharp.Properties.Resources.noimage;
+                                Image noImage = Properties.Resources.noimage;
 
                                 using (var ms = new MemoryStream())
                                 {
@@ -227,10 +229,6 @@ namespace AssignmentCSharp.Main.View
                                 BinaryReader br = new BinaryReader(fstream);
                                 imageByte = br.ReadBytes((int)fstream.Length);
                             }
-                            
-
-                            //MessageBox.Show(imageByte.ToString());
-                            //string result = Encoding.UTF8.GetString(imageByte);
 
                             validSendEmail = true;
                             FoodStock newItem = new FoodStock(inputItemName, selectedItem, inputQuantity, inputPrice, validSendEmail, imageByte);
@@ -252,7 +250,7 @@ namespace AssignmentCSharp.Main.View
                             byte[] imageByte = null;
                             if (imageLabel.Text == "No file is selected")
                             {
-                                Image noImage = global::AssignmentCSharp.Properties.Resources.noimage;
+                                Image noImage = Properties.Resources.noimage;
 
                                 using (var ms = new MemoryStream())
                                 {
@@ -517,5 +515,11 @@ namespace AssignmentCSharp.Main.View
             Program.homePageFormReference.clearAllTextBox();
             Program.homePageFormReference.Show();
         }
+
+        private void CategoryList_Click(object sender, EventArgs e)
+        {
+            new FoodCategoryForm().Show();
+        }
+
     }
 }

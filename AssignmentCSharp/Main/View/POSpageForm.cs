@@ -55,7 +55,7 @@ namespace AssignmentCSharp.Main.View
             this.categoryContainer.Controls.Add(allButton);
             this.categoryChosen = null;
 
-            foreach (Model.FoodCategory category in Model.FoodCategory.getFoodCategory())
+            foreach (Model.FoodCategory category in Model.FoodCategory.GetFoodCategory())
             {
                 
                 System.Windows.Forms.Button newButton = new System.Windows.Forms.Button();
