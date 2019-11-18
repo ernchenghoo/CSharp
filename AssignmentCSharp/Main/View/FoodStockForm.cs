@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 using AssignmentCSharp.Main.Model;
+using System.Text.RegularExpressions;
+using System.IO;
 
 namespace AssignmentCSharp.Main.View
 {
@@ -84,13 +86,21 @@ namespace AssignmentCSharp.Main.View
                 MessageBox.Show("No row is Selected");
             }
         }
-
+        Image ConvertBinaryToImage(byte[] image)
+        {
+            using (System.IO.MemoryStream ms = new System.IO.MemoryStream(image, 0, image.Length))
+            {
+                ms.Write(image, 0, image.Length);
+                //Set image variable value using memory stream.
+                return Image.FromStream(ms, true);
+            }
+        }
         public void ShowInputDialog(string itemname,string quantity,string price,string category, string caption,int getId)
         {
             Form prompt = new Form()
             {
-                Width = 300,
-                Height = 470,
+                Width = 500,
+                Height = 700,
                 FormBorderStyle = FormBorderStyle.FixedDialog,
                 Text = caption,
                 StartPosition = FormStartPosition.CenterScreen
@@ -103,8 +113,25 @@ namespace AssignmentCSharp.Main.View
             TextBox priceTextBox = new TextBox() { Left = 20, Top = 170, Width = 200 };
             Label categoryLabel = new Label() { Left = 20, Top = 220, Text = category };
             ListBox categoryListBox = new ListBox() { Left = 20, Top = 245, Width = 200 };
+            PictureBox imagePictureBox = new PictureBox() { Left = 20, Top = 500,Width= 150,Height = 100 };
+            Label imageLabel = new Label() { Left = 20, Top = 400, Width = 400,Text = "No file is selected" };
+            Button imageButton = new Button() { Text = "Browse image", Left = 20, Width = 70, Top = 430 };
             Button confirmation = new Button() { Text = "Ok", Left = 20, Width = 70, Top = 360 };
             Button cancel = new Button() { Text = "Cancel", Left = 120, Width = 70, Top = 360 };
+
+            imageButton.Click += (sender, e) =>
+            {
+                OpenFileDialog dlg = new OpenFileDialog();
+                dlg.Filter = "JPG Files(*.jpg)|*.jpg|PNG Files(*.png)|*.png|All Files(*.*)|*.*";
+
+                if(dlg.ShowDialog() == DialogResult.OK)
+                {
+                    imageLabel.Text = dlg.FileName.ToString();
+                    imagePictureBox.ImageLocation = imageLabel.Text;
+                    imagePictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
+
+                }
+            };
 
             foreach (Model.FoodCategory food in Model.FoodCategory.getFoodCategory())
             {
@@ -121,6 +148,18 @@ namespace AssignmentCSharp.Main.View
                 categoryListBox.SelectedItem = foodId.Category;
                 quantityTextBox.Text = foodId.Quantity.ToString();
                 priceTextBox.Text = foodId.Price.ToString();
+                
+                if (foodId.Image == null)
+                {
+                    MessageBox.Show("hha");
+                }
+                else
+                {
+                    //MemoryStream mstream = new MemoryStream(foodId.Image);
+                    imagePictureBox.Image = ConvertBinaryToImage(foodId.Image);
+                    imagePictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
+                }
+                
 
             }
             //button click event handler
@@ -170,8 +209,31 @@ namespace AssignmentCSharp.Main.View
                         prompt.DialogResult = DialogResult.OK;
                         if (getId == -1)
                         {
+                            byte[] imageByte = null;
+
+                            if (imageLabel.Text == "No file is selected")
+                            {
+                                Image noImage = global::AssignmentCSharp.Properties.Resources.noimage;
+
+                                using (var ms = new MemoryStream())
+                                {
+                                    noImage.Save(ms, noImage.RawFormat);
+                                    imageByte = ms.ToArray();
+                                }
+                            }
+                            else
+                            {
+                                FileStream fstream = new FileStream(imageLabel.Text, FileMode.Open, FileAccess.Read);
+                                BinaryReader br = new BinaryReader(fstream);
+                                imageByte = br.ReadBytes((int)fstream.Length);
+                            }
+                            
+
+                            //MessageBox.Show(imageByte.ToString());
+                            //string result = Encoding.UTF8.GetString(imageByte);
+
                             validSendEmail = true;
-                            FoodStock newItem = new FoodStock(inputItemName, selectedItem, inputQuantity, inputPrice, validSendEmail);
+                            FoodStock newItem = new FoodStock(inputItemName, selectedItem, inputQuantity, inputPrice, validSendEmail, imageByte);
                             newItem.Save();
                             GetAllRecord("");                            
                         }
@@ -187,14 +249,34 @@ namespace AssignmentCSharp.Main.View
                                 validSendEmail = true;
                             }
                             foodId.AllowSendEmail = validSendEmail;
+                            byte[] imageByte = null;
+                            if (imageLabel.Text == "No file is selected")
+                            {
+                                Image noImage = global::AssignmentCSharp.Properties.Resources.noimage;
+
+                                using (var ms = new MemoryStream())
+                                {
+                                    noImage.Save(ms, noImage.RawFormat);
+                                    imageByte = ms.ToArray();
+                                }
+                            }
+                            else
+                            {
+                                FileStream fstream = new FileStream(imageLabel.Text, FileMode.Open, FileAccess.Read);
+                                BinaryReader br = new BinaryReader(fstream);
+                                imageByte = br.ReadBytes((int)fstream.Length);
+                            }
+
+                            foodId.Image = imageByte;
                             foodId.Save();
                             GetAllRecord("");
                         }
                         
                     }
                 }
-                catch
+                catch (Exception exp)
                 {
+                    MessageBox.Show(exp.Message);
                     MessageBox.Show("Please Enter only Integer for quantity and price!\nPlease select one food category");
                 }
             };
@@ -208,6 +290,9 @@ namespace AssignmentCSharp.Main.View
             prompt.Controls.Add(priceLabel);
             prompt.Controls.Add(categoryLabel);
             prompt.Controls.Add(categoryListBox);
+            prompt.Controls.Add(imagePictureBox);
+            prompt.Controls.Add(imageLabel);
+            prompt.Controls.Add(imageButton);
             prompt.Controls.Add(confirmation);
             prompt.Controls.Add(cancel);            
             prompt.AcceptButton = confirmation;
@@ -378,12 +463,22 @@ namespace AssignmentCSharp.Main.View
             confirmation.Click += (sender, e) => {
                 try
                 {                   
-                    string inputSupplierEmail = supplierEmailTextBox.Text;                    
+                    string inputSupplierEmail = supplierEmailTextBox.Text;
+                    string pattern = "^([0-9a-zA-Z]([-\\.\\w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-\\w]*[0-9a-zA-z]\\.)+[a-zA-z]{2,9})$";
                     string errorMessages = "";
 
                     if (inputSupplierEmail == "")
                     {
                         errorMessages += "Email Address cannot be empty";
+                    }
+
+                    if (Regex.IsMatch(inputSupplierEmail,pattern))
+                    {
+                        MessageBox.Show("Successfully changed new email");
+                    }
+                    else
+                    {
+                        errorMessages += "Email Address in wrong format";
                     }
 
                     if (errorMessages != "")

@@ -159,6 +159,16 @@ namespace AssignmentCSharp.Main.View
 
             SearchAndUpdateList(this.searchBar.Text);
         }
+        Image ConvertBinaryToImage(byte[] image)
+        {
+            using (System.IO.MemoryStream ms = new System.IO.MemoryStream(image, 0, image.Length))
+            {
+                ms.Write(image, 0, image.Length);
+                //Set image variable value using memory stream.
+                return Image.FromStream(ms, true);
+            }
+        }
+
 
         //function to search and update the food menu
         private void SearchAndUpdateList(String search)
@@ -181,46 +191,57 @@ namespace AssignmentCSharp.Main.View
 
             foreach (Model.FoodStock food in filteredList)
             {
-               
-                System.Windows.Forms.Button newButton = new System.Windows.Forms.Button();
+                
+                FlowLayoutPanel newFlowPanel = new FlowLayoutPanel {
+                    Width = 150,
+                    Height = 180,
+                    Tag = food,
+                    Cursor = Cursors.Hand,
+                };
 
-                    
-                newButton.FlatAppearance.BorderSize = 2;
-                newButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-                newButton.Location = new System.Drawing.Point(10, 10);
-                newButton.Margin = new System.Windows.Forms.Padding(10);
-                newButton.Name = "button1";
-                newButton.Size = new System.Drawing.Size(199, 191);
-                newButton.TabIndex = 7;
-                newButton.Text = food.Name;
-                newButton.Tag = food;
-                newButton.UseVisualStyleBackColor = false;
 
-                //if the item is no stock the color will be red
-                if (food.Quantity > 0)
+                PictureBox myPicBox = new PictureBox
                 {
-                    newButton.BackColor = System.Drawing.Color.White;
-                    newButton.Click += new System.EventHandler(this.AddItem);
-                }
-                else
-                {
-                    newButton.BackColor = System.Drawing.Color.Red;
-                    newButton.Click += (sender, e) => {
-                        MessageBox.Show("This Item is Out of Stock!");
-                    };
-                }
-                    
+                    Name = "pictureBox",
+                    Size = new Size(150, 150),
+                    Image = ConvertBinaryToImage(food.Image),
+                    SizeMode = PictureBoxSizeMode.StretchImage,
+                    BorderStyle = BorderStyle.FixedSingle,
+                    Tag = food,
+                    Cursor = Cursors.Hand,
+                };
 
-                this.foodListContainer.Controls.Add(newButton);
-                 
+                
+
+                Label newLabel = new Label
+                {
+                    Text = food.Name,
+                    Font = new Font("Arial", 15, FontStyle.Bold),
+                    TextAlign = ContentAlignment.MiddleCenter,
+                    AutoSize = false,
+                    Width = 150,
+                    Height = 30,
+                    Tag = food,
+                    Cursor = Cursors.Hand,
+                };
+
+                newFlowPanel.Controls.Add(myPicBox);
+                newFlowPanel.Controls.Add(newLabel);
+                myPicBox.Click += new System.EventHandler(this.AddItem);
+                newLabel.Click += new System.EventHandler(this.AddItem);
+
+                this.foodListContainer.Controls.Add(newFlowPanel);
+
+
+
             }
         }
 
         //function to add the item to the cart
         private void AddItem(object sender, EventArgs e)
         {
-            System.Windows.Forms.Button buttonObject = (System.Windows.Forms.Button)sender;
-            Model.FoodStock chosenFood = (Model.FoodStock)buttonObject.Tag;
+            System.Windows.Forms.Control layoutPanelObject = (System.Windows.Forms.Control)sender;
+            Model.FoodStock chosenFood = (Model.FoodStock)layoutPanelObject.Tag;
 
             DataGridViewRow foundItemInCart = null;
             foreach (DataGridViewRow row in this.itemListInCart.Rows)
@@ -235,7 +256,15 @@ namespace AssignmentCSharp.Main.View
             if (foundItemInCart == null)
             {
                 int newNo = this.itemListInCart.Rows.Count + 1;
-                this.itemListInCart.Rows.Add(newNo, chosenFood.Id, chosenFood.Name, 1, chosenFood.Price, chosenFood.Price * 1);
+                if(chosenFood.Quantity >0)
+                {
+                    this.itemListInCart.Rows.Add(newNo, chosenFood.Id, chosenFood.Name, 1, chosenFood.Price, chosenFood.Price * 1);
+                }
+                else
+                {
+                    MessageBox.Show("Cannot Add! You have only " + chosenFood.Quantity + " stock.");
+                }
+                
             }
             else
             {

@@ -436,6 +436,9 @@
             this.itemListInCart.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.itemListInCart.Size = new System.Drawing.Size(572, 452);
             this.itemListInCart.TabIndex = 3;
+            this.itemListInCart.CellBeginEdit += this.itemListInCart_CellBeginEdit;
+            this.itemListInCart.CellEndEdit += this.itemListInCart_CellEditEnding;
+
             // 
             // No
             // 
