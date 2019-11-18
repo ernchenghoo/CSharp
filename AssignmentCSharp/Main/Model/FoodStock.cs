@@ -17,12 +17,13 @@ namespace AssignmentCSharp.Main.Model
         public decimal Price { get; set; }
 
         public Boolean AllowSendEmail { get; set; }
+        public byte [] Image { get; set; }
 
         public static MySqlConnection cnn;
         public static string connectionString = "server=localhost;database=pos;uid=root;pwd=;";
 
         // constructor for existing object in database
-        public FoodStock(int id, String name,String category, int quantity, decimal price, bool allowSendEmail)
+        public FoodStock(int id, String name,String category, int quantity, decimal price, bool allowSendEmail,Byte[] image)
         {
             this.Id = id;
             this.Name = name;
@@ -30,11 +31,12 @@ namespace AssignmentCSharp.Main.Model
             this.Price = price;
             this.Quantity = quantity;
             this.AllowSendEmail = allowSendEmail;
+            this.Image = image;
         }
 
         //constructor for new object which doesn't need id 
         //id will be generated automatically when you call save() function
-        public FoodStock(String name,String category, int quantity, decimal price, bool allowSendEmail)
+        public FoodStock(String name,String category, int quantity, decimal price, bool allowSendEmail,Byte[] image)
         {
             this.Id = -1;
             this.Name = name;
@@ -42,6 +44,7 @@ namespace AssignmentCSharp.Main.Model
             this.Price = price;
             this.Quantity = quantity;
             this.AllowSendEmail = allowSendEmail;
+            this.Image = image;
         }
 
         public FoodStock(int id,int quantity)
@@ -89,13 +92,14 @@ namespace AssignmentCSharp.Main.Model
                     int newId = currentBiggestId + 1;
                     command = new MySqlCommand();
                     command.Connection = cnn;
-                    command.CommandText = "Insert into FoodStock(foodId,foodName,category,quantity,price,allowSendEmail) Values(@foodid,@foodname,@category,@quantity,@price,@allowsendemail)";
+                    command.CommandText = "Insert into FoodStock(foodId,foodName,category,quantity,price,allowSendEmail,image) Values(@foodid,@foodname,@category,@quantity,@price,@allowsendemail,@image)";
                     command.Parameters.AddWithValue("@foodid", newId);
                     command.Parameters.AddWithValue("@foodname", Name);
                     command.Parameters.AddWithValue("@category", Category);
                     command.Parameters.AddWithValue("@quantity", Quantity);
                     command.Parameters.AddWithValue("@price", Price);
                     command.Parameters.AddWithValue("@allowsendemail", AllowSendEmail);
+                    command.Parameters.Add(new MySqlParameter("@image", Image));
                     command.ExecuteNonQuery();
                     cnn.Close();
 
@@ -108,13 +112,14 @@ namespace AssignmentCSharp.Main.Model
                     cnn.Open();
                     MySqlCommand command = new MySqlCommand();
                     command.Connection = cnn;
-                    command.CommandText = "UPDATE FoodStock SET FoodName=@foodname,category=@category,quantity=@quantity,price=@price,allowsendemail=@allowsendemail  WHERE foodId =@id";
+                    command.CommandText = "UPDATE FoodStock SET FoodName=@foodname,category=@category,quantity=@quantity,price=@price,allowsendemail=@allowsendemail,image=@image  WHERE foodId =@id";
                     command.Parameters.AddWithValue("@id", Id);
                     command.Parameters.AddWithValue("@foodname", Name);
                     command.Parameters.AddWithValue("@category", Category);
                     command.Parameters.AddWithValue("@quantity", Quantity);
                     command.Parameters.AddWithValue("@price", Price);
                     command.Parameters.AddWithValue("@allowsendemail", AllowSendEmail);
+                    command.Parameters.Add(new MySqlParameter("@image", Image));
                     command.ExecuteNonQuery();
                     cnn.Close();
 
@@ -137,12 +142,12 @@ namespace AssignmentCSharp.Main.Model
                 cnn.Open();
                 
 
-                MySqlCommand command = new MySqlCommand("select foodId,foodName,category,quantity,price,allowSendEmail from foodstock where foodId = "+id, cnn);
+                MySqlCommand command = new MySqlCommand("select foodId,foodName,category,quantity,price,allowSendEmail,image from foodstock where foodId = "+id, cnn);
                 MySqlDataReader dataReader = command.ExecuteReader();
 
                 while (dataReader.Read())
                 {
-                    foundFoodStockObject = new FoodStock(dataReader.GetInt32(0), dataReader.GetString(1), dataReader.GetString(2), dataReader.GetInt32(3), dataReader.GetDecimal(4), dataReader.GetBoolean(5));
+                    foundFoodStockObject = new FoodStock(dataReader.GetInt32(0), dataReader.GetString(1), dataReader.GetString(2), dataReader.GetInt32(3), dataReader.GetDecimal(4), dataReader.GetBoolean(5), (byte[])dataReader[6]);
                 }
                 cnn.Close();
 
@@ -234,12 +239,12 @@ namespace AssignmentCSharp.Main.Model
             {
                 cnn.Open();
 
-                MySqlCommand command = new MySqlCommand("select foodId,foodName,category,quantity,price,allowSendEmail from foodstock", cnn);
+                MySqlCommand command = new MySqlCommand("select foodId,foodName,category,quantity,price,allowSendEmail,image from foodstock", cnn);
                 MySqlDataReader dataReader = command.ExecuteReader();
 
                 while (dataReader.Read())
                 {
-                    foodlist.Add(new FoodStock(dataReader.GetInt32(0), dataReader.GetString(1), dataReader.GetString(2), dataReader.GetInt32(3), dataReader.GetDecimal(4), dataReader.GetBoolean(5)));
+                    foodlist.Add(new FoodStock(dataReader.GetInt32(0), dataReader.GetString(1), dataReader.GetString(2), dataReader.GetInt32(3), dataReader.GetDecimal(4), dataReader.GetBoolean(5), (byte[])dataReader["Image"]));
                 }
                 cnn.Close();
 

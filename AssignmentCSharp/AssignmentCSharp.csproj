@@ -73,6 +73,12 @@
     <Compile Include="Main\View\EmailSupplierForm.Designer.cs">
       <DependentUpon>EmailSupplierForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Main\View\FoodCategoryForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Main\View\FoodCategoryForm.Designer.cs">
+      <DependentUpon>FoodCategoryForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Main\View\FoodStockForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -129,6 +135,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Main\View\EmailSupplierForm.resx">
       <DependentUpon>EmailSupplierForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Main\View\FoodCategoryForm.resx">
+      <DependentUpon>FoodCategoryForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Main\View\FoodStockForm.resx">
       <DependentUpon>FoodStockForm.cs</DependentUpon>
@@ -199,6 +208,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\logout.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\noimage.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
