@@ -184,7 +184,7 @@ namespace AssignmentCSharp.Main.View
             {
                 //filter category
                 filteredList = from food in filteredList
-                               where food.Category.Equals(this.categoryChosen)
+                               where food.CategoryId.Equals(this.categoryChosen)
                                select food;
             }
 

@@ -31,11 +31,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
             this.dataFoodStock = new System.Windows.Forms.DataGridView();
-            this.no = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.itemName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.category = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.quantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.price = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.addItem = new System.Windows.Forms.Button();
             this.editItem = new System.Windows.Forms.Button();
             this.deleteItem = new System.Windows.Forms.Button();
@@ -46,6 +41,11 @@
             this.supplierEmail = new System.Windows.Forms.Button();
             this.logoutButton = new System.Windows.Forms.Button();
             this.categoryList = new System.Windows.Forms.Button();
+            this.no = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.categoryId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.itemName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.quantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.price = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataFoodStock)).BeginInit();
             this.SuspendLayout();
             // 
@@ -80,8 +80,8 @@
             this.dataFoodStock.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dataFoodStock.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.no,
+            this.categoryId,
             this.itemName,
-            this.category,
             this.quantity,
             this.price});
             this.dataFoodStock.EnableHeadersVisualStyles = false;
@@ -95,50 +95,6 @@
             this.dataFoodStock.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataFoodStock.Size = new System.Drawing.Size(441, 250);
             this.dataFoodStock.TabIndex = 3;
-            // 
-            // no
-            // 
-            this.no.FillWeight = 40F;
-            this.no.HeaderText = "No";
-            this.no.MinimumWidth = 6;
-            this.no.Name = "no";
-            this.no.ReadOnly = true;
-            this.no.Width = 40;
-            // 
-            // itemName
-            // 
-            this.itemName.FillWeight = 140F;
-            this.itemName.HeaderText = "Item Name";
-            this.itemName.MinimumWidth = 6;
-            this.itemName.Name = "itemName";
-            this.itemName.ReadOnly = true;
-            this.itemName.Width = 160;
-            // 
-            // category
-            // 
-            this.category.HeaderText = "Category";
-            this.category.MinimumWidth = 6;
-            this.category.Name = "category";
-            this.category.ReadOnly = true;
-            this.category.Width = 125;
-            // 
-            // quantity
-            // 
-            this.quantity.FillWeight = 45F;
-            this.quantity.HeaderText = "Qty";
-            this.quantity.MinimumWidth = 6;
-            this.quantity.Name = "quantity";
-            this.quantity.ReadOnly = true;
-            this.quantity.Width = 45;
-            // 
-            // price
-            // 
-            this.price.FillWeight = 70F;
-            this.price.HeaderText = "Price";
-            this.price.MinimumWidth = 6;
-            this.price.Name = "price";
-            this.price.ReadOnly = true;
-            this.price.Width = 70;
             // 
             // addItem
             // 
@@ -174,7 +130,7 @@
             // 
             this.searchBar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.searchBar.Location = new System.Drawing.Point(11, 65);
-            this.searchBar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.searchBar.Margin = new System.Windows.Forms.Padding(2);
             this.searchBar.Name = "searchBar";
             this.searchBar.Size = new System.Drawing.Size(257, 20);
             this.searchBar.TabIndex = 7;
@@ -187,7 +143,7 @@
             this.searchButton.FlatAppearance.BorderSize = 0;
             this.searchButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.searchButton.Location = new System.Drawing.Point(287, 58);
-            this.searchButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.searchButton.Margin = new System.Windows.Forms.Padding(2);
             this.searchButton.Name = "searchButton";
             this.searchButton.Size = new System.Drawing.Size(28, 26);
             this.searchButton.TabIndex = 8;
@@ -202,7 +158,7 @@
             this.clearSearchButton.FlatAppearance.BorderSize = 0;
             this.clearSearchButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.clearSearchButton.Location = new System.Drawing.Point(335, 56);
-            this.clearSearchButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.clearSearchButton.Margin = new System.Windows.Forms.Padding(2);
             this.clearSearchButton.Name = "clearSearchButton";
             this.clearSearchButton.Size = new System.Drawing.Size(98, 28);
             this.clearSearchButton.TabIndex = 9;
@@ -237,7 +193,7 @@
             this.logoutButton.FlatAppearance.BorderSize = 0;
             this.logoutButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.logoutButton.Location = new System.Drawing.Point(460, 7);
-            this.logoutButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.logoutButton.Margin = new System.Windows.Forms.Padding(2);
             this.logoutButton.Name = "logoutButton";
             this.logoutButton.Size = new System.Drawing.Size(142, 36);
             this.logoutButton.TabIndex = 12;
@@ -253,6 +209,50 @@
             this.categoryList.Text = "Category List";
             this.categoryList.UseVisualStyleBackColor = true;
             this.categoryList.Click += new System.EventHandler(this.CategoryList_Click);
+            // 
+            // no
+            // 
+            this.no.FillWeight = 40F;
+            this.no.HeaderText = "No";
+            this.no.MinimumWidth = 6;
+            this.no.Name = "no";
+            this.no.ReadOnly = true;
+            this.no.Width = 40;
+            // 
+            // categoryId
+            // 
+            this.categoryId.HeaderText = "Category Id";
+            this.categoryId.MinimumWidth = 6;
+            this.categoryId.Name = "categoryId";
+            this.categoryId.ReadOnly = true;
+            this.categoryId.Width = 110;
+            // 
+            // itemName
+            // 
+            this.itemName.FillWeight = 140F;
+            this.itemName.HeaderText = "Item Name";
+            this.itemName.MinimumWidth = 6;
+            this.itemName.Name = "itemName";
+            this.itemName.ReadOnly = true;
+            this.itemName.Width = 160;
+            // 
+            // quantity
+            // 
+            this.quantity.FillWeight = 45F;
+            this.quantity.HeaderText = "Qty";
+            this.quantity.MinimumWidth = 6;
+            this.quantity.Name = "quantity";
+            this.quantity.ReadOnly = true;
+            this.quantity.Width = 45;
+            // 
+            // price
+            // 
+            this.price.FillWeight = 70F;
+            this.price.HeaderText = "Price";
+            this.price.MinimumWidth = 6;
+            this.price.Name = "price";
+            this.price.ReadOnly = true;
+            this.price.Width = 70;
             // 
             // FoodStockForm
             // 
@@ -290,14 +290,14 @@
         private System.Windows.Forms.TextBox searchBar;
         private System.Windows.Forms.Button searchButton;
         private System.Windows.Forms.Button clearSearchButton;
-        private System.Windows.Forms.DataGridViewTextBoxColumn no;
-        private System.Windows.Forms.DataGridViewTextBoxColumn itemName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn category;
-        private System.Windows.Forms.DataGridViewTextBoxColumn quantity;
-        private System.Windows.Forms.DataGridViewTextBoxColumn price;
         private System.Windows.Forms.Button manageStock;
         private System.Windows.Forms.Button supplierEmail;
         private System.Windows.Forms.Button logoutButton;
         private System.Windows.Forms.Button categoryList;
+        private System.Windows.Forms.DataGridViewTextBoxColumn no;
+        private System.Windows.Forms.DataGridViewTextBoxColumn categoryId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn itemName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn quantity;
+        private System.Windows.Forms.DataGridViewTextBoxColumn price;
     }
 }
