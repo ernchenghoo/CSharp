@@ -15,7 +15,7 @@ namespace AssignmentCSharp.Main.View
     
     public partial class POSpageForm : Form
     {
-        private String categoryChosen = null;
+        private int categoryChosen = -1;
         private String orderType = null;
         public POSpageForm()
         {
@@ -30,6 +30,10 @@ namespace AssignmentCSharp.Main.View
             this.dineInRadioButton.Checked = true;
 
             DisplayListOfCategories();
+
+            //set validation for the editing the quantity in the list
+            this.itemListInCart.CellBeginEdit += this.itemListInCart_CellBeginEdit;
+            this.itemListInCart.CellEndEdit += this.itemListInCart_CellEditEnding;
         }
 
         private void DisplayListOfCategories()
@@ -47,13 +51,13 @@ namespace AssignmentCSharp.Main.View
             allButton.Size = new System.Drawing.Size(140, 23);
             allButton.TabIndex = 7;
             allButton.Text = "All";
-            allButton.Tag = (String)null;
+            allButton.Tag = -1;
             allButton.UseVisualStyleBackColor = false;
             allButton.BackColor = System.Drawing.Color.Green;
             allButton.Click += new System.EventHandler(this.ChooseCategory);
 
             this.categoryContainer.Controls.Add(allButton);
-            this.categoryChosen = null;
+            this.categoryChosen = -1;
 
             foreach (Model.FoodCategory category in Model.FoodCategory.GetFoodCategory())
             {
@@ -68,7 +72,7 @@ namespace AssignmentCSharp.Main.View
                 newButton.Size = new System.Drawing.Size(140, 23);
                 newButton.TabIndex = 7;
                 newButton.Text = category.Category;
-                newButton.Tag = category.Category;
+                newButton.Tag = category.Id;
                 newButton.UseVisualStyleBackColor = false;
                 newButton.BackColor = System.Drawing.Color.Yellow;
                 newButton.Click += new System.EventHandler(this.ChooseCategory);
@@ -154,7 +158,7 @@ namespace AssignmentCSharp.Main.View
 
             System.Windows.Forms.Button buttonObject = (System.Windows.Forms.Button)sender;
             //save it to class variable so we can reference it later
-            this.categoryChosen = (String)buttonObject.Tag;
+            this.categoryChosen = (int)buttonObject.Tag;
             buttonObject.BackColor = System.Drawing.Color.Green;
 
             SearchAndUpdateList(this.searchBar.Text);
@@ -180,11 +184,11 @@ namespace AssignmentCSharp.Main.View
                               where food.Name.ToLower().Contains(search.ToLower())
                               select food;
             //if category all is not chosen
-            if (this.categoryChosen != null)
+            if (this.categoryChosen != -1)
             {
                 //filter category
                 filteredList = from food in filteredList
-                               where food.CategoryId.Equals(this.categoryChosen)
+                               where food.CategoryId == this.categoryChosen
                                select food;
             }
 
