@@ -146,5 +146,37 @@ namespace AssignmentCSharp.Main.Model
             return foundFoodCategoryObject; ;
         }
 
+        public static FoodCategory FindByCategory(string category)
+        {
+            cnn = new MySqlConnection(connectionString);
+            FoodCategory foundFoodCategoryId = null;
+
+            try
+            {
+                cnn.Open();
+
+
+                MySqlCommand command = new MySqlCommand("select id,category from foodcategory where category = '"+category+"'", cnn);
+                /*
+                MySqlCommand command = cnn.CreateCommand();
+                command.CommandText = "select id,category from foodcategory where category = 'category1'";
+                */
+                MySqlDataReader dataReader = command.ExecuteReader();
+
+                while (dataReader.Read())
+                {
+                    foundFoodCategoryId = new FoodCategory(dataReader.GetInt32(0), dataReader.GetString(1));
+                }
+                cnn.Close();
+
+
+            }
+            catch(Exception exp)
+            {
+                MessageBox.Show(exp.Message);
+            }
+            return foundFoodCategoryId;
+        }
+
     }
 }

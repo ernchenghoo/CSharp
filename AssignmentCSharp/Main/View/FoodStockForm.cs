@@ -47,19 +47,19 @@ namespace AssignmentCSharp.Main.View
                         //create email form to supplier
                         EmailSupplierForm emailSupplier = new EmailSupplierForm(myAcc.Email, food.Id, food.Name);
                         emailSupplier.Show();
-                        this.dataFoodStock.Rows.Add(food.Id, food.Name, food.Category, food.Quantity, food.Price);
+                        this.dataFoodStock.Rows.Add(food.Id, food.CategoryId, food.Name, food.Quantity, food.Price);
                   
                     }
 
                     else if(food.Quantity > 0)
                     {
                         dataFoodStock.ClearSelection();
-                        this.dataFoodStock.Rows.Add(food.Id, food.Name, food.Category, food.Quantity, food.Price);
+                        this.dataFoodStock.Rows.Add(food.Id, food.CategoryId, food.Name,  food.Quantity, food.Price);
                     }
 
                     else
                     {
-                        this.dataFoodStock.Rows.Add(food.Id, food.Name, food.Category, food.Quantity, food.Price);
+                        this.dataFoodStock.Rows.Add(food.Id, food.CategoryId, food.Name, food.Quantity, food.Price);
                     }
                     
                 }
@@ -144,8 +144,9 @@ namespace AssignmentCSharp.Main.View
             if (getId != -1)
             {
                 FoodStock foodId = FoodStock.FindById(getId);
-                itemNameTextBox.Text = foodId.Name;
-                categoryListBox.SelectedItem = foodId.Category;
+                FoodCategory categoryId = FoodCategory.FindById(foodId.CategoryId);
+                categoryListBox.SelectedItem = categoryId.Category;
+                itemNameTextBox.Text = foodId.Name;                
                 quantityTextBox.Text = foodId.Quantity.ToString();
                 priceTextBox.Text = foodId.Price.ToString();
                 imagePictureBox.Image = ConvertBinaryToImage(foodId.Image);
@@ -171,7 +172,7 @@ namespace AssignmentCSharp.Main.View
                     string inputItemName = itemNameTextBox.Text;                    
                     int inputQuantity = Convert.ToInt32(quantityTextBox.Text);
                     decimal inputPrice = Convert.ToDecimal(priceTextBox.Text);
-                    string selectedItem = "";
+                    int selectedItem = 0;
                     string errorMessages = "";
                     bool validSendEmail = true;
 
@@ -183,14 +184,17 @@ namespace AssignmentCSharp.Main.View
                         }
                     }
 
-
+                    
                     if (categoryListBox.SelectedItem != null) {
-                        selectedItem = categoryListBox.Items[categoryListBox.SelectedIndex].ToString();
+                        string selectedItemName = categoryListBox.Items[categoryListBox.SelectedIndex].ToString();
+                        FoodCategory categoryId = FoodCategory.FindByCategory(selectedItemName);
+                        selectedItem = categoryId.Id;
                     }
                     else
                     {
                         errorMessages += "Please select one food category\n";
-                    }                   
+                    }            
+                    
 
                     if (inputQuantity < 0)
                     {
@@ -231,15 +235,15 @@ namespace AssignmentCSharp.Main.View
                             }
 
                             validSendEmail = true;
-                            FoodStock newItem = new FoodStock(inputItemName, selectedItem, inputQuantity, inputPrice, validSendEmail, imageByte);
+                            FoodStock newItem = new FoodStock(selectedItem,inputItemName, inputQuantity, inputPrice, validSendEmail, imageByte);
                             newItem.Save();
                             GetAllRecord("");                            
                         }
                         else
                         {
                             FoodStock foodId = FoodStock.FindById(getId);
+                            foodId.CategoryId = selectedItem;
                             foodId.Name = inputItemName;
-                            foodId.Category = selectedItem;
                             foodId.Quantity = inputQuantity;
                             foodId.Price = inputPrice;       
                             if (inputQuantity >= 1)
