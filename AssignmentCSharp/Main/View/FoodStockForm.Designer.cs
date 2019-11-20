@@ -31,6 +31,11 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
             this.dataFoodStock = new System.Windows.Forms.DataGridView();
+            this.no = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.categoryId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.itemName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.quantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.price = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.addItem = new System.Windows.Forms.Button();
             this.editItem = new System.Windows.Forms.Button();
             this.deleteItem = new System.Windows.Forms.Button();
@@ -41,11 +46,7 @@
             this.supplierEmail = new System.Windows.Forms.Button();
             this.logoutButton = new System.Windows.Forms.Button();
             this.categoryList = new System.Windows.Forms.Button();
-            this.no = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.categoryId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.itemName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.quantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.price = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.backButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataFoodStock)).BeginInit();
             this.SuspendLayout();
             // 
@@ -95,6 +96,50 @@
             this.dataFoodStock.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataFoodStock.Size = new System.Drawing.Size(441, 250);
             this.dataFoodStock.TabIndex = 3;
+            // 
+            // no
+            // 
+            this.no.FillWeight = 40F;
+            this.no.HeaderText = "No";
+            this.no.MinimumWidth = 6;
+            this.no.Name = "no";
+            this.no.ReadOnly = true;
+            this.no.Width = 40;
+            // 
+            // categoryId
+            // 
+            this.categoryId.HeaderText = "Category Id";
+            this.categoryId.MinimumWidth = 6;
+            this.categoryId.Name = "categoryId";
+            this.categoryId.ReadOnly = true;
+            this.categoryId.Width = 110;
+            // 
+            // itemName
+            // 
+            this.itemName.FillWeight = 140F;
+            this.itemName.HeaderText = "Item Name";
+            this.itemName.MinimumWidth = 6;
+            this.itemName.Name = "itemName";
+            this.itemName.ReadOnly = true;
+            this.itemName.Width = 160;
+            // 
+            // quantity
+            // 
+            this.quantity.FillWeight = 45F;
+            this.quantity.HeaderText = "Qty";
+            this.quantity.MinimumWidth = 6;
+            this.quantity.Name = "quantity";
+            this.quantity.ReadOnly = true;
+            this.quantity.Width = 45;
+            // 
+            // price
+            // 
+            this.price.FillWeight = 70F;
+            this.price.HeaderText = "Price";
+            this.price.MinimumWidth = 6;
+            this.price.Name = "price";
+            this.price.ReadOnly = true;
+            this.price.Width = 70;
             // 
             // addItem
             // 
@@ -210,55 +255,25 @@
             this.categoryList.UseVisualStyleBackColor = true;
             this.categoryList.Click += new System.EventHandler(this.CategoryList_Click);
             // 
-            // no
+            // backButton
             // 
-            this.no.FillWeight = 40F;
-            this.no.HeaderText = "No";
-            this.no.MinimumWidth = 6;
-            this.no.Name = "no";
-            this.no.ReadOnly = true;
-            this.no.Width = 40;
-            // 
-            // categoryId
-            // 
-            this.categoryId.HeaderText = "Category Id";
-            this.categoryId.MinimumWidth = 6;
-            this.categoryId.Name = "categoryId";
-            this.categoryId.ReadOnly = true;
-            this.categoryId.Width = 110;
-            // 
-            // itemName
-            // 
-            this.itemName.FillWeight = 140F;
-            this.itemName.HeaderText = "Item Name";
-            this.itemName.MinimumWidth = 6;
-            this.itemName.Name = "itemName";
-            this.itemName.ReadOnly = true;
-            this.itemName.Width = 160;
-            // 
-            // quantity
-            // 
-            this.quantity.FillWeight = 45F;
-            this.quantity.HeaderText = "Qty";
-            this.quantity.MinimumWidth = 6;
-            this.quantity.Name = "quantity";
-            this.quantity.ReadOnly = true;
-            this.quantity.Width = 45;
-            // 
-            // price
-            // 
-            this.price.FillWeight = 70F;
-            this.price.HeaderText = "Price";
-            this.price.MinimumWidth = 6;
-            this.price.Name = "price";
-            this.price.ReadOnly = true;
-            this.price.Width = 70;
+            this.backButton.BackgroundImage = global::AssignmentCSharp.Properties.Resources.back;
+            this.backButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.backButton.FlatAppearance.BorderSize = 0;
+            this.backButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.backButton.Location = new System.Drawing.Point(323, 7);
+            this.backButton.Name = "backButton";
+            this.backButton.Size = new System.Drawing.Size(134, 36);
+            this.backButton.TabIndex = 14;
+            this.backButton.UseVisualStyleBackColor = true;
+            this.backButton.Click += new System.EventHandler(this.backButton_Click);
             // 
             // FoodStockForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(621, 388);
+            this.Controls.Add(this.backButton);
             this.Controls.Add(this.categoryList);
             this.Controls.Add(this.logoutButton);
             this.Controls.Add(this.supplierEmail);
@@ -299,5 +314,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn itemName;
         private System.Windows.Forms.DataGridViewTextBoxColumn quantity;
         private System.Windows.Forms.DataGridViewTextBoxColumn price;
+        private System.Windows.Forms.Button backButton;
     }
 }

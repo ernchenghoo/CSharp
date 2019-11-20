@@ -16,10 +16,19 @@ namespace AssignmentCSharp.Main.View
 {
     public partial class FoodStockForm : Form
     {
-        public FoodStockForm()
+        public FoodStockForm(bool isAdmin)
         {
             InitializeComponent();
             GetAllRecord("");
+
+            if(isAdmin == true)
+            {
+                this.backButton.Visible = true;
+            }
+            else
+            {
+                this.backButton.Visible = false;
+            }
         }
 
         //public static string supplierEmailAddress = "";
@@ -525,5 +534,10 @@ namespace AssignmentCSharp.Main.View
             new FoodCategoryForm().Show();
         }
 
+        private void backButton_Click(object sender, EventArgs e)
+        {
+            Program.LoadAdmin();
+            this.Close();
+        }
     }
 }

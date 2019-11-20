@@ -50,7 +50,15 @@ namespace AssignmentCSharp.Main
 
         public static void LoadStocks()
         {
-            new FoodStockForm().Show();
+            //if loggedinaccount is admin show back button
+            if (LoggedinAccount.account.TypeID == 1)
+            {
+                new FoodStockForm(true).Show();
+            }
+            else
+            {
+                new FoodStockForm(false).Show();
+            }
         }
 
         public static void LoadRegister()
@@ -103,12 +111,4 @@ namespace AssignmentCSharp.Main
         private static HomepageForm homePage;
     }    
 
-    class Fromm : Form
-    {
-        public Fromm()
-        {
-            new FoodStockForm().Show();
-        }
-
-    }
 }
