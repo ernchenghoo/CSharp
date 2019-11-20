@@ -43,8 +43,7 @@ namespace AssignmentCSharp.Main.View
         private void Button1_Click(object sender, EventArgs e)
         {
             this.Close();
-            POSpageForm newPosPage = new POSpageForm();
-            newPosPage.Show();
+            Program.LoadCashier();
         }
 
         private void Button2_Click(object sender, EventArgs e)

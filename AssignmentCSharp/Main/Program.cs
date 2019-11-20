@@ -12,6 +12,7 @@ namespace AssignmentCSharp.Main
     static class Program
     {
         public static HomepageForm homePageFormReference = null;
+
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -35,7 +36,16 @@ namespace AssignmentCSharp.Main
 
         public static void LoadCashier ()
         {
-            new POSpageForm().Show();
+            //if loggedinaccount is admin show back button
+            if(LoggedinAccount.account.TypeID == 1)
+            {
+                new POSpageForm(true).Show();
+            }
+            else
+            {
+                new POSpageForm(false).Show();
+            }
+            
         }
 
         public static void LoadStocks()
@@ -55,7 +65,15 @@ namespace AssignmentCSharp.Main
 
         public static void LoadKitchen()
         {
-            new KitchenForm().Show();
+            //if loggedinaccount is admin show back button
+            if (LoggedinAccount.account.TypeID == 1)
+            {
+                new KitchenForm(true).Show();
+            }
+            else
+            {
+                new KitchenForm(false).Show();
+            }
         }
 
         public static void LoadAdmin ()

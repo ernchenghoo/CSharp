@@ -16,7 +16,7 @@ namespace AssignmentCSharp.Main.View
     {
         public int currentReceiptCount = 0;
         Thread backgroundCheckThread = null;
-        public KitchenForm()
+        public KitchenForm(bool isAdmin)
         {
             InitializeComponent();
             this.detail_id.Text = "";
@@ -34,6 +34,16 @@ namespace AssignmentCSharp.Main.View
             });
             backgroundCheckThread.IsBackground = true;
             backgroundCheckThread.Start();
+
+            //if is admin show back button
+            if(isAdmin == true)
+            {
+                this.backButton.Visible = true;
+            }
+            else
+            {
+                this.backButton.Visible = false;
+            }
 
         }        
         public void UpdateOrderList()
@@ -219,6 +229,14 @@ namespace AssignmentCSharp.Main.View
 
             Program.homePageFormReference.clearAllTextBox();
             Program.homePageFormReference.Show();
+        }
+
+        private void backButton_Click(object sender, EventArgs e)
+        {
+            Program.LoadAdmin();
+            this.Close();
+            //stop the background thread that constantly check DB for new order
+            backgroundCheckThread.Abort();
         }
     }   
 }

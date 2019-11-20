@@ -10,7 +10,6 @@ using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 using AssignmentCSharp.Main.Model;
 using System.Drawing.Imaging;
-using System.Drawing;
 
 namespace AssignmentCSharp.Main.View
 {
@@ -19,7 +18,7 @@ namespace AssignmentCSharp.Main.View
     {
         private int categoryChosen = -1;
         private String orderType = null;
-        public POSpageForm()
+        public POSpageForm(bool isAdmin)
         {
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
@@ -36,6 +35,19 @@ namespace AssignmentCSharp.Main.View
             //set validation for the editing the quantity in the list
             this.itemListInCart.CellBeginEdit += this.itemListInCart_CellBeginEdit;
             this.itemListInCart.CellEndEdit += this.itemListInCart_CellEditEnding;
+
+            String cashierName = Program.LoggedinAccount.account.Email.Split('@')[0];
+
+            this.cashierNameLabel.Text = cashierName;
+
+            if(isAdmin == true)
+            {
+                this.backButton.Visible = true;
+            }
+            else
+            {
+                this.backButton.Visible = false;
+            }
         }
 
         private void DisplayListOfCategories()
@@ -731,6 +743,12 @@ namespace AssignmentCSharp.Main.View
                 this.orderType = "Take-Away";
                 UpdateTotalCalculation();
             }
+        }
+
+        private void backButton_Click(object sender, EventArgs e)
+        {
+            Program.LoadAdmin();
+            this.Close();
         }
     }
 }
