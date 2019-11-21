@@ -100,7 +100,7 @@
             this.Controls.Add(this.emailBox);
             this.Controls.Add(this.Homepage);
             this.Name = "HomepageForm";
-            this.Text = "Form1";            
+            this.Text = "Homepage";            
             this.ResumeLayout(false);
             this.PerformLayout();
 

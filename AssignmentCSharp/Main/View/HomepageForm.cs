@@ -61,6 +61,5 @@ namespace AssignmentCSharp.Main.View
             emailBox.Text = "";
             passwordBox.Text = "";
         }
-        
     }
 }

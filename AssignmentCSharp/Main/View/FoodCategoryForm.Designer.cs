@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
             this.dataFoodCategory = new System.Windows.Forms.DataGridView();
             this.no = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -42,9 +42,10 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(12, 9);
+            this.label1.Location = new System.Drawing.Point(16, 11);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(154, 25);
+            this.label1.Size = new System.Drawing.Size(194, 31);
             this.label1.TabIndex = 1;
             this.label1.Text = "Food Category";
             // 
@@ -57,21 +58,21 @@
             this.dataFoodCategory.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
             this.dataFoodCategory.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dataFoodCategory.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.LightSteelBlue;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Elephant", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.LightSteelBlue;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataFoodCategory.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightSteelBlue;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Elephant", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.LightSteelBlue;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataFoodCategory.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataFoodCategory.ColumnHeadersHeight = 40;
             this.dataFoodCategory.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dataFoodCategory.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.no,
             this.category});
             this.dataFoodCategory.EnableHeadersVisualStyles = false;
-            this.dataFoodCategory.Location = new System.Drawing.Point(21, 64);
+            this.dataFoodCategory.Location = new System.Drawing.Point(28, 79);
             this.dataFoodCategory.Margin = new System.Windows.Forms.Padding(0);
             this.dataFoodCategory.MultiSelect = false;
             this.dataFoodCategory.Name = "dataFoodCategory";
@@ -79,7 +80,7 @@
             this.dataFoodCategory.RowHeadersVisible = false;
             this.dataFoodCategory.RowHeadersWidth = 51;
             this.dataFoodCategory.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataFoodCategory.Size = new System.Drawing.Size(185, 260);
+            this.dataFoodCategory.Size = new System.Drawing.Size(247, 320);
             this.dataFoodCategory.TabIndex = 4;
             // 
             // no
@@ -101,9 +102,10 @@
             // 
             // addCategory
             // 
-            this.addCategory.Location = new System.Drawing.Point(233, 64);
+            this.addCategory.Location = new System.Drawing.Point(311, 79);
+            this.addCategory.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.addCategory.Name = "addCategory";
-            this.addCategory.Size = new System.Drawing.Size(119, 29);
+            this.addCategory.Size = new System.Drawing.Size(159, 36);
             this.addCategory.TabIndex = 5;
             this.addCategory.Text = "Add Category";
             this.addCategory.UseVisualStyleBackColor = true;
@@ -111,9 +113,10 @@
             // 
             // editCategory
             // 
-            this.editCategory.Location = new System.Drawing.Point(233, 120);
+            this.editCategory.Location = new System.Drawing.Point(311, 148);
+            this.editCategory.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.editCategory.Name = "editCategory";
-            this.editCategory.Size = new System.Drawing.Size(119, 29);
+            this.editCategory.Size = new System.Drawing.Size(159, 36);
             this.editCategory.TabIndex = 6;
             this.editCategory.Text = "Edit Category";
             this.editCategory.UseVisualStyleBackColor = true;
@@ -121,15 +124,16 @@
             // 
             // FoodCategoryForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(375, 353);
+            this.ClientSize = new System.Drawing.Size(500, 434);
             this.Controls.Add(this.editCategory);
             this.Controls.Add(this.addCategory);
             this.Controls.Add(this.dataFoodCategory);
             this.Controls.Add(this.label1);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "FoodCategoryForm";
-            this.Text = "FoodCategory";
+            this.Text = "Food Category";
             ((System.ComponentModel.ISupportInitialize)(this.dataFoodCategory)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

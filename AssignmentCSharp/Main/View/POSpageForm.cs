@@ -33,8 +33,8 @@ namespace AssignmentCSharp.Main.View
             DisplayListOfCategories();
 
             //set validation for the editing the quantity in the list
-            this.itemListInCart.CellBeginEdit += this.itemListInCart_CellBeginEdit;
-            this.itemListInCart.CellEndEdit += this.itemListInCart_CellEditEnding;
+            this.ItemListInCart.CellBeginEdit += this.ItemListInCart_CellBeginEdit;
+            this.ItemListInCart.CellEndEdit += this.ItemListInCart_CellEditEnding;
 
             String cashierName = Program.LoggedinAccount.account.Email.Split('@')[0];
 
@@ -96,7 +96,7 @@ namespace AssignmentCSharp.Main.View
         }
 
         private int oldValueOfItemListInCart_CellEditing = 0;
-        private void itemListInCart_CellEditEnding(object sender, DataGridViewCellEventArgs e)
+        private void ItemListInCart_CellEditEnding(object sender, DataGridViewCellEventArgs e)
         {
             
 
@@ -104,13 +104,13 @@ namespace AssignmentCSharp.Main.View
             try
             {
                 String newValue = null;
-                if(itemListInCart[e.ColumnIndex, e.RowIndex].Value is System.Int32)
+                if(ItemListInCart[e.ColumnIndex, e.RowIndex].Value is System.Int32)
                 {
-                    QuantityEntered = (System.Int32) itemListInCart[e.ColumnIndex, e.RowIndex].Value;
+                    QuantityEntered = (System.Int32) ItemListInCart[e.ColumnIndex, e.RowIndex].Value;
                 }
                 else
                 {
-                    newValue = (String)itemListInCart[e.ColumnIndex, e.RowIndex].Value;
+                    newValue = (String)ItemListInCart[e.ColumnIndex, e.RowIndex].Value;
                     QuantityEntered = Convert.ToInt32(newValue);
                 }
                 
@@ -119,7 +119,7 @@ namespace AssignmentCSharp.Main.View
                 if (QuantityEntered > 0)
                 {
                     //check whether got enough stock
-                    foreach (DataGridViewRow row in this.itemListInCart.SelectedRows)
+                    foreach (DataGridViewRow row in this.ItemListInCart.SelectedRows)
                     {
                         int itemId = (int)row.Cells[1].Value;
 
@@ -136,7 +136,7 @@ namespace AssignmentCSharp.Main.View
                         {
                             MessageBox.Show(String.Format("Cannot modify item {0} because you have only {1} stock", itemObject.Name, itemObject.Quantity));
                             //setback to only value
-                            itemListInCart[e.ColumnIndex, e.RowIndex].Value = oldValueOfItemListInCart_CellEditing;
+                            ItemListInCart[e.ColumnIndex, e.RowIndex].Value = oldValueOfItemListInCart_CellEditing;
                         }
 
                     }
@@ -146,7 +146,7 @@ namespace AssignmentCSharp.Main.View
                 {
                     MessageBox.Show("Please Enter Integer more than 0!");
                     //setback to only value
-                    itemListInCart[e.ColumnIndex, e.RowIndex].Value = oldValueOfItemListInCart_CellEditing;
+                    ItemListInCart[e.ColumnIndex, e.RowIndex].Value = oldValueOfItemListInCart_CellEditing;
                 }
             }
             catch(Exception ex)
@@ -154,12 +154,12 @@ namespace AssignmentCSharp.Main.View
                 MessageBox.Show("Please Enter only Integer!"+ex.Message);
                 Console.WriteLine(ex.ToString());
                 //setback to only value
-                itemListInCart[e.ColumnIndex, e.RowIndex].Value = oldValueOfItemListInCart_CellEditing;
+                ItemListInCart[e.ColumnIndex, e.RowIndex].Value = oldValueOfItemListInCart_CellEditing;
             }
         }
-        private void itemListInCart_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
+        private void ItemListInCart_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
         {
-            oldValueOfItemListInCart_CellEditing = (int)itemListInCart[e.ColumnIndex, e.RowIndex].Value;
+            oldValueOfItemListInCart_CellEditing = (int)ItemListInCart[e.ColumnIndex, e.RowIndex].Value;
         }
 
 
@@ -247,7 +247,7 @@ namespace AssignmentCSharp.Main.View
 
                 if (food.Quantity == 0)
                 {
-                    myPicBox.Image = (Image)changeOpacity((Bitmap)myPicBox.Image.Clone(),80);
+                    myPicBox.Image = (Image)ChangeOpacity((Bitmap)myPicBox.Image.Clone(),80);
                     newLabel.ForeColor = Color.Red;
                 }
 
@@ -262,7 +262,7 @@ namespace AssignmentCSharp.Main.View
 
             }
         }
-        static Bitmap changeOpacity(Bitmap bmpIn, int alpha)
+        static Bitmap ChangeOpacity(Bitmap bmpIn, int alpha)
         {
             Bitmap bmpOut = new Bitmap(bmpIn.Width, bmpIn.Height);
             float a = alpha / 255f;
@@ -293,7 +293,7 @@ namespace AssignmentCSharp.Main.View
             Model.FoodStock chosenFood = (Model.FoodStock)layoutPanelObject.Tag;
 
             DataGridViewRow foundItemInCart = null;
-            foreach (DataGridViewRow row in this.itemListInCart.Rows)
+            foreach (DataGridViewRow row in this.ItemListInCart.Rows)
             {
                 int currentRowID = (int)row.Cells[1].Value;
                 if (currentRowID == chosenFood.Id)
@@ -304,14 +304,14 @@ namespace AssignmentCSharp.Main.View
 
             if (foundItemInCart == null)
             {
-                int newNo = this.itemListInCart.Rows.Count + 1;
+                int newNo = this.ItemListInCart.Rows.Count + 1;
                 if(chosenFood.Quantity >0)
                 {
-                    this.itemListInCart.Rows.Add(newNo, chosenFood.Id, chosenFood.Name, 1, chosenFood.Price, chosenFood.Price * 1);
+                    this.ItemListInCart.Rows.Add(newNo, chosenFood.Id, chosenFood.Name, 1, chosenFood.Price, chosenFood.Price * 1);
                 }
                 else
                 {
-                    MessageBox.Show("Cannot Add! You have only " + chosenFood.Quantity + " stock.");
+                    MessageBox.Show("Item out of stock!");
                 }
                 
             }
@@ -362,7 +362,7 @@ namespace AssignmentCSharp.Main.View
             if(newQuantity == 0)
             {
                 //if queantity already zero remove from cart
-                this.itemListInCart.Rows.Remove(row);
+                this.ItemListInCart.Rows.Remove(row);
             }
             else
             {
@@ -378,7 +378,7 @@ namespace AssignmentCSharp.Main.View
         {
             decimal totalPrice = 0;
 
-            foreach(DataGridViewRow row in this.itemListInCart.Rows)
+            foreach(DataGridViewRow row in this.ItemListInCart.Rows)
             {
                 totalPrice += (decimal)row.Cells[5].Value;
             }
@@ -412,7 +412,7 @@ namespace AssignmentCSharp.Main.View
 
         private void XQtyButton_Click(object sender, EventArgs e)
         {
-            if (this.itemListInCart.SelectedRows.Count > 0)
+            if (this.ItemListInCart.SelectedRows.Count > 0)
             {
                 // have row selected
                 string userinput = ShowQuantityInputDialog("Enter Quantity:", "Quantity Input Box");
@@ -422,7 +422,7 @@ namespace AssignmentCSharp.Main.View
                     //if input returned not empty because if user cancel the return will be empty
                     int newQuantity = Convert.ToInt32(userinput);
 
-                    foreach (DataGridViewRow row in this.itemListInCart.SelectedRows)
+                    foreach (DataGridViewRow row in this.ItemListInCart.SelectedRows)
                     {
                         int itemId = (int)row.Cells[1].Value;
                         int currentNumberOfItem = (int)row.Cells[3].Value;
@@ -438,7 +438,7 @@ namespace AssignmentCSharp.Main.View
                         }
                         else
                         {
-                            MessageBox.Show(String.Format("Cannot modify item {0} because you have only {1} stock",itemObject.Name,itemObject.Quantity));
+                            MessageBox.Show(String.Format("{0} only have {1} stocks available.",itemObject.Name,itemObject.Quantity));
                         }
                         
                     }
@@ -448,7 +448,7 @@ namespace AssignmentCSharp.Main.View
             else
             {
                 // no  row is selected 
-                MessageBox.Show("No row is Selected");
+                MessageBox.Show("Please select an item to edit.");
             }
             
         }
@@ -505,10 +505,10 @@ namespace AssignmentCSharp.Main.View
 
         private void MinusQtyButton_Click(object sender, EventArgs e)
         {
-            if (this.itemListInCart.SelectedRows.Count > 0)
+            if (this.ItemListInCart.SelectedRows.Count > 0)
             {
                 // have row selected
-                foreach(DataGridViewRow row in this.itemListInCart.SelectedRows)
+                foreach(DataGridViewRow row in this.ItemListInCart.SelectedRows)
                 {
                     MinusQuantityToRow(row);
                 }
@@ -517,41 +517,41 @@ namespace AssignmentCSharp.Main.View
             else
             {
                 // no  row is selected 
-                MessageBox.Show("No row is Selected");
+                MessageBox.Show("No item selected");
             }
             
         }
 
         private void DeleteButton_Click(object sender, EventArgs e)
         {
-            if (this.itemListInCart.SelectedRows.Count > 0)
+            if (this.ItemListInCart.SelectedRows.Count > 0)
             {
                 // have row selected
-                foreach (DataGridViewRow row in this.itemListInCart.SelectedRows)
+                foreach (DataGridViewRow row in this.ItemListInCart.SelectedRows)
                 {
-                    this.itemListInCart.Rows.Remove(row);
+                    this.ItemListInCart.Rows.Remove(row);
                 }
                 UpdateTotalCalculation();
             }
             else
             {
                 // no  row is selected 
-                MessageBox.Show("No row is Selected");
+                MessageBox.Show("Please select an item to delete");
             }     
         }
 
         private void ClearAllButton_Click(object sender, EventArgs e)
         {
-            this.itemListInCart.Rows.Clear();
+            this.ItemListInCart.Rows.Clear();
             UpdateTotalCalculation();
         }
 
         private void PlusQtyButton_Click(object sender, EventArgs e)
         {
-            if (this.itemListInCart.SelectedRows.Count > 0)
+            if (this.ItemListInCart.SelectedRows.Count > 0)
             {
                 // have row selected
-                foreach (DataGridViewRow row in this.itemListInCart.SelectedRows)
+                foreach (DataGridViewRow row in this.ItemListInCart.SelectedRows)
                 {
                     AddQuantityToRow(row);
                 }
@@ -560,7 +560,7 @@ namespace AssignmentCSharp.Main.View
             else
             {
                 // no  row is selected 
-                MessageBox.Show("No row is Selected");
+                MessageBox.Show("No item selected");
             }
         }
 
@@ -575,11 +575,11 @@ namespace AssignmentCSharp.Main.View
             {
                 decimal cashPayed =Convert.ToDecimal(this.cashAmount.Text);
 
-                if(this.itemListInCart.Rows.Count > 0)
+                if(this.ItemListInCart.Rows.Count > 0)
                 {
                     //add all food object
                     List<Receipt_Food> foodlist = new List<Receipt_Food>();
-                    foreach (DataGridViewRow row in this.itemListInCart.Rows)
+                    foreach (DataGridViewRow row in this.ItemListInCart.Rows)
                     {
                         int foodid = (int)row.Cells[1].Value;
                         int quantity = (int)row.Cells[3].Value;
@@ -590,7 +590,7 @@ namespace AssignmentCSharp.Main.View
                     //make the receipt
                     decimal totalPrice = 0;
 
-                    foreach (DataGridViewRow row in this.itemListInCart.Rows)
+                    foreach (DataGridViewRow row in this.ItemListInCart.Rows)
                     {
                         totalPrice += (decimal)row.Cells[5].Value;
                     }
@@ -658,11 +658,11 @@ namespace AssignmentCSharp.Main.View
 
         private void CreditCardPay_Click(object sender, EventArgs e)
         {
-            if (this.itemListInCart.Rows.Count > 0)
+            if (this.ItemListInCart.Rows.Count > 0)
             {
                 //add all food object
                 List<Receipt_Food> foodlist = new List<Receipt_Food>();
-                foreach (DataGridViewRow row in this.itemListInCart.Rows)
+                foreach (DataGridViewRow row in this.ItemListInCart.Rows)
                 {
                     int foodid = (int)row.Cells[1].Value;
                     int quantity = (int)row.Cells[3].Value;
@@ -674,7 +674,7 @@ namespace AssignmentCSharp.Main.View
                 //make the receipt
                 decimal totalPrice = 0;
 
-                foreach (DataGridViewRow row in this.itemListInCart.Rows)
+                foreach (DataGridViewRow row in this.ItemListInCart.Rows)
                 {
                     totalPrice += (decimal)row.Cells[5].Value;
                 }
@@ -745,7 +745,7 @@ namespace AssignmentCSharp.Main.View
             }
         }
 
-        private void backButton_Click(object sender, EventArgs e)
+        private void BackButton_Click(object sender, EventArgs e)
         {
             Program.LoadAdmin();
             this.Close();

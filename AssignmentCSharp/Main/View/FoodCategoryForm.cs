@@ -47,7 +47,7 @@ namespace AssignmentCSharp.Main.View
             else
             {
                 // no  row is selected 
-                MessageBox.Show("No row is Selected");
+                MessageBox.Show("No item selected.");
             }
         }
 

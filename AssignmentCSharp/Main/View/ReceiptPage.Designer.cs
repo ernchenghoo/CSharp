@@ -75,7 +75,7 @@
             this.panel1.Controls.Add(this.label1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1056, 47);
             this.panel1.TabIndex = 0;
@@ -240,7 +240,7 @@
             this.itemList.GridColor = System.Drawing.Color.White;
             this.itemList.ImeMode = System.Windows.Forms.ImeMode.Off;
             this.itemList.Location = new System.Drawing.Point(8, 148);
-            this.itemList.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.itemList.Margin = new System.Windows.Forms.Padding(4);
             this.itemList.MultiSelect = false;
             this.itemList.Name = "itemList";
             this.itemList.ReadOnly = true;
@@ -447,7 +447,7 @@
             this.button2.FlatAppearance.BorderSize = 0;
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button2.Location = new System.Drawing.Point(75, 479);
-            this.button2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button2.Margin = new System.Windows.Forms.Padding(4);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(173, 49);
             this.button2.TabIndex = 10;
@@ -462,7 +462,7 @@
             this.button1.FlatAppearance.BorderSize = 0;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Location = new System.Drawing.Point(285, 479);
-            this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(167, 49);
             this.button1.TabIndex = 9;
@@ -485,9 +485,9 @@
             this.Controls.Add(this.label12);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "ReceiptPage";
-            this.Text = "Form2";
+            this.Text = "Order Complete";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);

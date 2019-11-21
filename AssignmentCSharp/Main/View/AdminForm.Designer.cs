@@ -98,7 +98,7 @@
             this.logoutButton});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(823, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(823, 30);
             this.menuStrip1.TabIndex = 6;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -107,7 +107,7 @@
             this.manageAccountToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.editAccountDetailsToolStripMenuItem});
             this.manageAccountToolStripMenuItem.Name = "manageAccountToolStripMenuItem";
-            this.manageAccountToolStripMenuItem.Size = new System.Drawing.Size(133, 24);
+            this.manageAccountToolStripMenuItem.Size = new System.Drawing.Size(133, 26);
             this.manageAccountToolStripMenuItem.Text = "Manage account";
             // 
             // editAccountDetailsToolStripMenuItem
@@ -121,7 +121,7 @@
             // 
             this.logoutButton.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.logoutButton.Name = "logoutButton";
-            this.logoutButton.Size = new System.Drawing.Size(70, 24);
+            this.logoutButton.Size = new System.Drawing.Size(70, 26);
             this.logoutButton.Text = "Logout";
             this.logoutButton.Click += new System.EventHandler(this.LogoutButton_Click);
             // 
@@ -138,7 +138,7 @@
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "AdminForm";
-            this.Text = "AdminForm";            
+            this.Text = "Admin Page";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);

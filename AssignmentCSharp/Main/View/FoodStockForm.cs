@@ -23,11 +23,11 @@ namespace AssignmentCSharp.Main.View
 
             if(isAdmin == true)
             {
-                this.backButton.Visible = true;
+                this.BackButton.Visible = true;
             }
             else
             {
-                this.backButton.Visible = false;
+                this.BackButton.Visible = false;
             }
         }
 
@@ -92,7 +92,7 @@ namespace AssignmentCSharp.Main.View
             else
             {
                 // no  row is selected 
-                MessageBox.Show("No row is Selected");
+                MessageBox.Show("Please select item to edit.");
             }
         }
         Image ConvertBinaryToImage(byte[] image)
@@ -285,10 +285,9 @@ namespace AssignmentCSharp.Main.View
                         
                     }
                 }
-                catch (Exception exp)
-                {
-                    MessageBox.Show(exp.Message);
-                    MessageBox.Show("Please Enter only Integer for quantity and price!\nPlease select one food category");
+                catch
+                {                    
+                    MessageBox.Show("Please fill in all fields with appropriate values and select at least one food category.");
                 }
             };
             cancel.Click += (sender, e) => { prompt.Close(); };
@@ -325,7 +324,7 @@ namespace AssignmentCSharp.Main.View
             else
             {
                 // no  row is selected 
-                MessageBox.Show("No row is Selected");
+                MessageBox.Show("Please select item to delete.");
             }
         }
 
@@ -353,7 +352,7 @@ namespace AssignmentCSharp.Main.View
             else
             {
                 // no  row is selected 
-                MessageBox.Show("No row is Selected");
+                MessageBox.Show("No item selected.");
             }
 
         }
@@ -534,7 +533,7 @@ namespace AssignmentCSharp.Main.View
             new FoodCategoryForm().Show();
         }
 
-        private void backButton_Click(object sender, EventArgs e)
+        private void BackButton_Click(object sender, EventArgs e)
         {
             Program.LoadAdmin();
             this.Close();

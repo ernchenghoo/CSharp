@@ -72,19 +72,27 @@ namespace AssignmentCSharp.Main.View
 
         private void deleteButton_Click(object sender, EventArgs e)
         {
-            var confirm = MessageBox.Show("Are you sure to delete this item ??", "Delete confirmation", MessageBoxButtons.YesNo);
-            if (confirm == DialogResult.Yes)
+            if (accountList.SelectedItems.Count > 0)
             {
-                string deleteResult = ManageAccountController.DeleteAccount((Account)accountList.SelectedItems[0].Tag);
-                if (!string.Equals("ok", deleteResult))
+                var confirm = MessageBox.Show("Are you sure to delete this item ??", "Delete confirmation", MessageBoxButtons.YesNo);
+                if (confirm == DialogResult.Yes)
                 {
-                    MessageBox.Show(deleteResult);
+                    string deleteResult = ManageAccountController.DeleteAccount((Account)accountList.SelectedItems[0].Tag);
+                    if (!string.Equals("ok", deleteResult))
+                    {
+                        MessageBox.Show(deleteResult);
+                    }
+                    else
+                    {
+                        RefreshListView();
+                    }
                 }
-                else
-                {
-                    RefreshListView();
-                }
-            }            
+            }
+            else
+            {
+                MessageBox.Show("No item selected");
+            }
+                    
         }
 
         private void BackButton_Click(object sender, EventArgs e)

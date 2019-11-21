@@ -36,7 +36,11 @@ namespace AssignmentCSharp.Main.View
 
         private void SaveButton_Click(object sender, EventArgs e)
         {
-            if (string.Equals(passwordBox.Text, accountToEdit.Password)) {
+            if (String.IsNullOrEmpty(passwordBox.Text) || String.IsNullOrEmpty(retypeBox.Text))
+            {
+                MessageBox.Show("Password and/or Re-enter password field(s) cannot be empty.");
+            }
+            else if (string.Equals(passwordBox.Text, accountToEdit.Password)) {
                 MessageBox.Show("This password is the same as the old one, please enter a new password.");
             }
             else if (!string.Equals(retypeBox.Text, passwordBox.Text))
@@ -61,6 +65,6 @@ namespace AssignmentCSharp.Main.View
         {
             Program.LoadAdmin();
             this.Close();
-        }       
+        }               
     }
 }
