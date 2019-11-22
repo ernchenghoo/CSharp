@@ -7,9 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using AssignmentCSharp.Main.Controller;
-using AssignmentCSharp.Main;
 using AssignmentCSharp.Main.Model;
+using AssignmentCSharp.Main.View;
+using MySql.Data.MySqlClient;
 
 namespace AssignmentCSharp.Main.View
 {
@@ -23,8 +23,8 @@ namespace AssignmentCSharp.Main.View
             retypeBox.PasswordChar = '*';
             accountToEdit = acc;
             emailLabel.Text = accountToEdit.Email;
-            roleBox.Text = accountToEdit.IDToRole();
-            if (accountToEdit.TypeID != 1)
+            roleBox.Text = accountToEdit.Type.Name;
+            if (accountToEdit.Type.ID != 1)
             {
                 roleBox.Enabled = true;
             }
@@ -47,10 +47,11 @@ namespace AssignmentCSharp.Main.View
             {
                 MessageBox.Show("Re-typed password and password is not identical.");
             }
-            else if (EditAccountController.EditCredentials(accountToEdit.Email, 
-                passwordBox.Text, accountToEdit.TypeID)) //edit successful
+            else if (EditCredentials(accountToEdit.Email, 
+                passwordBox.Text, accountToEdit.Type.ID)) //edit successful
             {
                 MessageBox.Show("Account details has been edited!");
+                Program.LoggedinAccount.account.Password = passwordBox.Text;
                 Program.LoadAdmin();
                 this.Close();
             }
@@ -65,6 +66,25 @@ namespace AssignmentCSharp.Main.View
         {
             Program.LoadAdmin();
             this.Close();
-        }               
+        }
+
+        public bool EditCredentials(string em, string newpw, int rl)
+        {
+            MySqlConnection cnn;
+            string connectionString = "server=localhost;database=pos;uid=root;pwd=;";
+            cnn = new MySqlConnection(connectionString);
+            try
+            {
+                cnn.Open();
+                String sql = "update account set password= '" + newpw + "', typeID='" + rl + "' where email= '" + em + "'";
+                MySqlCommand command = new MySqlCommand(sql, cnn);
+                MySqlDataReader dataReader = command.ExecuteReader();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
     }
 }

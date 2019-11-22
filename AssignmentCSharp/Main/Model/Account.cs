@@ -13,44 +13,69 @@ namespace AssignmentCSharp.Main.Model
         public string Email { get; set; }
         public string Password { get; set; }
         public int AccountID { get; set; }
-        public int TypeID { get; set; }
+        public AccountType Type { get; set; }
 
         public static MySqlConnection cnn;
-        public static string connectionString = "server=localhost;database=pos;uid=root;pwd=;";
-
-        public Account(string usnm, string pwd, int accID, string role)
-        {
-            Email = usnm;
-            Password = pwd;
-            AccountID = accID;
-            TypeID = RoleToID(role);
-        }
+        public static string connectionString = "server=localhost;database=pos;uid=root;pwd=;";        
 
         public Account(string usnm, string pwd, int accID, int role) //overloaded constructor
         {
             Email = usnm;
             Password = pwd;
             AccountID = accID;
-            TypeID = role;
+            Type = new AccountType(role, IDToRole(role));
         }
 
-        private int RoleToID(string accType)
+        public Account(string usnm, string pwd, int accID, string role) //overloaded constructor
         {
-            int typeID = 0;
-            switch (accType)
-            {
+            Email = usnm;
+            Password = pwd;
+            AccountID = accID;
+            Type = new AccountType(RoleToID(role), role);
+        }
 
-                case "Stock Keeper":
-                    typeID = 2;
+        private string IDToRole(int id)
+        {
+            string role = "";
+            switch (id)
+            {
+                case 1:
+                    role = "Admin";
                     break;
-                case "Kitchen Staff":
-                    typeID = 3;
+                case 2:
+                    role = "Stock Keeper";
                     break;
-                case "Cashier":
-                    typeID = 4;
+                case 3:
+                    role = "Kitchen Staff";
+                    break;
+                case 4:
+                    role = "Cashier";
                     break;
             }
-            return typeID;
+            return role;
+
+        }
+
+        private int RoleToID(string name)
+        {
+            int roleID = 0;
+            switch (name)
+            {
+                case "Admin":
+                    roleID = 1;
+                    break;
+                case "Stock Keeper":
+                    roleID = 2;
+                    break;
+                case "Kitchen Staff":
+                    roleID = 3;
+                    break;
+                case "Cashier":
+                    roleID = 4;
+                    break;
+            }
+            return roleID;
+
         }
 
         public static Account GetSupplierAcc()
@@ -67,7 +92,7 @@ namespace AssignmentCSharp.Main.Model
 
                 while (dataReader.Read())
                 {
-                    supplierAcc = new Account(dataReader.GetString(0), dataReader.GetString(1), dataReader.GetInt32(2), dataReader.GetString(3));
+                    supplierAcc = new Account(dataReader.GetString(0), dataReader.GetString(1), dataReader.GetInt32(2), dataReader.GetInt32(3));
                 }
                 cnn.Close();
 
@@ -101,28 +126,6 @@ namespace AssignmentCSharp.Main.Model
                 MessageBox.Show("Connection failed");
                 MessageBox.Show(e.ToString());
             }
-        }
-
-        public string IDToRole()
-        {
-            string typeName = "";
-            switch (TypeID)
-            {
-                case 1:
-                    typeName = "Admin";
-                    break;
-                case 2:
-                    typeName = "Stock Keeper";
-                    break;
-                case 3:
-                    typeName = "Kitchen Staff";
-                    break;
-                case 4:
-                    typeName = "Cashier";
-                    break;
-            }
-            return typeName;
-
-        }
+        }       
     }    
 }

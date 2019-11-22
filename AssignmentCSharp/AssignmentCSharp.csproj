@@ -51,12 +51,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Main\Controller\HomepageController.cs" />
-    <Compile Include="Main\Controller\EditAccountController.cs" />
-    <Compile Include="Main\Controller\ManageAccountController.cs" />
-    <Compile Include="Main\Controller\POSpageController.cs" />
-    <Compile Include="Main\Controller\RegisterController.cs" />
     <Compile Include="Main\Model\Account.cs" />
+    <Compile Include="Main\Model\AccountType.cs" />
     <Compile Include="Main\Model\FoodCategory.cs" />
     <Compile Include="Main\Model\Receipt_Food.cs" />
     <Compile Include="Main\Model\Receipt.cs" />
@@ -214,6 +210,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\back.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Main\Controller\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
