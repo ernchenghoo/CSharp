@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using AssignmentCSharp.Main.Model;
-using AssignmentCSharp.Main.Controller;
+using MySql.Data.MySqlClient;
 
 namespace AssignmentCSharp.Main.View
 {
@@ -23,9 +23,9 @@ namespace AssignmentCSharp.Main.View
         private void RefreshListView ()
         {
             accountList.Items.Clear();
-            foreach (Account acc in ManageAccountController.DisplayAccounts())
+            foreach (Account acc in DisplayAccounts())
             {
-                string[] listRow = new string[] { acc.Email, acc.IDToRole() };
+                string[] listRow = new string[] { acc.Email, acc.Type.Name };
                 ListViewItem lvi = new ListViewItem(listRow);
                 lvi.Tag = acc;
                 accountList.Items.Add(lvi);
@@ -45,7 +45,7 @@ namespace AssignmentCSharp.Main.View
                 if (accountList.SelectedItems.Count > 0)
                 {
                     var selectedAccount = (Account)accountList.SelectedItems[0].Tag;
-                    if (selectedAccount.TypeID != 1)
+                    if (selectedAccount.Type.ID != 1)
                         editButton.Enabled = true;
                     else
                     {
@@ -77,7 +77,7 @@ namespace AssignmentCSharp.Main.View
                 var confirm = MessageBox.Show("Are you sure to delete this item ??", "Delete confirmation", MessageBoxButtons.YesNo);
                 if (confirm == DialogResult.Yes)
                 {
-                    string deleteResult = ManageAccountController.DeleteAccount((Account)accountList.SelectedItems[0].Tag);
+                    string deleteResult = DeleteAccount((Account)accountList.SelectedItems[0].Tag);
                     if (!string.Equals("ok", deleteResult))
                     {
                         MessageBox.Show(deleteResult);
@@ -99,6 +99,54 @@ namespace AssignmentCSharp.Main.View
         {
             Program.LoadAdmin();
             this.Close();
+        }
+
+        private List<Account> DisplayAccounts()
+        {
+            List<Account> accountsInDB = new List<Account>();
+
+            try
+            {
+                MySqlConnection cnn;
+                string connectionString = "server=localhost;database=pos;uid=root;pwd=;";
+                cnn = new MySqlConnection(connectionString);
+                cnn.Open();
+
+                String sql = "select * from account";
+                MySqlCommand command = new MySqlCommand(sql, cnn);
+                MySqlDataReader dataReader = command.ExecuteReader();
+                while (dataReader.Read())
+                {
+                    accountsInDB.Add(new Account(dataReader.GetString(0), dataReader.GetString(1), dataReader.GetInt32(2),
+                        dataReader.GetInt32(3)));
+                }
+
+            }
+            catch
+            {
+
+            }
+            return accountsInDB;
+        }        
+        public static string DeleteAccount(Account acc)
+        {
+            try
+            {
+                MySqlConnection cnn;
+                string connectionString = "server=localhost;database=pos;uid=root;pwd=;";
+                cnn = new MySqlConnection(connectionString);
+                cnn.Open();
+
+                String sql = "delete from account where accountID = '" + acc.AccountID + "'";
+                MySqlCommand command = new MySqlCommand(sql, cnn);
+                MySqlDataReader dataReader = command.ExecuteReader();
+                return "ok";
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+
         }
     }
 }

@@ -37,7 +37,7 @@ namespace AssignmentCSharp.Main
         public static void LoadCashier ()
         {
             //if loggedinaccount is admin show back button
-            if(LoggedinAccount.account.TypeID == 1)
+            if(LoggedinAccount.account.Type.ID == 1)
             {
                 new POSpageForm(true).Show();
             }
@@ -51,7 +51,7 @@ namespace AssignmentCSharp.Main
         public static void LoadStocks()
         {
             //if loggedinaccount is admin show back button
-            if (LoggedinAccount.account.TypeID == 1)
+            if (LoggedinAccount.account.Type.ID == 1)
             {
                 new FoodStockForm(true).Show();
             }
@@ -74,7 +74,7 @@ namespace AssignmentCSharp.Main
         public static void LoadKitchen()
         {
             //if loggedinaccount is admin show back button
-            if (LoggedinAccount.account.TypeID == 1)
+            if (LoggedinAccount.account.Type.ID == 1)
             {
                 new KitchenForm(true).Show();
             }
