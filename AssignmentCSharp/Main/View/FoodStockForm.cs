@@ -31,10 +31,6 @@ namespace AssignmentCSharp.Main.View
             }
         }
 
-        //public static string supplierEmailAddress = "";
-        //public static int itemId = 0;
-        //public static string emailSubject = "";
-
         private void FoodStock_Load(object sender, EventArgs e)
         {
 
@@ -43,16 +39,13 @@ namespace AssignmentCSharp.Main.View
         private void GetAllRecord(string search)
         {
             this.dataFoodStock.Rows.Clear();
-            foreach (Model.FoodStock food in Model.FoodStock.GetFoodStocks())
+            foreach (FoodStock food in FoodStock.GetFoodStocks())
             {
                 if (food.Name.ToLower().Contains(search.ToLower()))
                 {
-                    if(food.Quantity == 0 && food.AllowSendEmail == true)
+                    if(food.Quantity < 15 && food.AllowSendEmail == true)
                     {
-                        Account myAcc = Model.Account.GetSupplierAcc();
-                        //supplierEmailAddress = myAcc.Email;
-                        //itemId = food.Id;
-                        //emailSubject = food.Name;
+                        Account myAcc = Account.GetSupplierAcc();
                         //create email form to supplier
                         EmailSupplierForm emailSupplier = new EmailSupplierForm(myAcc.Email, food.Id, food.Name);
                         emailSupplier.Show();
@@ -114,13 +107,13 @@ namespace AssignmentCSharp.Main.View
                 Text = caption,
                 StartPosition = FormStartPosition.CenterScreen
             };
-            Label itemNameLabel = new Label() { Left = 20, Top = 10, Text = itemname };
+            Label itemNameLabel = new Label() { Left = 20, Top = 10, Text = itemname ,Width = 300  };
             TextBox itemNameTextBox = new TextBox() { Left = 20, Top = 30, Width = 200 };
             Label quantityLabel = new Label() { Left = 20, Top = 80, Text = quantity, Width = 300 };
             TextBox quantityTextBox = new TextBox() { Left = 20, Top = 100, Width = 200 };
             Label priceLabel = new Label() { Left = 20, Top = 150, Text = price };
             TextBox priceTextBox = new TextBox() { Left = 20, Top = 170, Width = 200 };
-            Label categoryLabel = new Label() { Left = 20, Top = 220, Text = category };
+            Label categoryLabel = new Label() { Left = 20, Top = 220, Text = category,Width = 300 };
             ListBox categoryListBox = new ListBox() { Left = 20, Top = 245, Width = 200 };
             PictureBox imagePictureBox = new PictureBox() { Left = 20, Top = 420,Width= 150,Height = 100 };
             Label imageLabel = new Label() { Left = 20, Top = 360, Width = 400,Text = "No file is selected" };
@@ -142,7 +135,7 @@ namespace AssignmentCSharp.Main.View
                 }
             };
 
-            foreach (Model.FoodCategory food in Model.FoodCategory.GetFoodCategory())
+            foreach (FoodCategory food in FoodCategory.GetFoodCategory())
             {
                 categoryListBox.Sorted = true;
                 categoryListBox.Items.Add(food.Category);
@@ -160,18 +153,6 @@ namespace AssignmentCSharp.Main.View
                 priceTextBox.Text = foodId.Price.ToString();
                 imagePictureBox.Image = ConvertBinaryToImage(foodId.Image);
                 imagePictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
-                /*
-                if (foodId.Image == null)
-                {
-                    MessageBox.Show("hha");
-                }
-                else
-                {
-                    //MemoryStream mstream = new MemoryStream(foodId.Image);
-                    imagePictureBox.Image = ConvertBinaryToImage(foodId.Image);
-                    imagePictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
-                }
-                */
 
             }
             //button click event handler
@@ -185,7 +166,7 @@ namespace AssignmentCSharp.Main.View
                     string errorMessages = "";
                     bool validSendEmail = true;
 
-                    foreach (Model.FoodStock food in Model.FoodStock.GetFoodStocks())
+                    foreach (FoodStock food in FoodStock.GetFoodStocks())
                     {
                         if (itemNameTextBox.Text.ToLower() == food.Name.ToLower() && getId != food.Id)
                         {
@@ -260,25 +241,17 @@ namespace AssignmentCSharp.Main.View
                                 validSendEmail = true;
                             }
                             foodId.AllowSendEmail = validSendEmail;
-                            byte[] imageByte = null;
-                            if (imageLabel.Text == "No file is selected")
-                            {
-                                Image noImage = Properties.Resources.noimage;
 
-                                using (var ms = new MemoryStream())
-                                {
-                                    noImage.Save(ms, noImage.RawFormat);
-                                    imageByte = ms.ToArray();
-                                }
-                            }
-                            else
+                            byte[] imageByte = null;
+                            if (imageLabel.Text != "No file is selected")
                             {
                                 FileStream fstream = new FileStream(imageLabel.Text, FileMode.Open, FileAccess.Read);
                                 BinaryReader br = new BinaryReader(fstream);
                                 imageByte = br.ReadBytes((int)fstream.Length);
-                            }
 
-                            foodId.Image = imageByte;
+                                foodId.Image = imageByte;
+                            }
+                            
                             foodId.Save();
                             GetAllRecord("");
                         }

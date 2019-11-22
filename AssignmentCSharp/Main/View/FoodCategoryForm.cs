@@ -80,7 +80,7 @@ namespace AssignmentCSharp.Main.View
                     string inputCategoryName = categoryTextBox.Text;
                     string errorMessages = "";
 
-                    foreach (Model.FoodCategory food in Model.FoodCategory.GetFoodCategory())
+                    foreach (FoodCategory food in FoodCategory.GetFoodCategory())
                     {
                         if (categoryTextBox.Text.ToLower() == food.Category.ToLower())
                         {

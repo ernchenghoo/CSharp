@@ -54,10 +54,9 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(8, 11);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Location = new System.Drawing.Point(6, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(131, 31);
+            this.label1.Size = new System.Drawing.Size(104, 25);
             this.label1.TabIndex = 0;
             this.label1.Text = "Database";
             // 
@@ -87,7 +86,7 @@
             this.quantity,
             this.price});
             this.dataFoodStock.EnableHeadersVisualStyles = false;
-            this.dataFoodStock.Location = new System.Drawing.Point(21, 161);
+            this.dataFoodStock.Location = new System.Drawing.Point(7, 131);
             this.dataFoodStock.Margin = new System.Windows.Forms.Padding(0);
             this.dataFoodStock.MultiSelect = false;
             this.dataFoodStock.Name = "dataFoodStock";
@@ -95,7 +94,7 @@
             this.dataFoodStock.RowHeadersVisible = false;
             this.dataFoodStock.RowHeadersWidth = 51;
             this.dataFoodStock.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataFoodStock.Size = new System.Drawing.Size(588, 308);
+            this.dataFoodStock.Size = new System.Drawing.Size(459, 250);
             this.dataFoodStock.TabIndex = 3;
             // 
             // no
@@ -144,10 +143,9 @@
             // 
             // addItem
             // 
-            this.addItem.Location = new System.Drawing.Point(625, 230);
-            this.addItem.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.addItem.Location = new System.Drawing.Point(475, 187);
             this.addItem.Name = "addItem";
-            this.addItem.Size = new System.Drawing.Size(159, 36);
+            this.addItem.Size = new System.Drawing.Size(119, 29);
             this.addItem.TabIndex = 4;
             this.addItem.Text = "Add Item";
             this.addItem.UseVisualStyleBackColor = true;
@@ -155,10 +153,9 @@
             // 
             // editItem
             // 
-            this.editItem.Location = new System.Drawing.Point(625, 298);
-            this.editItem.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.editItem.Location = new System.Drawing.Point(475, 242);
             this.editItem.Name = "editItem";
-            this.editItem.Size = new System.Drawing.Size(159, 36);
+            this.editItem.Size = new System.Drawing.Size(119, 29);
             this.editItem.TabIndex = 5;
             this.editItem.Text = "Edit Item";
             this.editItem.UseVisualStyleBackColor = true;
@@ -166,10 +163,9 @@
             // 
             // deleteItem
             // 
-            this.deleteItem.Location = new System.Drawing.Point(625, 427);
-            this.deleteItem.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.deleteItem.Location = new System.Drawing.Point(475, 347);
             this.deleteItem.Name = "deleteItem";
-            this.deleteItem.Size = new System.Drawing.Size(159, 36);
+            this.deleteItem.Size = new System.Drawing.Size(119, 29);
             this.deleteItem.TabIndex = 6;
             this.deleteItem.Text = "Delete Item";
             this.deleteItem.UseVisualStyleBackColor = true;
@@ -178,10 +174,10 @@
             // searchBar
             // 
             this.searchBar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.searchBar.Location = new System.Drawing.Point(15, 80);
-            this.searchBar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.searchBar.Location = new System.Drawing.Point(11, 65);
+            this.searchBar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.searchBar.Name = "searchBar";
-            this.searchBar.Size = new System.Drawing.Size(342, 22);
+            this.searchBar.Size = new System.Drawing.Size(257, 20);
             this.searchBar.TabIndex = 7;
             // 
             // searchButton
@@ -191,10 +187,10 @@
             this.searchButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.searchButton.FlatAppearance.BorderSize = 0;
             this.searchButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.searchButton.Location = new System.Drawing.Point(383, 71);
-            this.searchButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.searchButton.Location = new System.Drawing.Point(287, 58);
+            this.searchButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.searchButton.Name = "searchButton";
-            this.searchButton.Size = new System.Drawing.Size(37, 32);
+            this.searchButton.Size = new System.Drawing.Size(28, 26);
             this.searchButton.TabIndex = 8;
             this.searchButton.UseVisualStyleBackColor = true;
             this.searchButton.Click += new System.EventHandler(this.SearchButton_Click);
@@ -206,20 +202,19 @@
             this.clearSearchButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.clearSearchButton.FlatAppearance.BorderSize = 0;
             this.clearSearchButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.clearSearchButton.Location = new System.Drawing.Point(447, 69);
-            this.clearSearchButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.clearSearchButton.Location = new System.Drawing.Point(335, 56);
+            this.clearSearchButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.clearSearchButton.Name = "clearSearchButton";
-            this.clearSearchButton.Size = new System.Drawing.Size(131, 34);
+            this.clearSearchButton.Size = new System.Drawing.Size(98, 28);
             this.clearSearchButton.TabIndex = 9;
             this.clearSearchButton.UseVisualStyleBackColor = true;
             this.clearSearchButton.Click += new System.EventHandler(this.ClearSearchButton_Click_1);
             // 
             // manageStock
             // 
-            this.manageStock.Location = new System.Drawing.Point(625, 366);
-            this.manageStock.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.manageStock.Location = new System.Drawing.Point(475, 297);
             this.manageStock.Name = "manageStock";
-            this.manageStock.Size = new System.Drawing.Size(159, 36);
+            this.manageStock.Size = new System.Drawing.Size(119, 29);
             this.manageStock.TabIndex = 10;
             this.manageStock.Text = "Add Stock";
             this.manageStock.UseVisualStyleBackColor = true;
@@ -227,10 +222,9 @@
             // 
             // supplierEmail
             // 
-            this.supplierEmail.Location = new System.Drawing.Point(625, 71);
-            this.supplierEmail.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.supplierEmail.Location = new System.Drawing.Point(476, 58);
             this.supplierEmail.Name = "supplierEmail";
-            this.supplierEmail.Size = new System.Drawing.Size(159, 36);
+            this.supplierEmail.Size = new System.Drawing.Size(119, 29);
             this.supplierEmail.TabIndex = 11;
             this.supplierEmail.Text = "Supplier Email";
             this.supplierEmail.UseVisualStyleBackColor = true;
@@ -243,20 +237,19 @@
             this.logoutButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.logoutButton.FlatAppearance.BorderSize = 0;
             this.logoutButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.logoutButton.Location = new System.Drawing.Point(613, 9);
-            this.logoutButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.logoutButton.Location = new System.Drawing.Point(460, 7);
+            this.logoutButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.logoutButton.Name = "logoutButton";
-            this.logoutButton.Size = new System.Drawing.Size(189, 44);
+            this.logoutButton.Size = new System.Drawing.Size(142, 36);
             this.logoutButton.TabIndex = 12;
             this.logoutButton.UseVisualStyleBackColor = true;
             this.logoutButton.Click += new System.EventHandler(this.LogoutButton_Click);
             // 
             // categoryList
             // 
-            this.categoryList.Location = new System.Drawing.Point(625, 161);
-            this.categoryList.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.categoryList.Location = new System.Drawing.Point(476, 131);
             this.categoryList.Name = "categoryList";
-            this.categoryList.Size = new System.Drawing.Size(159, 36);
+            this.categoryList.Size = new System.Drawing.Size(119, 29);
             this.categoryList.TabIndex = 13;
             this.categoryList.Text = "Category List";
             this.categoryList.UseVisualStyleBackColor = true;
@@ -268,19 +261,18 @@
             this.BackButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.BackButton.FlatAppearance.BorderSize = 0;
             this.BackButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BackButton.Location = new System.Drawing.Point(431, 9);
-            this.BackButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.BackButton.Location = new System.Drawing.Point(323, 7);
             this.BackButton.Name = "BackButton";
-            this.BackButton.Size = new System.Drawing.Size(179, 44);
+            this.BackButton.Size = new System.Drawing.Size(134, 36);
             this.BackButton.TabIndex = 14;
             this.BackButton.UseVisualStyleBackColor = true;
             this.BackButton.Click += new System.EventHandler(this.BackButton_Click);
             // 
             // FoodStockForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(828, 478);
+            this.ClientSize = new System.Drawing.Size(621, 388);
             this.Controls.Add(this.BackButton);
             this.Controls.Add(this.categoryList);
             this.Controls.Add(this.logoutButton);
@@ -294,7 +286,6 @@
             this.Controls.Add(this.addItem);
             this.Controls.Add(this.dataFoodStock);
             this.Controls.Add(this.label1);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "FoodStockForm";
             this.Text = "Food Stock";
             this.Load += new System.EventHandler(this.FoodStock_Load);
