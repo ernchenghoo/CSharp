@@ -164,7 +164,7 @@ namespace AssignmentCSharp.Main.View
                     decimal inputPrice = Convert.ToDecimal(priceTextBox.Text);
                     int selectedItem = 0;
                     string errorMessages = "";
-                    bool validSendEmail = true;
+                    bool validSendEmail = false;
 
                     foreach (FoodStock food in FoodStock.GetFoodStocks())
                     {
@@ -234,12 +234,12 @@ namespace AssignmentCSharp.Main.View
                             FoodStock foodId = FoodStock.FindById(getId);
                             foodId.CategoryId = selectedItem;
                             foodId.Name = inputItemName;
-                            foodId.Quantity = inputQuantity;
-                            foodId.Price = inputPrice;       
-                            if (inputQuantity >= 1)
+                            if (inputQuantity > foodId.Quantity)
                             {
                                 validSendEmail = true;
                             }
+                            foodId.Quantity = inputQuantity;
+                            foodId.Price = inputPrice;
                             foodId.AllowSendEmail = validSendEmail;
 
                             byte[] imageByte = null;
