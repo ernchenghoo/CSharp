@@ -157,10 +157,6 @@ namespace AssignmentCSharp.Main.Model
 
 
                 MySqlCommand command = new MySqlCommand("select id,category from foodcategory where category = '"+category+"'", cnn);
-                /*
-                MySqlCommand command = cnn.CreateCommand();
-                command.CommandText = "select id,category from foodcategory where category = 'category1'";
-                */
                 MySqlDataReader dataReader = command.ExecuteReader();
 
                 while (dataReader.Read())
