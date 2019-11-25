@@ -614,7 +614,7 @@ namespace AssignmentCSharp.Main.View
                             foodObj.Quantity -= currFood.QuantityOrdered;
                             foodObj.Save();
                             
-                            if (foodObj.Quantity <= 0)
+                            if (foodObj.Quantity < 15 && foodObj.AllowSendEmail == true)
                             {
                                 EmailSupplierForm emailSupplier = new EmailSupplierForm(myAcc.Email, foodObj.Id,foodObj.Name);
                                 emailSupplier.Show();
@@ -696,7 +696,7 @@ namespace AssignmentCSharp.Main.View
                     foodObj.Quantity -= currFood.QuantityOrdered;
                     foodObj.Save();
                     
-                    if (foodObj.Quantity <= 0)
+                    if (foodObj.Quantity < 15 && foodObj.AllowSendEmail == true)
                     {
                         Account myAcc = Model.Account.GetSupplierAcc();
                         EmailSupplierForm emailSupplier = new EmailSupplierForm(myAcc.Email,foodObj.Id,foodObj.Name);
