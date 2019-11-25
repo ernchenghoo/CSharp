@@ -93,6 +93,11 @@ namespace AssignmentCSharp.Main
             EditAccountForm editForm = new EditAccountForm (acc);
             editForm.ShowDialog();
         }
+
+        public static void LoadSalesReport()
+        {
+            new DailySalesForm().Show();
+        }
     }
 
    public class FormManager

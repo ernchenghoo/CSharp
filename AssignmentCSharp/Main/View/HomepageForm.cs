@@ -12,6 +12,7 @@ namespace AssignmentCSharp.Main.View
         {
             InitializeComponent();
             passwordBox.PasswordChar = '*';
+            this.AcceptButton = LoginButton;
         }
 
         int loginAttemps = 0;
@@ -121,6 +122,6 @@ namespace AssignmentCSharp.Main.View
         {
             emailBox.Text = "";
             passwordBox.Text = "";
-        }
+        }        
     }
 }

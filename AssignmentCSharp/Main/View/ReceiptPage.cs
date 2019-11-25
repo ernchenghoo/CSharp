@@ -48,10 +48,19 @@ namespace AssignmentCSharp.Main.View
 
         private void Button2_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Thank you for using our POS system! Have a nice day =D");
-            this.Close();
-            Program.homePageFormReference.clearAllTextBox();
-            Program.homePageFormReference.Show();
+            var confirm = MessageBox.Show("Would you like to view the daily sales report before exiting?", "Delete confirmation", 
+                MessageBoxButtons.YesNo);
+            if (confirm == DialogResult.Yes)
+            {
+                Program.LoadSalesReport();
+                this.Close();
+            }
+            else
+            {
+                this.Close();
+                Program.homePageFormReference.clearAllTextBox();
+                Program.homePageFormReference.Show();
+            }            
         }
     }
 }
