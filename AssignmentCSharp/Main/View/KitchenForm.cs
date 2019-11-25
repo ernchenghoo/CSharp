@@ -178,7 +178,7 @@ namespace AssignmentCSharp.Main.View
                     }
                 }
                 var orderDescList = from receipt in orderNotDone
-                                    orderby receipt.DatePrinted descending
+                                    orderby receipt.DatePrinted ascending
                                     select receipt;
                 orderList.Rows.Clear();
 

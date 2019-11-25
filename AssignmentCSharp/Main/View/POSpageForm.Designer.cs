@@ -30,8 +30,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.backButton = new System.Windows.Forms.Button();
             this.endBusinessButton = new System.Windows.Forms.Button();
@@ -91,19 +91,20 @@
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1316, 47);
+            this.panel1.Size = new System.Drawing.Size(1382, 47);
             this.panel1.TabIndex = 0;
             // 
             // backButton
             // 
             this.backButton.BackgroundImage = global::AssignmentCSharp.Properties.Resources.back;
             this.backButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.backButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.backButton.FlatAppearance.BorderSize = 0;
             this.backButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.backButton.Location = new System.Drawing.Point(945, 5);
+            this.backButton.Location = new System.Drawing.Point(1047, 5);
             this.backButton.Margin = new System.Windows.Forms.Padding(4);
             this.backButton.Name = "backButton";
-            this.backButton.Size = new System.Drawing.Size(172, 38);
+            this.backButton.Size = new System.Drawing.Size(137, 38);
             this.backButton.TabIndex = 2;
             this.backButton.UseVisualStyleBackColor = true;
             this.backButton.Visible = false;
@@ -117,7 +118,7 @@
             this.endBusinessButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.endBusinessButton.FlatAppearance.BorderSize = 0;
             this.endBusinessButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.endBusinessButton.Location = new System.Drawing.Point(1125, 5);
+            this.endBusinessButton.Location = new System.Drawing.Point(1191, 5);
             this.endBusinessButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.endBusinessButton.Name = "endBusinessButton";
             this.endBusinessButton.Size = new System.Drawing.Size(188, 39);
@@ -181,8 +182,8 @@
             this.splitContainer1.Panel2.Controls.Add(this.searchBar);
             this.splitContainer1.Panel2.Controls.Add(this.label13);
             this.splitContainer1.Panel2.Controls.Add(this.label12);
-            this.splitContainer1.Size = new System.Drawing.Size(1316, 681);
-            this.splitContainer1.SplitterDistance = 662;
+            this.splitContainer1.Size = new System.Drawing.Size(1382, 681);
+            this.splitContainer1.SplitterDistance = 695;
             this.splitContainer1.TabIndex = 1;
             // 
             // takeAwayRadioButton
@@ -418,14 +419,14 @@
             this.ItemListInCart.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
             this.ItemListInCart.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.ItemListInCart.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightSteelBlue;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Elephant", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.LightSteelBlue;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.ItemListInCart.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.LightSteelBlue;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Elephant", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.LightSteelBlue;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.ItemListInCart.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.ItemListInCart.ColumnHeadersHeight = 40;
             this.ItemListInCart.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.ItemListInCart.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -440,15 +441,15 @@
             this.ItemListInCart.Location = new System.Drawing.Point(3, 46);
             this.ItemListInCart.Margin = new System.Windows.Forms.Padding(0);
             this.ItemListInCart.Name = "ItemListInCart";
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(0, 10, 0, 10);
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.ItemListInCart.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.Padding = new System.Windows.Forms.Padding(0, 10, 0, 10);
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.ItemListInCart.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.ItemListInCart.RowHeadersVisible = false;
             this.ItemListInCart.RowHeadersWidth = 51;
             this.ItemListInCart.RowTemplate.Height = 24;
@@ -611,7 +612,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1316, 730);
+            this.ClientSize = new System.Drawing.Size(1382, 730);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.panel1);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
