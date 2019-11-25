@@ -9,27 +9,48 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 using AssignmentCSharp.Main.Model;
-
+using System.Drawing.Imaging;
 
 namespace AssignmentCSharp.Main.View
 {
     
     public partial class POSpageForm : Form
     {
-        private String categoryChosen = null;
-        public POSpageForm()
+        private int categoryChosen = -1;
+        private String orderType = null;
+        public POSpageForm(bool isAdmin)
         {
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+
             InitializeComponent();
-            searchAndUpdateList("");
+            SearchAndUpdateList("");
 
             //add value to comboBox
-            this.orderType.Items.Insert(0, "Dine-In");
-            this.orderType.Items.Insert(1, "Take Away");
-            this.orderType.SelectedIndex = 0;
-            displayListOfCategories();
+            this.orderType = "Dine-In";
+            this.dineInRadioButton.Checked = true;
+
+            DisplayListOfCategories();
+
+            //set validation for the editing the quantity in the list
+            this.ItemListInCart.CellBeginEdit += this.ItemListInCart_CellBeginEdit;
+            this.ItemListInCart.CellEndEdit += this.ItemListInCart_CellEditEnding;
+
+            String cashierName = Program.LoggedinAccount.account.Email.Split('@')[0];
+
+            this.cashierNameLabel.Text = cashierName;
+
+            if(isAdmin == true)
+            {
+                this.backButton.Visible = true;
+            }
+            else
+            {
+                this.backButton.Visible = false;
+            }
         }
 
-        private void displayListOfCategories()
+        private void DisplayListOfCategories()
         {
             this.categoryContainer.Controls.Clear();
 
@@ -44,15 +65,15 @@ namespace AssignmentCSharp.Main.View
             allButton.Size = new System.Drawing.Size(140, 23);
             allButton.TabIndex = 7;
             allButton.Text = "All";
-            allButton.Tag = (String)null;
+            allButton.Tag = -1;
             allButton.UseVisualStyleBackColor = false;
             allButton.BackColor = System.Drawing.Color.Green;
-            allButton.Click += new System.EventHandler(this.chooseCategory);
+            allButton.Click += new System.EventHandler(this.ChooseCategory);
 
             this.categoryContainer.Controls.Add(allButton);
-            this.categoryChosen = null;
+            this.categoryChosen = -1;
 
-            foreach (Model.FoodCategory category in Model.FoodCategory.getFoodCategory())
+            foreach (Model.FoodCategory category in Model.FoodCategory.GetFoodCategory())
             {
                 
                 System.Windows.Forms.Button newButton = new System.Windows.Forms.Button();
@@ -65,16 +86,84 @@ namespace AssignmentCSharp.Main.View
                 newButton.Size = new System.Drawing.Size(140, 23);
                 newButton.TabIndex = 7;
                 newButton.Text = category.Category;
-                newButton.Tag = category.Category;
+                newButton.Tag = category.Id;
                 newButton.UseVisualStyleBackColor = false;
                 newButton.BackColor = System.Drawing.Color.Yellow;
-                newButton.Click += new System.EventHandler(this.chooseCategory);
+                newButton.Click += new System.EventHandler(this.ChooseCategory);
           
                 this.categoryContainer.Controls.Add(newButton);    
             }
         }
 
-        private void chooseCategory(object sender, EventArgs e)
+        private int oldValueOfItemListInCart_CellEditing = 0;
+        private void ItemListInCart_CellEditEnding(object sender, DataGridViewCellEventArgs e)
+        {
+            
+
+            int QuantityEntered = 0;
+            try
+            {
+                String newValue = null;
+                if(ItemListInCart[e.ColumnIndex, e.RowIndex].Value is System.Int32)
+                {
+                    QuantityEntered = (System.Int32) ItemListInCart[e.ColumnIndex, e.RowIndex].Value;
+                }
+                else
+                {
+                    newValue = (String)ItemListInCart[e.ColumnIndex, e.RowIndex].Value;
+                    QuantityEntered = Convert.ToInt32(newValue);
+                }
+                
+                
+
+                if (QuantityEntered > 0)
+                {
+                    //check whether got enough stock
+                    foreach (DataGridViewRow row in this.ItemListInCart.SelectedRows)
+                    {
+                        int itemId = (int)row.Cells[1].Value;
+
+                        Model.FoodStock itemObject = Model.FoodStock.FindById(itemId);
+
+                        if (itemObject.Quantity >= QuantityEntered)
+                        {
+                            //modify quantity
+                            row.Cells[3].Value = QuantityEntered;
+                            row.Cells[4].Value = itemObject.Price;
+                            row.Cells[5].Value = QuantityEntered * itemObject.Price;
+                        }
+                        else
+                        {
+                            MessageBox.Show(String.Format("Cannot modify item {0} because you have only {1} stock", itemObject.Name, itemObject.Quantity));
+                            //setback to only value
+                            ItemListInCart[e.ColumnIndex, e.RowIndex].Value = oldValueOfItemListInCart_CellEditing;
+                        }
+
+                    }
+                    UpdateTotalCalculation();
+                }
+                else
+                {
+                    MessageBox.Show("Please Enter Integer more than 0!");
+                    //setback to only value
+                    ItemListInCart[e.ColumnIndex, e.RowIndex].Value = oldValueOfItemListInCart_CellEditing;
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Please Enter only Integer!"+ex.Message);
+                Console.WriteLine(ex.ToString());
+                //setback to only value
+                ItemListInCart[e.ColumnIndex, e.RowIndex].Value = oldValueOfItemListInCart_CellEditing;
+            }
+        }
+        private void ItemListInCart_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
+        {
+            oldValueOfItemListInCart_CellEditing = (int)ItemListInCart[e.ColumnIndex, e.RowIndex].Value;
+        }
+
+
+        private void ChooseCategory(object sender, EventArgs e)
         {
             foreach (Button b in this.categoryContainer.Controls)
             {
@@ -83,76 +172,128 @@ namespace AssignmentCSharp.Main.View
 
             System.Windows.Forms.Button buttonObject = (System.Windows.Forms.Button)sender;
             //save it to class variable so we can reference it later
-            this.categoryChosen = (String)buttonObject.Tag;
+            this.categoryChosen = (int)buttonObject.Tag;
             buttonObject.BackColor = System.Drawing.Color.Green;
 
-            searchAndUpdateList(this.searchBar.Text);
+            SearchAndUpdateList(this.searchBar.Text);
+        }
+        Image ConvertBinaryToImage(byte[] image)
+        {
+            using (System.IO.MemoryStream ms = new System.IO.MemoryStream(image, 0, image.Length))
+            {
+                ms.Write(image, 0, image.Length);
+                //Set image variable value using memory stream.
+                return Image.FromStream(ms, true);
+            }
         }
 
+
         //function to search and update the food menu
-        private void searchAndUpdateList(String search)
+        private void SearchAndUpdateList(String search)
         {
             this.foodListContainer.Controls.Clear();
 
             //filter food name
-            var filteredList = from food in Model.FoodStock.getFoodStocks()
+            var filteredList = from food in Model.FoodStock.GetFoodStocks()
                               where food.Name.ToLower().Contains(search.ToLower())
                               select food;
             //if category all is not chosen
-            if (this.categoryChosen != null)
+            if (this.categoryChosen != -1)
             {
                 //filter category
                 filteredList = from food in filteredList
-                               where food.Category.Equals(this.categoryChosen)
+                               where food.CategoryId == this.categoryChosen
                                select food;
             }
 
 
             foreach (Model.FoodStock food in filteredList)
             {
-               
-                System.Windows.Forms.Button newButton = new System.Windows.Forms.Button();
+                
+                FlowLayoutPanel newFlowPanel = new FlowLayoutPanel {
+                    Width = 150,
+                    Height = 180,
+                    Tag = food,
+                    Cursor = Cursors.Hand,
+                };
 
-                    
-                newButton.FlatAppearance.BorderSize = 2;
-                newButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-                newButton.Location = new System.Drawing.Point(10, 10);
-                newButton.Margin = new System.Windows.Forms.Padding(10);
-                newButton.Name = "button1";
-                newButton.Size = new System.Drawing.Size(199, 191);
-                newButton.TabIndex = 7;
-                newButton.Text = food.Name;
-                newButton.Tag = food;
-                newButton.UseVisualStyleBackColor = false;
+                
 
-                //if the item is no stock the color will be red
-                if (food.Quantity > 0)
+
+                PictureBox myPicBox = new PictureBox
                 {
-                    newButton.BackColor = System.Drawing.Color.White;
-                    newButton.Click += new System.EventHandler(this.addItem);
-                }
-                else
-                {
-                    newButton.BackColor = System.Drawing.Color.Red;
-                    newButton.Click += (sender, e) => {
-                        MessageBox.Show("This Item is Out of Stock!");
-                    };
-                }
-                    
+                    Name = "pictureBox",
+                    Size = new Size(150, 150),
+                    Image = ConvertBinaryToImage(food.Image),
+                    SizeMode = PictureBoxSizeMode.StretchImage,
+                    BorderStyle = BorderStyle.FixedSingle,
+                    Tag = food,
+                    Cursor = Cursors.Hand,
+                };
 
-                this.foodListContainer.Controls.Add(newButton);
-                 
+                
+
+                Label newLabel = new Label
+                {
+                    Text = food.Name,
+                    Font = new Font("Arial", 15, FontStyle.Bold),
+                    TextAlign = ContentAlignment.MiddleCenter,
+                    AutoSize = false,
+                    Width = 150,
+                    Height = 30,
+                    Tag = food,
+                    Cursor = Cursors.Hand,
+                };
+
+                if (food.Quantity == 0)
+                {
+                    myPicBox.Image = (Image)ChangeOpacity((Bitmap)myPicBox.Image.Clone(),80);
+                    newLabel.ForeColor = Color.Red;
+                }
+
+                newFlowPanel.Controls.Add(myPicBox);
+                newFlowPanel.Controls.Add(newLabel);
+                myPicBox.Click += new System.EventHandler(this.AddItem);
+                newLabel.Click += new System.EventHandler(this.AddItem);
+
+                this.foodListContainer.Controls.Add(newFlowPanel);
+
+
+
             }
+        }
+        static Bitmap ChangeOpacity(Bitmap bmpIn, int alpha)
+        {
+            Bitmap bmpOut = new Bitmap(bmpIn.Width, bmpIn.Height);
+            float a = alpha / 255f;
+            Rectangle r = new Rectangle(0, 0, bmpIn.Width, bmpIn.Height);
+
+            float[][] matrixItems = {
+                                    new float[] {1, 0, 0, 0, 0},
+                                    new float[] {0, 1, 0, 0, 0},
+                                    new float[] {0, 0, 1, 0, 0},
+                                    new float[] {0, 0, 0, a, 0},
+                                    new float[] {0, 0, 0, 0, 1}};
+
+            ColorMatrix colorMatrix = new ColorMatrix(matrixItems);
+
+            ImageAttributes imageAtt = new ImageAttributes();
+            imageAtt.SetColorMatrix(colorMatrix, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
+
+            using (Graphics g = Graphics.FromImage(bmpOut))
+                g.DrawImage(bmpIn, r, r.X, r.Y, r.Width, r.Height, GraphicsUnit.Pixel, imageAtt);
+
+            return bmpOut;
         }
 
         //function to add the item to the cart
-        private void addItem(object sender, EventArgs e)
+        private void AddItem(object sender, EventArgs e)
         {
-            System.Windows.Forms.Button buttonObject = (System.Windows.Forms.Button)sender;
-            Model.FoodStock chosenFood = (Model.FoodStock)buttonObject.Tag;
+            System.Windows.Forms.Control layoutPanelObject = (System.Windows.Forms.Control)sender;
+            Model.FoodStock chosenFood = (Model.FoodStock)layoutPanelObject.Tag;
 
             DataGridViewRow foundItemInCart = null;
-            foreach (DataGridViewRow row in this.itemListInCart.Rows)
+            foreach (DataGridViewRow row in this.ItemListInCart.Rows)
             {
                 int currentRowID = (int)row.Cells[1].Value;
                 if (currentRowID == chosenFood.Id)
@@ -163,30 +304,34 @@ namespace AssignmentCSharp.Main.View
 
             if (foundItemInCart == null)
             {
-                int newNo = this.itemListInCart.Rows.Count + 1;
-                this.itemListInCart.Rows.Add(newNo, chosenFood.Id, chosenFood.Name, 1, chosenFood.Price, chosenFood.Price * 1);
+                int newNo = this.ItemListInCart.Rows.Count + 1;
+                if(chosenFood.Quantity >0)
+                {
+                    this.ItemListInCart.Rows.Add(newNo, chosenFood.Id, chosenFood.Name, 1, chosenFood.Price, chosenFood.Price * 1);
+                }
+                else
+                {
+                    MessageBox.Show("Item out of stock!");
+                }
+                
             }
             else
             {
                 //if enough quantity then show sucessfully added
                 int currentNumberOfItem = (int)foundItemInCart.Cells[3].Value;
-                if (FoodStock.findById((int)foundItemInCart.Cells[1].Value).Quantity > currentNumberOfItem+1)
-                {
-                    MessageBox.Show("Item Already in Cart! Added 1 quantity for you");
-                }
-                
-                addQuantityToRow(foundItemInCart);
+                                
+                AddQuantityToRow(foundItemInCart);
             }
-            updateTotalCalculation();
+            UpdateTotalCalculation();
         }
 
-        private void addQuantityToRow(DataGridViewRow row)
+        private void AddQuantityToRow(DataGridViewRow row)
         {
 
             int itemId = (int)row.Cells[1].Value;
             int currentNumberOfItem = (int)row.Cells[3].Value;
 
-            Model.FoodStock itemObject = Model.FoodStock.findById(itemId);
+            Model.FoodStock itemObject = Model.FoodStock.FindById(itemId);
 
             int newQuantity = currentNumberOfItem + 1;
             if(itemObject.Quantity >= newQuantity)
@@ -195,7 +340,7 @@ namespace AssignmentCSharp.Main.View
                 row.Cells[3].Value = newQuantity;
                 row.Cells[4].Value = itemObject.Price;
                 row.Cells[5].Value = newQuantity * itemObject.Price;
-                updateTotalCalculation();
+                UpdateTotalCalculation();
             }
             else
             {
@@ -204,20 +349,20 @@ namespace AssignmentCSharp.Main.View
             
         }
 
-        private void minusQuantityToRow(DataGridViewRow row)
+        private void MinusQuantityToRow(DataGridViewRow row)
         {
 
             int itemId = (int)row.Cells[1].Value;
             int currentNumberOfItem = (int)row.Cells[3].Value;
 
-            Model.FoodStock itemObject = Model.FoodStock.findById(itemId);
+            Model.FoodStock itemObject = Model.FoodStock.FindById(itemId);
 
             int newQuantity = currentNumberOfItem - 1;
 
             if(newQuantity == 0)
             {
                 //if queantity already zero remove from cart
-                this.itemListInCart.Rows.Remove(row);
+                this.ItemListInCart.Rows.Remove(row);
             }
             else
             {
@@ -226,20 +371,20 @@ namespace AssignmentCSharp.Main.View
                 row.Cells[4].Value = itemObject.Price;
                 row.Cells[5].Value = newQuantity * itemObject.Price;
             }
-            updateTotalCalculation();
+            UpdateTotalCalculation();
         }
 
-        private void updateTotalCalculation()
+        private void UpdateTotalCalculation()
         {
             decimal totalPrice = 0;
 
-            foreach(DataGridViewRow row in this.itemListInCart.Rows)
+            foreach(DataGridViewRow row in this.ItemListInCart.Rows)
             {
                 totalPrice += (decimal)row.Cells[5].Value;
             }
 
             //if orderType is dine in got dine in tax
-            if (orderType.SelectedIndex == 0)
+            if (orderType == "Dine-In")
             {
                 this.subTotal.Text = totalPrice.ToString();
                 this.tax.Text = (totalPrice * 6 / 100).ToString();
@@ -258,7 +403,7 @@ namespace AssignmentCSharp.Main.View
         private void SearchButton_Click(object sender, EventArgs e)
         {
             this.foodListContainer.Controls.Clear();
-            searchAndUpdateList(searchBar.Text);
+            SearchAndUpdateList(searchBar.Text);
         }
 
         
@@ -267,7 +412,7 @@ namespace AssignmentCSharp.Main.View
 
         private void XQtyButton_Click(object sender, EventArgs e)
         {
-            if (this.itemListInCart.SelectedRows.Count > 0)
+            if (this.ItemListInCart.SelectedRows.Count > 0)
             {
                 // have row selected
                 string userinput = ShowQuantityInputDialog("Enter Quantity:", "Quantity Input Box");
@@ -277,12 +422,12 @@ namespace AssignmentCSharp.Main.View
                     //if input returned not empty because if user cancel the return will be empty
                     int newQuantity = Convert.ToInt32(userinput);
 
-                    foreach (DataGridViewRow row in this.itemListInCart.SelectedRows)
+                    foreach (DataGridViewRow row in this.ItemListInCart.SelectedRows)
                     {
                         int itemId = (int)row.Cells[1].Value;
                         int currentNumberOfItem = (int)row.Cells[3].Value;
 
-                        Model.FoodStock itemObject = Model.FoodStock.findById(itemId);
+                        Model.FoodStock itemObject = Model.FoodStock.FindById(itemId);
 
                         if(itemObject.Quantity >= newQuantity)
                         {
@@ -293,17 +438,17 @@ namespace AssignmentCSharp.Main.View
                         }
                         else
                         {
-                            MessageBox.Show(String.Format("Cannot modify item {0} because you have only {1} stock",itemObject.Name,itemObject.Quantity));
+                            MessageBox.Show(String.Format("{0} only have {1} stocks available.",itemObject.Name,itemObject.Quantity));
                         }
                         
                     }
-                    updateTotalCalculation();
+                    UpdateTotalCalculation();
                 }                
             }
             else
             {
                 // no  row is selected 
-                MessageBox.Show("No row is Selected");
+                MessageBox.Show("Please select an item to edit.");
             }
             
         }
@@ -354,124 +499,124 @@ namespace AssignmentCSharp.Main.View
         }
         private void ClearSearchButton_Click(object sender, EventArgs e)
         {
-            searchAndUpdateList("");
+            SearchAndUpdateList("");
             searchBar.Text = "";
         }
 
-        private void minusQtyButton_Click(object sender, EventArgs e)
+        private void MinusQtyButton_Click(object sender, EventArgs e)
         {
-            if (this.itemListInCart.SelectedRows.Count > 0)
+            if (this.ItemListInCart.SelectedRows.Count > 0)
             {
                 // have row selected
-                foreach(DataGridViewRow row in this.itemListInCart.SelectedRows)
+                foreach(DataGridViewRow row in this.ItemListInCart.SelectedRows)
                 {
-                    minusQuantityToRow(row);
+                    MinusQuantityToRow(row);
                 }
                 
             }
             else
             {
                 // no  row is selected 
-                MessageBox.Show("No row is Selected");
+                MessageBox.Show("No item selected");
             }
             
         }
 
-        private void deleteButton_Click(object sender, EventArgs e)
+        private void DeleteButton_Click(object sender, EventArgs e)
         {
-            if (this.itemListInCart.SelectedRows.Count > 0)
+            if (this.ItemListInCart.SelectedRows.Count > 0)
             {
                 // have row selected
-                foreach (DataGridViewRow row in this.itemListInCart.SelectedRows)
+                foreach (DataGridViewRow row in this.ItemListInCart.SelectedRows)
                 {
-                    this.itemListInCart.Rows.Remove(row);
+                    this.ItemListInCart.Rows.Remove(row);
                 }
-                updateTotalCalculation();
+                UpdateTotalCalculation();
             }
             else
             {
                 // no  row is selected 
-                MessageBox.Show("No row is Selected");
+                MessageBox.Show("Please select an item to delete");
             }     
         }
 
-        private void clearAllButton_Click(object sender, EventArgs e)
+        private void ClearAllButton_Click(object sender, EventArgs e)
         {
-            this.itemListInCart.Rows.Clear();
-            updateTotalCalculation();
+            this.ItemListInCart.Rows.Clear();
+            UpdateTotalCalculation();
         }
 
-        private void plusQtyButton_Click(object sender, EventArgs e)
+        private void PlusQtyButton_Click(object sender, EventArgs e)
         {
-            if (this.itemListInCart.SelectedRows.Count > 0)
+            if (this.ItemListInCart.SelectedRows.Count > 0)
             {
                 // have row selected
-                foreach (DataGridViewRow row in this.itemListInCart.SelectedRows)
+                foreach (DataGridViewRow row in this.ItemListInCart.SelectedRows)
                 {
-                    addQuantityToRow(row);
+                    AddQuantityToRow(row);
                 }
 
             }
             else
             {
                 // no  row is selected 
-                MessageBox.Show("No row is Selected");
+                MessageBox.Show("No item selected");
             }
         }
 
-        private void orderType_SelectedIndexChanged(object sender, EventArgs e)
+        private void OrderType_SelectedIndexChanged(object sender, EventArgs e)
         {
-            updateTotalCalculation();
+            UpdateTotalCalculation();
         }
 
-        private void cashPayButton_Click(object sender, EventArgs e)
+        private void CashPayButton_Click(object sender, EventArgs e)
         {
             try
             {
                 decimal cashPayed =Convert.ToDecimal(this.cashAmount.Text);
 
-                if(this.itemListInCart.Rows.Count > 0)
+                if(this.ItemListInCart.Rows.Count > 0)
                 {
                     //add all food object
                     List<Receipt_Food> foodlist = new List<Receipt_Food>();
-                    foreach (DataGridViewRow row in this.itemListInCart.Rows)
+                    foreach (DataGridViewRow row in this.ItemListInCart.Rows)
                     {
                         int foodid = (int)row.Cells[1].Value;
                         int quantity = (int)row.Cells[3].Value;
-                        FoodStock foodObj = FoodStock.findById(foodid);
+                        FoodStock foodObj = FoodStock.FindById(foodid);
                         foodlist.Add(new Receipt_Food(foodid,foodObj.Name,foodObj.Price, quantity));
                     }
 
                     //make the receipt
                     decimal totalPrice = 0;
 
-                    foreach (DataGridViewRow row in this.itemListInCart.Rows)
+                    foreach (DataGridViewRow row in this.ItemListInCart.Rows)
                     {
                         totalPrice += (decimal)row.Cells[5].Value;
                     }
 
                     
                     decimal tax = (totalPrice * 6 / 100);
-                    decimal servTax = this.orderType.SelectedIndex == 0 ? totalPrice * 10 / 100 : 0;
+                    decimal servTax = this.orderType == "Dine-In" ? totalPrice * 10 / 100 : 0;
                     decimal finaltotal = totalPrice + tax + servTax;
 
                     if (cashPayed >= finaltotal)
                     {
                         Receipt newReceipt = new Receipt(tax, servTax, finaltotal, foodlist);
-                        newReceipt.save();
+                        newReceipt.Save();
 
                         /*Minus the stock from database*/
                         foreach(Receipt_Food currFood in newReceipt.FoodOrdered)
                         {
+                            Account myAcc = Model.Account.GetSupplierAcc();
                             //food stock quantity minus ordered quantity
-
-                            FoodStock foodObj = FoodStock.findById(currFood.FoodId);
+                            FoodStock foodObj = FoodStock.FindById(currFood.FoodId);
                             foodObj.Quantity -= currFood.QuantityOrdered;
-                            foodObj.save();
+                            foodObj.Save();
                             
                             if (foodObj.Quantity <= 0)
                             {
-                                EmailSupplierForm emailSupplier = new EmailSupplierForm(foodObj.Id,foodObj.Name);
+                                EmailSupplierForm emailSupplier = new EmailSupplierForm(myAcc.Email, foodObj.Id,foodObj.Name);
                                 emailSupplier.Show();
                             }
                         }
@@ -511,17 +656,17 @@ namespace AssignmentCSharp.Main.View
             }
         }
 
-        private void creditCardPay_Click(object sender, EventArgs e)
+        private void CreditCardPay_Click(object sender, EventArgs e)
         {
-            if (this.itemListInCart.Rows.Count > 0)
+            if (this.ItemListInCart.Rows.Count > 0)
             {
                 //add all food object
                 List<Receipt_Food> foodlist = new List<Receipt_Food>();
-                foreach (DataGridViewRow row in this.itemListInCart.Rows)
+                foreach (DataGridViewRow row in this.ItemListInCart.Rows)
                 {
                     int foodid = (int)row.Cells[1].Value;
                     int quantity = (int)row.Cells[3].Value;
-                    FoodStock foodObj = FoodStock.findById(foodid);
+                    FoodStock foodObj = FoodStock.FindById(foodid);
 
                     foodlist.Add(new Receipt_Food(foodid, foodObj.Name, foodObj.Price, quantity));
                 }
@@ -529,31 +674,32 @@ namespace AssignmentCSharp.Main.View
                 //make the receipt
                 decimal totalPrice = 0;
 
-                foreach (DataGridViewRow row in this.itemListInCart.Rows)
+                foreach (DataGridViewRow row in this.ItemListInCart.Rows)
                 {
                     totalPrice += (decimal)row.Cells[5].Value;
                 }
 
 
                 decimal tax = (totalPrice * 6 / 100);
-                decimal servTax = this.orderType.SelectedIndex == 0 ? totalPrice * 10 / 100 : 0;
+                decimal servTax = this.orderType == "Dine-In" ? totalPrice * 10 / 100 : 0;
                 decimal finaltotal = totalPrice + tax + servTax;
 
                
                 Receipt newReceipt = new Receipt(tax, servTax, finaltotal, foodlist);
-                newReceipt.save();
+                newReceipt.Save();
 
                 /*Minus the stock from database*/
                 foreach (Receipt_Food currFood in newReceipt.FoodOrdered)
                 {
                     //food stock quantity minus ordered quantity
-                    FoodStock foodObj = FoodStock.findById(currFood.FoodId);
+                    FoodStock foodObj = FoodStock.FindById(currFood.FoodId);
                     foodObj.Quantity -= currFood.QuantityOrdered;
-                    foodObj.save();
+                    foodObj.Save();
                     
                     if (foodObj.Quantity <= 0)
                     {
-                        EmailSupplierForm emailSupplier = new EmailSupplierForm(foodObj.Id,foodObj.Name);
+                        Account myAcc = Model.Account.GetSupplierAcc();
+                        EmailSupplierForm emailSupplier = new EmailSupplierForm(myAcc.Email,foodObj.Id,foodObj.Name);
                         emailSupplier.Show();
                     }
                 }
@@ -572,11 +718,46 @@ namespace AssignmentCSharp.Main.View
             }
         }
 
-        private void endBusinessButton_Click(object sender, EventArgs e)
+        private void EndBusinessButton_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Thank you for using our POS system! Have a nice day =D");
-            this.Close();
+            var confirm = MessageBox.Show("Would you like to view the daily sales report before exiting?", "Delete confirmation",
+                MessageBoxButtons.YesNo);
+            if (confirm == DialogResult.Yes)
+            {
+                Program.LoadSalesReport();
+                this.Close();
+            }
+            else
+            {
+                this.Close();
+                Program.homePageFormReference.clearAllTextBox();
+                Program.homePageFormReference.Show();
+            }
         }
 
+        private void DineInRadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            if(dineInRadioButton.Checked == true)
+            {
+                this.orderType = "Dine-In";
+                UpdateTotalCalculation();
+            }
+            
+        }
+
+        private void TakeAwayRadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            if(takeAwayRadioButton.Checked == true)
+            {
+                this.orderType = "Take-Away";
+                UpdateTotalCalculation();
+            }
+        }
+
+        private void BackButton_Click(object sender, EventArgs e)
+        {
+            Program.LoadAdmin();
+            this.Close();
+        }
     }
 }

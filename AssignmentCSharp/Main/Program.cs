@@ -12,6 +12,7 @@ namespace AssignmentCSharp.Main
     static class Program
     {
         public static HomepageForm homePageFormReference = null;
+
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -35,12 +36,29 @@ namespace AssignmentCSharp.Main
 
         public static void LoadCashier ()
         {
-            new POSpageForm().Show();
+            //if loggedinaccount is admin show back button
+            if(LoggedinAccount.account.Type.ID == 1)
+            {
+                new POSpageForm(true).Show();
+            }
+            else
+            {
+                new POSpageForm(false).Show();
+            }
+            
         }
 
         public static void LoadStocks()
         {
-            new FoodStockForm().Show();
+            //if loggedinaccount is admin show back button
+            if (LoggedinAccount.account.Type.ID == 1)
+            {
+                new FoodStockForm(true).Show();
+            }
+            else
+            {
+                new FoodStockForm(false).Show();
+            }
         }
 
         public static void LoadRegister()
@@ -55,7 +73,15 @@ namespace AssignmentCSharp.Main
 
         public static void LoadKitchen()
         {
-            new KitchenForm().Show();
+            //if loggedinaccount is admin show back button
+            if (LoggedinAccount.account.Type.ID == 1)
+            {
+                new KitchenForm(true).Show();
+            }
+            else
+            {
+                new KitchenForm(false).Show();
+            }
         }
 
         public static void LoadAdmin ()
@@ -66,6 +92,11 @@ namespace AssignmentCSharp.Main
         {
             EditAccountForm editForm = new EditAccountForm (acc);
             editForm.ShowDialog();
+        }
+
+        public static void LoadSalesReport()
+        {
+            new DailySalesForm().Show();
         }
     }
 
@@ -85,12 +116,4 @@ namespace AssignmentCSharp.Main
         private static HomepageForm homePage;
     }    
 
-    class Fromm : Form
-    {
-        public Fromm()
-        {
-            new FoodStockForm().Show();
-        }
-
-    }
 }

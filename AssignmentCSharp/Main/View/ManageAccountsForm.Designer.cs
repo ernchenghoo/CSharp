@@ -127,7 +127,7 @@
             this.Controls.Add(this.createAccButton);
             this.Controls.Add(this.label1);
             this.Name = "ManageAccountsForm";
-            this.Text = "ManageAccountsForm";
+            this.Text = "Manage Accounts";
             this.ResumeLayout(false);
             this.PerformLayout();
 

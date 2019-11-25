@@ -8,12 +8,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using AssignmentCSharp.Main.Model;
-using AssignmentCSharp.Main.Controller;
+using MySql.Data.MySqlClient;
 
 namespace AssignmentCSharp.Main.View
 {
     public partial class ManageAccountsForm : Form
     {
+        static MySqlConnection cnn;
+        static string connectionString = "server=localhost;database=pos;uid=root;pwd=;";
         public ManageAccountsForm()
         {
             InitializeComponent();
@@ -23,9 +25,9 @@ namespace AssignmentCSharp.Main.View
         private void RefreshListView ()
         {
             accountList.Items.Clear();
-            foreach (Account acc in ManageAccountController.DisplayAccounts())
+            foreach (Account acc in DisplayAccounts())
             {
-                string[] listRow = new string[] { acc.Email, acc.IDToRole() };
+                string[] listRow = new string[] { acc.Email, acc.Type.Name };
                 ListViewItem lvi = new ListViewItem(listRow);
                 lvi.Tag = acc;
                 accountList.Items.Add(lvi);
@@ -45,7 +47,7 @@ namespace AssignmentCSharp.Main.View
                 if (accountList.SelectedItems.Count > 0)
                 {
                     var selectedAccount = (Account)accountList.SelectedItems[0].Tag;
-                    if (selectedAccount.TypeID != 1)
+                    if (selectedAccount.Type.ID != 1)
                         editButton.Enabled = true;
                     else
                     {
@@ -72,25 +74,77 @@ namespace AssignmentCSharp.Main.View
 
         private void deleteButton_Click(object sender, EventArgs e)
         {
-            var confirm = MessageBox.Show("Are you sure to delete this item ??", "Delete confirmation", MessageBoxButtons.YesNo);
-            if (confirm == DialogResult.Yes)
+            if (accountList.SelectedItems.Count > 0)
             {
-                string deleteResult = ManageAccountController.DeleteAccount((Account)accountList.SelectedItems[0].Tag);
-                if (!string.Equals("ok", deleteResult))
+                var confirm = MessageBox.Show("Are you sure to delete this item ??", "Delete confirmation", MessageBoxButtons.YesNo);
+                if (confirm == DialogResult.Yes)
                 {
-                    MessageBox.Show(deleteResult);
+                    string deleteResult = DeleteAccount((Account)accountList.SelectedItems[0].Tag);
+                    if (!string.Equals("ok", deleteResult))
+                    {
+                        MessageBox.Show(deleteResult);
+                    }
+                    else
+                    {
+                        RefreshListView();
+                    }
                 }
-                else
-                {
-                    RefreshListView();
-                }
-            }            
+            }
+            else
+            {
+                MessageBox.Show("No item selected");
+            }
+                    
         }
 
         private void BackButton_Click(object sender, EventArgs e)
         {
             Program.LoadAdmin();
             this.Close();
+        }
+
+        private List<Account> DisplayAccounts()
+        {
+            List<Account> accountsInDB = new List<Account>();
+           
+            try
+            {                
+                cnn = new MySqlConnection(connectionString);
+                cnn.Open();
+
+                String sql = "select * from account";
+                MySqlCommand command = new MySqlCommand(sql, cnn);
+                MySqlDataReader dataReader = command.ExecuteReader();
+                while (dataReader.Read())
+                {
+                    accountsInDB.Add(new Account(dataReader.GetString(0), dataReader.GetString(1), dataReader.GetInt32(2),
+                        dataReader.GetInt32(3)));
+                }
+
+            }
+            catch
+            {
+
+            }
+            return accountsInDB;
+        }        
+        public static string DeleteAccount(Account acc)
+        {
+            try
+            {                
+                cnn = new MySqlConnection(connectionString);
+                cnn.Open();
+
+                String sql = "delete from account where accountID = '" + acc.AccountID + "'";
+                MySqlCommand command = new MySqlCommand(sql, cnn);
+                MySqlDataReader dataReader = command.ExecuteReader();
+                return "ok";
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+
         }
     }
 }

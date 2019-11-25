@@ -41,7 +41,39 @@ namespace AssignmentCSharp.Main.Model
             this.FoodOrdered = foodOrdered;
         }
 
-        public void save()
+        //constructor without food ordered for report
+        public Receipt(int id, DateTime date, decimal tax, decimal svTax, decimal tot)
+        {
+            Id = id;
+            DatePrinted = date;
+            Tax = tax;
+            ServiceTax = svTax;
+            Total = tot;
+            FoodOrdered = retrieveOrderFood();
+        }
+
+        private List<Receipt_Food> retrieveOrderFood()
+        {
+            List<Receipt_Food> orderFood = new List<Receipt_Food>();
+
+            cnn = new MySqlConnection(connectionString);
+            cnn.Open();
+
+            String sql = "SELECT * from receipt_food WHERE receiptid = '" + Id + "'"; ;
+
+            MySqlCommand cmd = new MySqlCommand(sql, cnn);
+            MySqlDataReader dataReader = cmd.ExecuteReader();
+            while (dataReader.Read())
+            {
+                orderFood.Add(new Receipt_Food(dataReader.GetInt32(0), dataReader.GetInt32(1),
+                    dataReader.GetString(2), dataReader.GetDecimal(3), dataReader.GetInt32(4),
+                    dataReader.GetBoolean(5)));
+            }
+
+            return orderFood;
+        }
+
+        public void Save()
         {
             try
             {
@@ -89,7 +121,7 @@ namespace AssignmentCSharp.Main.Model
                     foreach(Receipt_Food food in FoodOrdered)
                     {
                         //pass receipt id to indicate this food record belongs to this receipt
-                        food.save(this.Id);
+                        food.Save(this.Id);
                     }
                 }
                 else
@@ -112,7 +144,7 @@ namespace AssignmentCSharp.Main.Model
                     foreach (Receipt_Food food in FoodOrdered)
                     {
                         //pass receipt id to indicate this food record belongs to this receipt
-                        food.save();
+                        food.Save();
                     }
 
                 }
@@ -124,7 +156,7 @@ namespace AssignmentCSharp.Main.Model
                 Console.WriteLine(ex.ToString());
             }
         }
-        public static Receipt findById(int id)
+        public static Receipt FindById(int id)
         {
             cnn = new MySqlConnection(connectionString);
             Receipt foundReceiptObject = null;
@@ -156,14 +188,14 @@ namespace AssignmentCSharp.Main.Model
 
 
             }
-            catch
+            catch (Exception ex)
             {
-                MessageBox.Show("Connection failed");
+                MessageBox.Show(ex.Message);
             }
             return foundReceiptObject; ;
         }
 
-        public static List<Receipt> getReceipts()
+        public static List<Receipt> GetReceipts()
         {
             List<Receipt> receiptList = new List<Receipt>();
 
@@ -198,7 +230,7 @@ namespace AssignmentCSharp.Main.Model
             }
             catch(Exception ex)
             {
-                MessageBox.Show("Connection failed");
+                MessageBox.Show(ex.Message);
                 Console.WriteLine(ex.ToString());
             }
             return receiptList;

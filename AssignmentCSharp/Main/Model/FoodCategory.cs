@@ -23,7 +23,13 @@ namespace AssignmentCSharp.Main.Model
             this.Category = category;
         }
 
-        public static List<FoodCategory> getFoodCategory()
+        public FoodCategory(String category)
+        {
+            this.Id = -1;
+            this.Category = category;
+        }
+
+        public static List<FoodCategory> GetFoodCategory()
         {
             cnn = new MySqlConnection(connectionString);
             List<FoodCategory> foodCategoryList = new List<FoodCategory>();
@@ -48,6 +54,128 @@ namespace AssignmentCSharp.Main.Model
                 MessageBox.Show("Connection failed");
             }
             return foodCategoryList;
+        }
+
+        public void Save()
+        {
+            try
+            {
+                //if id is equal negative 1 that means its a new object
+                //because you create object using constructor without passing parameter id
+                if (Id == -1)
+                {
+                    cnn = new MySqlConnection(connectionString);
+                    cnn.Open();
+                    MySqlCommand command = new MySqlCommand("select COUNT(foodcategory.id),Max(foodcategory.id) from foodcategory", cnn);
+                    MySqlDataReader dataReader = command.ExecuteReader();
+
+                    int currentBiggestId = -1;
+                    while (dataReader.Read())
+                    {
+                        if (dataReader.GetInt32(0) == 0)
+                        {
+                            currentBiggestId = 0;
+                        }
+                        else
+                        {
+                            currentBiggestId = dataReader.GetInt32(1);
+                        }
+                    }
+                    cnn.Close();
+
+                    cnn = new MySqlConnection(connectionString);
+                    cnn.Open();
+                    int newId = currentBiggestId + 1;
+                    command = new MySqlCommand();
+                    command.Connection = cnn;
+                    command.CommandText = "Insert into foodcategory(id,category) Values(@id,@category)";
+                    command.Parameters.AddWithValue("@id", newId);
+                    command.Parameters.AddWithValue("@category", Category);
+                    command.ExecuteNonQuery();
+                    cnn.Close();
+
+                    this.Id = newId;
+                }
+                else
+                {
+                    //update the record
+                    cnn = new MySqlConnection(connectionString);
+                    cnn.Open();
+                    MySqlCommand command = new MySqlCommand();
+                    command.Connection = cnn;
+                    command.CommandText = "UPDATE foodcategory SET category=@category WHERE id =@id";
+                    command.Parameters.AddWithValue("@id", Id);
+                    command.Parameters.AddWithValue("@category", Category);
+                    command.ExecuteNonQuery();
+                    cnn.Close();
+
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+                MessageBox.Show(e.ToString());
+            }
+        }
+
+        public static FoodCategory FindById(int id)
+        {
+            cnn = new MySqlConnection(connectionString);
+            FoodCategory foundFoodCategoryObject = null;
+
+            try
+            {
+                cnn.Open();
+
+
+                MySqlCommand command = new MySqlCommand("select id,category from foodcategory where id = " + id, cnn);
+                MySqlDataReader dataReader = command.ExecuteReader();
+
+                while (dataReader.Read())
+                {
+                    foundFoodCategoryObject = new FoodCategory(dataReader.GetInt32(0), dataReader.GetString(1));
+                }
+                cnn.Close();
+
+
+            }
+            catch
+            {
+                MessageBox.Show("Connection failed");
+            }
+            return foundFoodCategoryObject; ;
+        }
+
+        public static FoodCategory FindByCategory(string category)
+        {
+            cnn = new MySqlConnection(connectionString);
+            FoodCategory foundFoodCategoryId = null;
+
+            try
+            {
+                cnn.Open();
+
+
+                MySqlCommand command = new MySqlCommand("select id,category from foodcategory where category = '"+category+"'", cnn);
+                /*
+                MySqlCommand command = cnn.CreateCommand();
+                command.CommandText = "select id,category from foodcategory where category = 'category1'";
+                */
+                MySqlDataReader dataReader = command.ExecuteReader();
+
+                while (dataReader.Read())
+                {
+                    foundFoodCategoryId = new FoodCategory(dataReader.GetInt32(0), dataReader.GetString(1));
+                }
+                cnn.Close();
+
+
+            }
+            catch(Exception exp)
+            {
+                MessageBox.Show(exp.Message);
+            }
+            return foundFoodCategoryId;
         }
 
     }

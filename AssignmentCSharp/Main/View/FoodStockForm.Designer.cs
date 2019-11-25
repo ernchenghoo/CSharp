@@ -32,8 +32,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.dataFoodStock = new System.Windows.Forms.DataGridView();
             this.no = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.categoryId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.itemName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.category = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.quantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.price = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.addItem = new System.Windows.Forms.Button();
@@ -43,6 +43,10 @@
             this.searchButton = new System.Windows.Forms.Button();
             this.clearSearchButton = new System.Windows.Forms.Button();
             this.manageStock = new System.Windows.Forms.Button();
+            this.supplierEmail = new System.Windows.Forms.Button();
+            this.logoutButton = new System.Windows.Forms.Button();
+            this.categoryList = new System.Windows.Forms.Button();
+            this.BackButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataFoodStock)).BeginInit();
             this.SuspendLayout();
             // 
@@ -77,12 +81,12 @@
             this.dataFoodStock.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dataFoodStock.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.no,
+            this.categoryId,
             this.itemName,
-            this.category,
             this.quantity,
             this.price});
             this.dataFoodStock.EnableHeadersVisualStyles = false;
-            this.dataFoodStock.Location = new System.Drawing.Point(16, 94);
+            this.dataFoodStock.Location = new System.Drawing.Point(7, 131);
             this.dataFoodStock.Margin = new System.Windows.Forms.Padding(0);
             this.dataFoodStock.MultiSelect = false;
             this.dataFoodStock.Name = "dataFoodStock";
@@ -90,35 +94,40 @@
             this.dataFoodStock.RowHeadersVisible = false;
             this.dataFoodStock.RowHeadersWidth = 51;
             this.dataFoodStock.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataFoodStock.Size = new System.Drawing.Size(441, 229);
+            this.dataFoodStock.Size = new System.Drawing.Size(459, 250);
             this.dataFoodStock.TabIndex = 3;
             // 
             // no
             // 
             this.no.FillWeight = 40F;
             this.no.HeaderText = "No";
+            this.no.MinimumWidth = 6;
             this.no.Name = "no";
             this.no.ReadOnly = true;
             this.no.Width = 40;
+            // 
+            // categoryId
+            // 
+            this.categoryId.HeaderText = "Category Id";
+            this.categoryId.MinimumWidth = 6;
+            this.categoryId.Name = "categoryId";
+            this.categoryId.ReadOnly = true;
+            this.categoryId.Width = 110;
             // 
             // itemName
             // 
             this.itemName.FillWeight = 140F;
             this.itemName.HeaderText = "Item Name";
+            this.itemName.MinimumWidth = 6;
             this.itemName.Name = "itemName";
             this.itemName.ReadOnly = true;
             this.itemName.Width = 160;
-            // 
-            // category
-            // 
-            this.category.HeaderText = "Category";
-            this.category.Name = "category";
-            this.category.ReadOnly = true;
             // 
             // quantity
             // 
             this.quantity.FillWeight = 45F;
             this.quantity.HeaderText = "Qty";
+            this.quantity.MinimumWidth = 6;
             this.quantity.Name = "quantity";
             this.quantity.ReadOnly = true;
             this.quantity.Width = 45;
@@ -127,13 +136,14 @@
             // 
             this.price.FillWeight = 70F;
             this.price.HeaderText = "Price";
+            this.price.MinimumWidth = 6;
             this.price.Name = "price";
             this.price.ReadOnly = true;
             this.price.Width = 70;
             // 
             // addItem
             // 
-            this.addItem.Location = new System.Drawing.Point(469, 94);
+            this.addItem.Location = new System.Drawing.Point(475, 187);
             this.addItem.Name = "addItem";
             this.addItem.Size = new System.Drawing.Size(119, 29);
             this.addItem.TabIndex = 4;
@@ -143,7 +153,7 @@
             // 
             // editItem
             // 
-            this.editItem.Location = new System.Drawing.Point(469, 152);
+            this.editItem.Location = new System.Drawing.Point(475, 242);
             this.editItem.Name = "editItem";
             this.editItem.Size = new System.Drawing.Size(119, 29);
             this.editItem.TabIndex = 5;
@@ -153,7 +163,7 @@
             // 
             // deleteItem
             // 
-            this.deleteItem.Location = new System.Drawing.Point(469, 259);
+            this.deleteItem.Location = new System.Drawing.Point(475, 347);
             this.deleteItem.Name = "deleteItem";
             this.deleteItem.Size = new System.Drawing.Size(119, 29);
             this.deleteItem.TabIndex = 6;
@@ -164,8 +174,8 @@
             // searchBar
             // 
             this.searchBar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.searchBar.Location = new System.Drawing.Point(11, 36);
-            this.searchBar.Margin = new System.Windows.Forms.Padding(2);
+            this.searchBar.Location = new System.Drawing.Point(11, 65);
+            this.searchBar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.searchBar.Name = "searchBar";
             this.searchBar.Size = new System.Drawing.Size(257, 20);
             this.searchBar.TabIndex = 7;
@@ -177,8 +187,8 @@
             this.searchButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.searchButton.FlatAppearance.BorderSize = 0;
             this.searchButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.searchButton.Location = new System.Drawing.Point(305, 32);
-            this.searchButton.Margin = new System.Windows.Forms.Padding(2);
+            this.searchButton.Location = new System.Drawing.Point(287, 58);
+            this.searchButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.searchButton.Name = "searchButton";
             this.searchButton.Size = new System.Drawing.Size(28, 26);
             this.searchButton.TabIndex = 8;
@@ -192,8 +202,8 @@
             this.clearSearchButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.clearSearchButton.FlatAppearance.BorderSize = 0;
             this.clearSearchButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.clearSearchButton.Location = new System.Drawing.Point(359, 28);
-            this.clearSearchButton.Margin = new System.Windows.Forms.Padding(2);
+            this.clearSearchButton.Location = new System.Drawing.Point(335, 56);
+            this.clearSearchButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.clearSearchButton.Name = "clearSearchButton";
             this.clearSearchButton.Size = new System.Drawing.Size(98, 28);
             this.clearSearchButton.TabIndex = 9;
@@ -202,7 +212,7 @@
             // 
             // manageStock
             // 
-            this.manageStock.Location = new System.Drawing.Point(469, 204);
+            this.manageStock.Location = new System.Drawing.Point(475, 297);
             this.manageStock.Name = "manageStock";
             this.manageStock.Size = new System.Drawing.Size(119, 29);
             this.manageStock.TabIndex = 10;
@@ -210,11 +220,63 @@
             this.manageStock.UseVisualStyleBackColor = true;
             this.manageStock.Click += new System.EventHandler(this.ManageStock_Click);
             // 
+            // supplierEmail
+            // 
+            this.supplierEmail.Location = new System.Drawing.Point(476, 58);
+            this.supplierEmail.Name = "supplierEmail";
+            this.supplierEmail.Size = new System.Drawing.Size(119, 29);
+            this.supplierEmail.TabIndex = 11;
+            this.supplierEmail.Text = "Supplier Email";
+            this.supplierEmail.UseVisualStyleBackColor = true;
+            this.supplierEmail.Click += new System.EventHandler(this.SupplierEmail_Click);
+            // 
+            // logoutButton
+            // 
+            this.logoutButton.BackgroundImage = global::AssignmentCSharp.Properties.Resources.logout;
+            this.logoutButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.logoutButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.logoutButton.FlatAppearance.BorderSize = 0;
+            this.logoutButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.logoutButton.Location = new System.Drawing.Point(460, 7);
+            this.logoutButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.logoutButton.Name = "logoutButton";
+            this.logoutButton.Size = new System.Drawing.Size(142, 36);
+            this.logoutButton.TabIndex = 12;
+            this.logoutButton.UseVisualStyleBackColor = true;
+            this.logoutButton.Click += new System.EventHandler(this.LogoutButton_Click);
+            // 
+            // categoryList
+            // 
+            this.categoryList.Location = new System.Drawing.Point(476, 131);
+            this.categoryList.Name = "categoryList";
+            this.categoryList.Size = new System.Drawing.Size(119, 29);
+            this.categoryList.TabIndex = 13;
+            this.categoryList.Text = "Category List";
+            this.categoryList.UseVisualStyleBackColor = true;
+            this.categoryList.Click += new System.EventHandler(this.CategoryList_Click);
+            // 
+            // BackButton
+            // 
+            this.BackButton.BackgroundImage = global::AssignmentCSharp.Properties.Resources.back;
+            this.BackButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.BackButton.FlatAppearance.BorderSize = 0;
+            this.BackButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BackButton.Location = new System.Drawing.Point(323, 7);
+            this.BackButton.Name = "BackButton";
+            this.BackButton.Size = new System.Drawing.Size(134, 36);
+            this.BackButton.TabIndex = 14;
+            this.BackButton.UseVisualStyleBackColor = true;
+            this.BackButton.Click += new System.EventHandler(this.BackButton_Click);
+            // 
             // FoodStockForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(621, 332);
+            this.ClientSize = new System.Drawing.Size(621, 388);
+            this.Controls.Add(this.BackButton);
+            this.Controls.Add(this.categoryList);
+            this.Controls.Add(this.logoutButton);
+            this.Controls.Add(this.supplierEmail);
             this.Controls.Add(this.manageStock);
             this.Controls.Add(this.clearSearchButton);
             this.Controls.Add(this.searchButton);
@@ -225,7 +287,7 @@
             this.Controls.Add(this.dataFoodStock);
             this.Controls.Add(this.label1);
             this.Name = "FoodStockForm";
-            this.Text = "FoodStock";
+            this.Text = "Food Stock";
             this.Load += new System.EventHandler(this.FoodStock_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataFoodStock)).EndInit();
             this.ResumeLayout(false);
@@ -243,11 +305,15 @@
         private System.Windows.Forms.TextBox searchBar;
         private System.Windows.Forms.Button searchButton;
         private System.Windows.Forms.Button clearSearchButton;
+        private System.Windows.Forms.Button manageStock;
+        private System.Windows.Forms.Button supplierEmail;
+        private System.Windows.Forms.Button logoutButton;
+        private System.Windows.Forms.Button categoryList;
         private System.Windows.Forms.DataGridViewTextBoxColumn no;
+        private System.Windows.Forms.DataGridViewTextBoxColumn categoryId;
         private System.Windows.Forms.DataGridViewTextBoxColumn itemName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn category;
         private System.Windows.Forms.DataGridViewTextBoxColumn quantity;
         private System.Windows.Forms.DataGridViewTextBoxColumn price;
-        private System.Windows.Forms.Button manageStock;
+        private System.Windows.Forms.Button BackButton;
     }
 }

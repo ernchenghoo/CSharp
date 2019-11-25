@@ -28,7 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.backButton = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
@@ -60,6 +62,7 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(242)))), ((int)(((byte)(255)))));
+            this.panel1.Controls.Add(this.backButton);
             this.panel1.Controls.Add(this.button1);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
@@ -69,9 +72,24 @@
             this.panel1.Size = new System.Drawing.Size(947, 43);
             this.panel1.TabIndex = 0;
             // 
+            // backButton
+            // 
+            this.backButton.BackgroundImage = global::AssignmentCSharp.Properties.Resources.back;
+            this.backButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.backButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.backButton.FlatAppearance.BorderSize = 0;
+            this.backButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.backButton.Location = new System.Drawing.Point(617, 6);
+            this.backButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.backButton.Name = "backButton";
+            this.backButton.Size = new System.Drawing.Size(151, 34);
+            this.backButton.TabIndex = 2;
+            this.backButton.UseVisualStyleBackColor = true;
+            this.backButton.Click += new System.EventHandler(this.backButton_Click);
+            // 
             // button1
             // 
-            this.button1.BackgroundImage = global::AssignmentCSharp.Properties.Resources.endbusiness;
+            this.button1.BackgroundImage = global::AssignmentCSharp.Properties.Resources.logout;
             this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.button1.FlatAppearance.BorderSize = 0;
@@ -82,7 +100,7 @@
             this.button1.Size = new System.Drawing.Size(160, 32);
             this.button1.TabIndex = 1;
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button1.Click += new System.EventHandler(this.Button1_Click);
             // 
             // label1
             // 
@@ -121,7 +139,7 @@
             this.splitContainer1.Panel2.Controls.Add(this.label3);
             this.splitContainer1.Panel2.Controls.Add(this.foodList);
             this.splitContainer1.Size = new System.Drawing.Size(947, 571);
-            this.splitContainer1.SplitterDistance = 346;
+            this.splitContainer1.SplitterDistance = 345;
             this.splitContainer1.SplitterWidth = 5;
             this.splitContainer1.TabIndex = 1;
             // 
@@ -147,7 +165,7 @@
             this.orderList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.orderList.Size = new System.Drawing.Size(331, 497);
             this.orderList.TabIndex = 1;
-            this.orderList.SelectionChanged += new System.EventHandler(this.orderList_OnSelectionChanged);
+            this.orderList.SelectionChanged += new System.EventHandler(this.OrderList_OnSelectionChanged);
             // 
             // timeOrdered
             // 
@@ -190,7 +208,7 @@
             this.orderDoneButton.TabIndex = 8;
             this.orderDoneButton.Text = "Order Done";
             this.orderDoneButton.UseVisualStyleBackColor = false;
-            this.orderDoneButton.Click += new System.EventHandler(this.button2_Click);
+            this.orderDoneButton.Click += new System.EventHandler(this.Button2_Click);
             // 
             // detail_numoffood
             // 
@@ -272,15 +290,23 @@
             this.foodList.AllowUserToDeleteRows = false;
             this.foodList.AllowUserToResizeColumns = false;
             this.foodList.AllowUserToResizeRows = false;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
+            this.foodList.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.foodList.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
             this.foodList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.foodList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.No,
             this.foodname,
             this.quantity});
+            this.foodList.Enabled = false;
             this.foodList.Location = new System.Drawing.Point(37, 149);
             this.foodList.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.foodList.MultiSelect = false;
             this.foodList.Name = "foodList";
+            this.foodList.ReadOnly = true;
             this.foodList.RowHeadersVisible = false;
             this.foodList.RowHeadersWidth = 51;
             this.foodList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -293,6 +319,7 @@
             this.No.HeaderText = "No";
             this.No.MinimumWidth = 6;
             this.No.Name = "No";
+            this.No.ReadOnly = true;
             this.No.Width = 40;
             // 
             // foodname
@@ -301,6 +328,7 @@
             this.foodname.HeaderText = "Food Name";
             this.foodname.MinimumWidth = 6;
             this.foodname.Name = "foodname";
+            this.foodname.ReadOnly = true;
             this.foodname.Width = 210;
             // 
             // quantity
@@ -308,6 +336,7 @@
             this.quantity.HeaderText = "Quantity";
             this.quantity.MinimumWidth = 6;
             this.quantity.Name = "quantity";
+            this.quantity.ReadOnly = true;
             this.quantity.Width = 125;
             // 
             // KitchenForm
@@ -319,7 +348,7 @@
             this.Controls.Add(this.panel1);
             this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "KitchenForm";
-            this.Text = "KitchenForm";
+            this.Text = "Orders";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.splitContainer1.Panel1.ResumeLayout(false);
@@ -356,5 +385,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn timeOrdered;
         private System.Windows.Forms.DataGridViewTextBoxColumn orderid;
         private System.Windows.Forms.Button orderDoneButton;
+        private System.Windows.Forms.Button backButton;
     }
 }
