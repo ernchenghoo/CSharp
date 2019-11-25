@@ -41,6 +41,38 @@ namespace AssignmentCSharp.Main.Model
             this.FoodOrdered = foodOrdered;
         }
 
+        //constructor without food ordered for report
+        public Receipt(int id, DateTime date, decimal tax, decimal svTax, decimal tot)
+        {
+            Id = id;
+            DatePrinted = date;
+            Tax = tax;
+            ServiceTax = svTax;
+            Total = tot;
+            FoodOrdered = retrieveOrderFood();
+        }
+
+        private List<Receipt_Food> retrieveOrderFood()
+        {
+            List<Receipt_Food> orderFood = new List<Receipt_Food>();
+
+            cnn = new MySqlConnection(connectionString);
+            cnn.Open();
+
+            String sql = "SELECT * from receipt_food WHERE receiptid = '" + Id + "'"; ;
+
+            MySqlCommand cmd = new MySqlCommand(sql, cnn);
+            MySqlDataReader dataReader = cmd.ExecuteReader();
+            while (dataReader.Read())
+            {
+                orderFood.Add(new Receipt_Food(dataReader.GetInt32(0), dataReader.GetInt32(1),
+                    dataReader.GetString(2), dataReader.GetDecimal(3), dataReader.GetInt32(4),
+                    dataReader.GetBoolean(5)));
+            }
+
+            return orderFood;
+        }
+
         public void Save()
         {
             try

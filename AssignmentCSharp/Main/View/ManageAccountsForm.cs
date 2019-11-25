@@ -14,6 +14,8 @@ namespace AssignmentCSharp.Main.View
 {
     public partial class ManageAccountsForm : Form
     {
+        static MySqlConnection cnn;
+        static string connectionString = "server=localhost;database=pos;uid=root;pwd=;";
         public ManageAccountsForm()
         {
             InitializeComponent();
@@ -104,11 +106,9 @@ namespace AssignmentCSharp.Main.View
         private List<Account> DisplayAccounts()
         {
             List<Account> accountsInDB = new List<Account>();
-
+           
             try
-            {
-                MySqlConnection cnn;
-                string connectionString = "server=localhost;database=pos;uid=root;pwd=;";
+            {                
                 cnn = new MySqlConnection(connectionString);
                 cnn.Open();
 
@@ -131,9 +131,7 @@ namespace AssignmentCSharp.Main.View
         public static string DeleteAccount(Account acc)
         {
             try
-            {
-                MySqlConnection cnn;
-                string connectionString = "server=localhost;database=pos;uid=root;pwd=;";
+            {                
                 cnn = new MySqlConnection(connectionString);
                 cnn.Open();
 
