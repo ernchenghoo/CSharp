@@ -98,6 +98,11 @@ namespace AssignmentCSharp.Main
         {
             new DailySalesForm().Show();
         }
+
+        public static void LoadSalesReportDetails(Receipt selectedSale)
+        {
+            new SalesDetailsPopupForm(selectedSale).Show();
+        }
     }
 
    public class FormManager

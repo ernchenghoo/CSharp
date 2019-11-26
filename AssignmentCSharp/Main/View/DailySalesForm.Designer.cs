@@ -69,27 +69,30 @@
             this.IDColumn,
             this.DateColumn,
             this.SalesColumn});
+            this.SalesList.FullRowSelect = true;
             this.SalesList.HideSelection = false;
             this.SalesList.Location = new System.Drawing.Point(24, 114);
             this.SalesList.Name = "SalesList";
-            this.SalesList.Size = new System.Drawing.Size(293, 240);
+            this.SalesList.Size = new System.Drawing.Size(301, 240);
             this.SalesList.TabIndex = 1;
             this.SalesList.UseCompatibleStateImageBehavior = false;
             this.SalesList.View = System.Windows.Forms.View.Details;
+            this.SalesList.DoubleClick += new System.EventHandler(this.SalesList_OnDoubleClick);
             // 
             // IDColumn
             // 
             this.IDColumn.Text = "ID";
+            this.IDColumn.Width = 42;
             // 
             // DateColumn
             // 
             this.DateColumn.Text = "Date";
-            this.DateColumn.Width = 150;
+            this.DateColumn.Width = 143;
             // 
             // SalesColumn
             // 
             this.SalesColumn.Text = "Sales";
-            this.SalesColumn.Width = 79;
+            this.SalesColumn.Width = 101;
             // 
             // RevenueLabel
             // 
@@ -122,20 +125,20 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(46, 94);
+            this.label5.Location = new System.Drawing.Point(21, 94);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(52, 17);
+            this.label5.Size = new System.Drawing.Size(47, 17);
             this.label5.TabIndex = 5;
-            this.label5.Text = "Orders";
+            this.label5.Text = " Sales";
             // 
             // label6
             // 
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(351, 94);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(72, 17);
+            this.label6.Size = new System.Drawing.Size(76, 17);
             this.label6.TabIndex = 7;
-            this.label6.Text = "Food Sold";
+            this.label6.Text = " Food Sold";
             // 
             // FoodSalesList
             // 

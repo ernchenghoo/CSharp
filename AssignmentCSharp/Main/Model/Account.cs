@@ -51,6 +51,9 @@ namespace AssignmentCSharp.Main.Model
                 case 4:
                     role = "Cashier";
                     break;
+                case 5:
+                    role = "Supplier";
+                    break;
             }
             return role;
 
@@ -72,6 +75,9 @@ namespace AssignmentCSharp.Main.Model
                     break;
                 case "Cashier":
                     roleID = 4;
+                    break;
+                case "Supplier":
+                    roleID = 5;
                     break;
             }
             return roleID;

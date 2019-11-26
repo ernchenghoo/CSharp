@@ -53,15 +53,14 @@ namespace AssignmentCSharp.Main.View
                 FoodSalesList.Items.Add(lvi);
             }
 
-            GrandTotalLabel.Text += "RM" + calculateGrandTotal().ToString();
+            GrandTotalLabel.Text += "  RM" + calculateGrandTotal().ToString();
             ServiceChargeLabel.Text += "- RM" + calculateTotalServiceTax().ToString();
             TaxLabel.Text += "- RM" + calculateTotalTax().ToString();
-            RevenueLabel.Text += "+ RM" + calculateTotalRevenue().ToString();
+            RevenueLabel.Text += "RM" + calculateTotalRevenue().ToString();
 
         }
         private List <Receipt> DisplaySales()
-        {
-            
+        {            
             try
             {
                 cnn = new MySqlConnection(connectionString);
@@ -189,8 +188,8 @@ namespace AssignmentCSharp.Main.View
 
         private void generateReport(string pt)
         {           
-            Document doc = new Document();
-            PdfWriter writer = PdfWriter.GetInstance(doc, new FileStream(pt + "/SalesReport2.pdf", FileMode.Create));
+            Document doc = new Document(PageSize.A4);
+            PdfWriter writer = PdfWriter.GetInstance(doc, new FileStream(pt + "/Daily Sales Report.pdf", FileMode.Create));
             doc.Open();
 
             PdfContentByte cb = writer.DirectContent;
@@ -199,10 +198,10 @@ namespace AssignmentCSharp.Main.View
             BaseFont boldCalibri = BaseFont.CreateFont("c:\\windows\\fonts\\calibrib.ttf", BaseFont.CP1252, BaseFont.NOT_EMBEDDED);
             BaseFont calibri = BaseFont.CreateFont("c:\\windows\\fonts\\calibri.ttf", BaseFont.CP1252, BaseFont.NOT_EMBEDDED);
 
-            int yAxis = 800;
+            int yAxis = 780;
             //document title
             cb.SetFontAndSize(boldCalibri, 32);
-            cb.SetTextMatrix(230, yAxis);
+            cb.SetTextMatrix(220, yAxis);
             cb.ShowText("Sales report");
             //document title end
             yAxis -= 50;
@@ -215,29 +214,39 @@ namespace AssignmentCSharp.Main.View
             //title
             cb.SetFontAndSize(boldCalibri, 18);            
             cb.SetTextMatrix(60, yAxis);
-            cb.ShowText("Food Sold");            
-            cb.SetFontAndSize(calibri, 12);
+            cb.ShowText("Food Sold");
+            cb.EndText();
+            cb.MoveTo(60, yAxis - 5);
+            cb.LineTo(450, yAxis - 5);
+            cb.Stroke();
+            cb.BeginText();
+            cb.SetFontAndSize(boldCalibri, 12);
             //title end
-            yAxis -= 30;
+            yAxis -= 25;
             //header
-            cb.SetTextMatrix(60, yAxis);
+            cb.SetTextMatrix(62, yAxis);
             cb.ShowText("Food Name");
-            cb.SetTextMatrix(220, yAxis);
-            cb.ShowText("Price");
-            cb.SetTextMatrix(400, yAxis);
+            cb.SetTextMatrix(180, yAxis);
             cb.ShowText("Quantity");
+            cb.SetTextMatrix(280, yAxis);
+            cb.ShowText("Unit Price");
+            cb.SetTextMatrix(400, yAxis);
+            cb.ShowText("Total Price");
             //header end
 
             //data
             yAxis -= 20;
+            cb.SetFontAndSize(calibri, 12);
             foreach (Receipt_Food food in foodSold)
             {
-                cb.SetTextMatrix(60, yAxis);
+                cb.SetTextMatrix(62, yAxis);
                 cb.ShowText(food.FoodName.ToString());
-                cb.SetTextMatrix(240, yAxis);
-                cb.ShowText(food.FoodPrice.ToString());
-                cb.SetTextMatrix(450, yAxis);
+                cb.SetTextMatrix(180, yAxis);
                 cb.ShowText(food.QuantityOrdered.ToString());
+                cb.SetTextMatrix(280, yAxis);
+                cb.ShowText("RM" + food.FoodPrice.ToString());
+                cb.SetTextMatrix(400, yAxis);
+                cb.ShowText("RM" + (food.FoodPrice * food.QuantityOrdered).ToString());
 
                 yAxis -= 15;
 
@@ -250,28 +259,53 @@ namespace AssignmentCSharp.Main.View
             cb.SetFontAndSize(boldCalibri, 18);
             cb.SetTextMatrix(60, yAxis);
             cb.ShowText("Orders");
+            cb.EndText();
+            cb.MoveTo(60, yAxis - 5);
+            cb.LineTo(450, yAxis - 5);
+            cb.Stroke();
+            cb.BeginText();
             //order title end
-            yAxis -= 30;
+            yAxis -= 25;
             //order header
-            cb.SetFontAndSize(calibri, 12);
-            cb.SetTextMatrix(60, yAxis);
+            cb.SetFontAndSize(boldCalibri, 12);
+            cb.SetTextMatrix(62, yAxis);
             cb.ShowText("ID");
-            cb.SetTextMatrix(110, yAxis);
+            cb.SetTextMatrix(180, yAxis);
             cb.ShowText("Time of order");
-            cb.SetTextMatrix(260, yAxis);
+            cb.SetTextMatrix(400, yAxis);
             cb.ShowText("Total Sales");
             //order header end
             yAxis -= 20;
             //order data
+            cb.SetFontAndSize(calibri, 12);
             foreach (Receipt sales in dailySales)
             {
-                cb.SetTextMatrix(60, yAxis);
+                cb.SetTextMatrix(62, yAxis);
                 cb.ShowText(sales.Id.ToString());
-                cb.SetTextMatrix(110, yAxis);
-                cb.ShowText(sales.DatePrinted.ToString());
-                cb.SetTextMatrix(260, yAxis);
-                cb.ShowText(sales.Total.ToString());
+                cb.SetTextMatrix(180, yAxis);
+                cb.ShowText(sales.DatePrinted.TimeOfDay.ToString());
+                cb.SetTextMatrix(400, yAxis);
+                cb.ShowText("RM" + sales.Total.ToString());
                 yAxis -= 15;
+                
+                if (yAxis <= 50)
+                {
+                    //generate new header for following page
+                    cb.EndText();
+                    doc.NewPage();
+                    cb.BeginText();
+                    cb.SetFontAndSize(boldCalibri, 12);
+                    cb.SetTextMatrix(60, yAxis);
+                    yAxis = 780;
+                    cb.SetTextMatrix(62, yAxis);
+                    cb.ShowText("ID");
+                    cb.SetTextMatrix(180, yAxis);
+                    cb.ShowText("Time of order");
+                    cb.SetTextMatrix(400, yAxis);
+                    cb.ShowText("Total Sales");
+                    cb.SetFontAndSize(calibri, 12);
+                    yAxis -= 20;
+                }
             }         
             //order data end
             yAxis -= 40;
@@ -288,12 +322,25 @@ namespace AssignmentCSharp.Main.View
             cb.SetFontAndSize(boldCalibri, 16);
             cb.SetTextMatrix(362, yAxis);
             cb.ShowText("Total Revenue:   RM" + calculateTotalRevenue().ToString());
-            yAxis -= 15;
-            
+            yAxis -= 15;          
+
             cb.EndText();            
 
             doc.Close();
             MessageBox.Show("Pdf Created Successfully");
+        }
+
+        private void SalesList_OnDoubleClick(object sender, EventArgs e)
+        {
+            if (SalesList.SelectedItems.Count > 0)
+            {
+                var selectedSale = (Receipt)SalesList.SelectedItems[0].Tag;
+                Program.LoadSalesReportDetails(selectedSale);
+            }
+            else
+            {
+                return;
+            }
         }
     }
 }
