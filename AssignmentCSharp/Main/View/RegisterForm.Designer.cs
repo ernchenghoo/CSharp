@@ -115,7 +115,8 @@
             this.roleBox.Items.AddRange(new object[] {
             "Stock Keeper",
             "Kitchen Staff",
-            "Cashier"});
+            "Cashier",
+            "Supplier"});
             this.roleBox.Location = new System.Drawing.Point(196, 282);
             this.roleBox.Name = "roleBox";
             this.roleBox.Size = new System.Drawing.Size(146, 24);
